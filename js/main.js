@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
         bgEl.insertBefore(tc, bgEl.firstChild);
 
         function generateTexture() {
-            tc.width = bgEl.offsetWidth || window.innerWidth;
-            tc.height = bgEl.offsetHeight || window.innerHeight;
+            const hero = document.querySelector('.hero');
+            tc.width = (hero ? hero.offsetWidth : bgEl.offsetWidth) || window.innerWidth;
+            tc.height = (hero ? hero.offsetHeight : bgEl.offsetHeight) || window.innerHeight;
             const ctx = tc.getContext('2d');
             const w = tc.width, h = tc.height;
 
