@@ -1,9 +1,33 @@
 /* ============================================
    JOHNSON PERFORMANCE CO.
-   Main JavaScript — Animations & Interactions
+   Main JavaScript — Enhanced Animations & Interactions
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // --- NOISE TEXTURE CANVAS OVERLAY ---
+    const noiseCanvas = document.createElement('canvas');
+    noiseCanvas.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none; z-index: 9998; opacity: 0.035; mix-blend-mode: overlay;
+    `;
+    document.body.appendChild(noiseCanvas);
+
+    function generateNoise() {
+        const ctx = noiseCanvas.getContext('2d');
+        noiseCanvas.width = window.innerWidth;
+        noiseCanvas.height = window.innerHeight;
+        const imageData = ctx.createImageData(noiseCanvas.width, noiseCanvas.height);
+        const buffer32 = new Uint32Array(imageData.data.buffer);
+        for (let i = 0; i < buffer32.length; i++) {
+            buffer32[i] = (Math.random() < 0.5) ? 0xffffffff : 0xff000000;
+        }
+        ctx.putImageData(imageData, 0, 0);
+    }
+
+    generateNoise();
+    setInterval(generateNoise, 100);
+    window.addEventListener('resize', generateNoise, { passive: true });
 
     // --- LOADER ---
     const loader = document.getElementById('loader');
@@ -12,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
             loader.classList.add('loaded');
         }, 800);
     });
-    // Fallback in case load event already fired
     if (document.readyState === 'complete') {
         setTimeout(() => loader.classList.add('loaded'), 800);
     }
@@ -43,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
     });
 
-    // Close menu on link click
     navMenu.querySelectorAll('.nav__link').forEach(link => {
         link.addEventListener('click', () => {
             navToggle.classList.remove('active');
@@ -52,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- SMOOTH SCROLL for anchor links ---
+    // --- SMOOTH SCROLL ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             const target = document.querySelector(anchor.getAttribute('href'));
@@ -67,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- SCROLL REVEAL ANIMATIONS ---
     const revealElements = document.querySelectorAll('.reveal');
-
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -75,14 +96,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 revealObserver.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -40px 0px'
-    });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // --- ACTIVE NAV LINK on scroll ---
+    // --- ANIMATED COUNTERS ---
+    function animateCounter(el) {
+        const target = parseInt(el.getAttribute('data-target'));
+        const suffix = el.getAttribute('data-suffix') || '';
+        const prefix = el.getAttribute('data-prefix') || '';
+        const duration = 2000;
+        const start = performance.now();
+
+        function update(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(eased * target);
+            el.textContent = prefix + current.toLocaleString() + suffix;
+            if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+    }
+
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                animateCounter(entry.target);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+    // --- ACTIVE NAV LINK ---
     const sections = document.querySelectorAll('.section, .hero');
     const navLinks = document.querySelectorAll('.nav__link:not(.nav__link--cta)');
 
@@ -98,12 +148,103 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
-    }, {
-        threshold: 0.3,
-        rootMargin: `-${parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 80}px 0px 0px 0px`
-    });
+    }, { threshold: 0.3 });
 
     sections.forEach(sec => sectionObserver.observe(sec));
+
+    // --- PARALLAX: Hero + Section backgrounds ---
+    const heroBg = document.querySelector('.hero__bg-placeholder');
+    const parallaxEls = document.querySelectorAll('[data-parallax]');
+
+    window.addEventListener('scroll', () => {
+        const scroll = window.scrollY;
+
+        if (heroBg && window.innerWidth > 768 && scroll < window.innerHeight) {
+            heroBg.style.transform = `scale(1.08) translateY(${scroll * 0.2}px)`;
+        }
+
+        if (window.innerWidth > 768) {
+            parallaxEls.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const speed = parseFloat(el.getAttribute('data-parallax')) || 0.1;
+                const offset = (window.innerHeight / 2 - rect.top - rect.height / 2) * speed;
+                el.style.transform = `translateY(${offset}px)`;
+            });
+        }
+    }, { passive: true });
+
+    // --- MAGNETIC BUTTONS ---
+    document.querySelectorAll('.btn, .nav__link--cta').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = '';
+        });
+    });
+
+    // --- DUMBBELL / GYM CURSOR TRAIL ---
+    if (window.innerWidth > 768) {
+        const trail = [];
+        const TRAIL_LENGTH = 8;
+
+        for (let i = 0; i < TRAIL_LENGTH; i++) {
+            const dot = document.createElement('div');
+            dot.style.cssText = `
+                position: fixed; width: ${6 - i * 0.5}px; height: ${6 - i * 0.5}px;
+                border-radius: 50%; background: var(--gold, #C9A94E);
+                pointer-events: none; z-index: 9997;
+                opacity: ${(TRAIL_LENGTH - i) / TRAIL_LENGTH * 0.4};
+                transition: opacity 0.1s;
+                transform: translate(-50%, -50%);
+            `;
+            document.body.appendChild(dot);
+            trail.push({ el: dot, x: 0, y: 0 });
+        }
+
+        let mouseX = 0, mouseY = 0;
+        window.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function updateTrail() {
+            trail[0].x = mouseX;
+            trail[0].y = mouseY;
+            for (let i = 1; i < trail.length; i++) {
+                trail[i].x += (trail[i-1].x - trail[i].x) * 0.4;
+                trail[i].y += (trail[i-1].y - trail[i].y) * 0.4;
+            }
+            trail.forEach(t => {
+                t.el.style.left = t.x + 'px';
+                t.el.style.top = t.y + 'px';
+            });
+            requestAnimationFrame(updateTrail);
+        }
+        updateTrail();
+    }
+
+    // --- STAGGERED GALLERY REVEAL ---
+    const galleryPhotos = document.querySelectorAll('.facility__photo');
+    galleryPhotos.forEach((photo, i) => {
+        photo.style.transitionDelay = `${i * 0.1}s`;
+    });
+
+    // --- HORIZONTAL SCROLL TICKER (if element exists) ---
+    const ticker = document.querySelector('.ticker__inner');
+    if (ticker) {
+        let pos = 0;
+        function animateTicker() {
+            pos -= 0.5;
+            if (pos <= -ticker.scrollWidth / 2) pos = 0;
+            ticker.style.transform = `translateX(${pos}px)`;
+            requestAnimationFrame(animateTicker);
+        }
+        animateTicker();
+    }
 
     // --- CONTACT FORM HANDLING ---
     const contactForm = document.getElementById('contactForm');
@@ -112,7 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const btn = contactForm.querySelector('button[type="submit"]');
             const originalText = btn.textContent;
-
             btn.textContent = 'Sending...';
             btn.disabled = true;
 
@@ -134,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         btn.disabled = false;
                     }, 3000);
                 } else {
-                    throw new Error('Form submission failed');
+                    throw new Error('Failed');
                 }
             } catch (err) {
                 btn.textContent = 'Error — Try Again';
@@ -148,22 +288,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- PARALLAX EFFECT on Hero (subtle) ---
-    const heroBg = document.querySelector('.hero__bg-placeholder');
-    if (heroBg && window.innerWidth > 768) {
-        window.addEventListener('scroll', () => {
-            const scroll = window.scrollY;
-            if (scroll < window.innerHeight) {
-                heroBg.style.transform = `scale(1.05) translateY(${scroll * 0.15}px)`;
-            }
-        }, { passive: true });
-    }
-
-    // --- FACILITY PHOTO HOVER: slight zoom already in CSS ---
-    // Additional: staggered reveal for gallery items
-    const galleryPhotos = document.querySelectorAll('.facility__photo');
-    galleryPhotos.forEach((photo, i) => {
-        photo.style.transitionDelay = `${i * 0.1}s`;
-    });
-
 });
+
+// --- SCROLL PROGRESS BAR ---
+const scrollProgress = document.getElementById('scrollProgress');
+if (scrollProgress) {
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        scrollProgress.style.width = progress + '%';
+    }, { passive: true });
+}
