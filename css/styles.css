@@ -1486,3 +1486,51 @@ h2::after {
     .book__cta-card { padding: 40px 24px; }
     .book__cta-details { gap: 16px; }
 }
+
+/* ============================================
+   LIGHTNING + GOLD PULSE EFFECTS
+   ============================================ */
+
+/* --- HERO TITLE GOLD PULSE --- */
+@keyframes goldPulse {
+    0%, 100% {
+        text-shadow:
+            0 0 20px rgba(201, 169, 78, 0),
+            0 0 40px rgba(201, 169, 78, 0);
+    }
+    50% {
+        text-shadow:
+            0 0 20px rgba(201, 169, 78, 0.4),
+            0 0 60px rgba(201, 169, 78, 0.2),
+            0 0 100px rgba(201, 169, 78, 0.1);
+    }
+}
+
+.hero__title-pulse {
+    animation: goldPulse 4s ease-in-out infinite;
+}
+
+.hero__title-line--gold.hero__title-pulse {
+    animation: goldPulse 2.5s ease-in-out infinite;
+    text-shadow:
+        0 0 30px rgba(201, 169, 78, 0.3),
+        0 0 60px rgba(201, 169, 78, 0.15);
+}
+
+/* --- LIGHTNING FLASH on background --- */
+@keyframes bgFlash {
+    0% { background: transparent; }
+    10% { background: rgba(201, 169, 78, 0.03); }
+    20% { background: transparent; }
+    30% { background: rgba(201, 169, 78, 0.02); }
+    100% { background: transparent; }
+}
+
+.hero.lightning-flash {
+    animation: bgFlash 0.4s ease forwards;
+}
+
+/* --- HERO overlay gets slight gold tint during strike --- */
+.hero__title-line {
+    will-change: text-shadow;
+}
