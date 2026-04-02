@@ -408,7 +408,7 @@ if (navProgress) {
     }
 
     function strikeSequence() {
-        const numStrikes = 2 + Math.floor(Math.random() * 3); // 2-4 bolts per sequence
+        const numStrikes = 3 + Math.floor(Math.random() * 4); // 3-6 bolts per sequence
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         for (let i = 0; i < numStrikes; i++) {
@@ -447,7 +447,7 @@ if (navProgress) {
     }
 
     function scheduleLightning() {
-        const delay = 2000 + Math.random() * 4000; // every 2-6 seconds
+        const delay = 1200 + Math.random() * 2500; // every 1.2-3.7 seconds
         setTimeout(() => {
             strikeSequence();
             scheduleLightning();
@@ -457,7 +457,7 @@ if (navProgress) {
     setTimeout(() => {
         strikeSequence();
         scheduleLightning();
-    }, 1500);
+    }, 800);
 })();
 
 // --- PULSING GOLD GLOW on Hero Title Lines ---
