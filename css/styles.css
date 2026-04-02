@@ -186,6 +186,18 @@ ul { list-style: none; }
     padding: 0 40px;
     z-index: 1000;
     transition: background 0.4s var(--ease-smooth), box-shadow 0.4s;
+    overflow: hidden;
+}
+
+.nav__progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+    z-index: 1001;
+    transition: width 0.1s linear;
+    width: 0%;
 }
 .nav.scrolled {
     background: rgba(10, 10, 10, 0.95);
@@ -1304,13 +1316,14 @@ h2::after {
 /* --- SCROLL PROGRESS BAR --- */
 .scroll-progress {
     position: fixed;
-    top: var(--nav-height);
+    bottom: 0;
     left: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
-    z-index: 999;
+    z-index: 1002;
     transform-origin: left;
     transition: width 0.1s;
+    /* Sits at bottom of viewport as a reading progress indicator */
 }
 
 /* --- GYM PATTERN BACKGROUND --- */
