@@ -290,13 +290,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// --- SCROLL PROGRESS BAR ---
-const scrollProgress = document.getElementById('scrollProgress');
-if (scrollProgress) {
+// --- SCROLL PROGRESS BAR (inside nav bottom edge) ---
+const navProgress = document.getElementById('navProgress');
+if (navProgress) {
     window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY;
         const docHeight = document.body.scrollHeight - window.innerHeight;
-        const progress = (scrollTop / docHeight) * 100;
-        scrollProgress.style.width = progress + '%';
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        navProgress.style.width = progress + '%';
     }, { passive: true });
 }
