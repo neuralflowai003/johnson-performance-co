@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4BA6A"/>
+      <stop offset="50%" style="stop-color:#C9A94E"/>
+      <stop offset="100%" style="stop-color:#A88B3A"/>
+    </linearGradient>
+    <linearGradient id="goldGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4BA6A"/>
+      <stop offset="100%" style="stop-color:#A88B3A"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="200" fill="#0A0A0A"/>
+  <!-- Barbell accent line -->
+  <line x1="0" y1="100" x2="50" y2="100" stroke="url(#goldGrad)" stroke-width="2" opacity="0.4"/>
+  <circle cx="55" cy="100" r="5" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.4"/>
+  <!-- JP Monogram -->
+  <rect x="75" y="55" width="90" height="90" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <rect x="80" y="60" width="80" height="80" fill="none" stroke="url(#goldGrad)" stroke-width="0.5" opacity="0.3"/>
+  <text x="120" y="115" font-family="Georgia, 'Cormorant Garamond', serif" font-size="48" font-weight="700" fill="url(#goldGrad)" text-anchor="middle" letter-spacing="3">JP</text>
+  <!-- Company Name -->
+  <text x="190" y="88" font-family="Georgia, 'Cormorant Garamond', serif" font-size="32" font-weight="600" fill="#FFFFFF" letter-spacing="2">JOHNSON</text>
+  <text x="190" y="120" font-family="Georgia, 'Cormorant Garamond', serif" font-size="32" font-weight="600" fill="url(#goldGrad)" letter-spacing="2">PERFORMANCE</text>
+  <text x="190" y="148" font-family="'Helvetica Neue', 'DM Sans', sans-serif" font-size="11" fill="#999999" letter-spacing="12">PRIVATE TRAINING STUDIO</text>
+  <!-- Barbell accent line right -->
+  <circle cx="545" cy="100" r="5" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.4"/>
+  <line x1="550" y1="100" x2="600" y2="100" stroke="url(#goldGrad)" stroke-width="2" opacity="0.4"/>
+</svg>
