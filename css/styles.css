@@ -1380,12 +1380,27 @@ h2::after {
    ============================================ */
 .book__cta-card {
     background: linear-gradient(135deg, var(--dark-2) 0%, var(--dark-3) 100%);
-    border: 1px solid rgba(201, 169, 78, 0.2);
+    border: 1px solid rgba(201, 169, 78, 0.35);
     border-radius: 4px;
     padding: 56px 48px;
     text-align: center;
     position: relative;
     overflow: hidden;
+    box-shadow:
+        0 0 0 1px rgba(201, 169, 78, 0.08),
+        0 0 40px rgba(201, 169, 78, 0.08),
+        0 0 80px rgba(201, 169, 78, 0.04),
+        inset 0 1px 0 rgba(201, 169, 78, 0.15);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.book__cta-card:hover {
+    border-color: rgba(201, 169, 78, 0.6);
+    box-shadow:
+        0 0 0 1px rgba(201, 169, 78, 0.12),
+        0 0 60px rgba(201, 169, 78, 0.15),
+        0 0 120px rgba(201, 169, 78, 0.08),
+        inset 0 1px 0 rgba(201, 169, 78, 0.2);
 }
 
 .book__cta-card::before {
