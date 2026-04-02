@@ -405,16 +405,16 @@ if (navProgress) {
     const canvas = document.createElement('canvas');
     canvas.id = 'lightningCanvas';
     canvas.style.cssText = `
-        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-        pointer-events: none; z-index: 1; opacity: 0;
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none; z-index: 2; opacity: 0;
     `;
-    document.body.appendChild(canvas);
+    hero.appendChild(canvas);
 
     const ctx = canvas.getContext('2d');
 
     function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.width = hero.offsetWidth || window.innerWidth;
+        canvas.height = hero.offsetHeight || window.innerHeight;
     }
     resize();
     window.addEventListener('resize', resize, { passive: true });
@@ -438,7 +438,7 @@ if (navProgress) {
         ctx.lineWidth = lineWidth * 6;
         ctx.shadowColor = glowColor;
         ctx.shadowBlur = 30;
-        ctx.globalAlpha = alpha * 0.3;
+        ctx.globalAlpha = alpha * 0.21;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
         ctx.beginPath();
@@ -453,7 +453,7 @@ if (navProgress) {
         ctx.lineWidth = lineWidth * 3;
         ctx.shadowColor = glowColor;
         ctx.shadowBlur = 15;
-        ctx.globalAlpha = alpha * 0.5;
+        ctx.globalAlpha = alpha * 0.35;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
         ctx.beginPath();
@@ -468,7 +468,7 @@ if (navProgress) {
         ctx.lineWidth = lineWidth;
         ctx.shadowColor = glowColor;
         ctx.shadowBlur = 8;
-        ctx.globalAlpha = alpha;
+        ctx.globalAlpha = alpha * 0.7;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
         ctx.beginPath();
@@ -493,7 +493,7 @@ if (navProgress) {
             ctx.lineWidth = lineWidth * 2;
             ctx.shadowColor = glowColor;
             ctx.shadowBlur = 10;
-            ctx.globalAlpha = alpha * 0.4;
+            ctx.globalAlpha = alpha * 0.28;
             ctx.lineJoin = 'round';
             ctx.beginPath();
             ctx.moveTo(bx1, by1);
@@ -522,13 +522,13 @@ if (navProgress) {
         // Flash sequence: instant on → flicker → off
         const flashEl = canvas;
         flashEl.style.transition = 'none';
-        flashEl.style.opacity = '1';
+        flashEl.style.opacity = '0.49';
 
         // Flicker effect
-        setTimeout(() => { flashEl.style.opacity = '0.3'; }, 50);
-        setTimeout(() => { flashEl.style.opacity = '0.9'; }, 80);
+        setTimeout(() => { flashEl.style.opacity = '0.21'; }, 50);
+        setTimeout(() => { flashEl.style.opacity = '0.63'; }, 80);
         setTimeout(() => { flashEl.style.opacity = '0.1'; }, 120);
-        setTimeout(() => { flashEl.style.opacity = '0.7'; }, 150);
+        setTimeout(() => { flashEl.style.opacity = '0.49'; }, 150);
         setTimeout(() => {
             flashEl.style.transition = 'opacity 0.5s ease';
             flashEl.style.opacity = '0';
