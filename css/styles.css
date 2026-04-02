@@ -1304,11 +1304,11 @@ h2::after {
 /* --- SCROLL PROGRESS BAR --- */
 .scroll-progress {
     position: fixed;
-    top: 0;
+    top: var(--nav-height);
     left: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
-    z-index: 9999;
+    z-index: 999;
     transform-origin: left;
     transition: width 0.1s;
 }
