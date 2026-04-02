@@ -300,3 +300,117 @@ if (navProgress) {
         navProgress.style.width = progress + '%';
     }, { passive: true });
 }
+
+// --- LIGHTNING EFFECT on Hero ---
+(function() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    // Canvas for lightning
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = `
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none; z-index: 2; opacity: 0;
+    `;
+    hero.style.position = 'relative';
+    hero.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+        canvas.width = hero.offsetWidth;
+        canvas.height = hero.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    function drawBolt(x1, y1, x2, y2, branches, ctx) {
+        const mx = (x1 + x2) / 2 + (Math.random() - 0.5) * 120;
+        const my = (y1 + y2) / 2 + (Math.random() - 0.5) * 60;
+
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(mx, my);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+
+        if (branches > 0 && Math.random() > 0.4) {
+            const bx = mx + (Math.random() - 0.5) * 200;
+            const by = my + Math.random() * 150;
+            ctx.globalAlpha *= 0.6;
+            drawBolt(mx, my, bx, by, branches - 1, ctx);
+            ctx.globalAlpha /= 0.6;
+        }
+    }
+
+    function lightning() {
+        resize();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const numBolts = Math.floor(Math.random() * 2) + 1;
+
+        for (let b = 0; b < numBolts; b++) {
+            const startX = Math.random() * canvas.width;
+            const endX = startX + (Math.random() - 0.5) * 300;
+            const endY = Math.random() * canvas.height * 0.7 + canvas.height * 0.2;
+
+            // Gold lightning
+            ctx.strokeStyle = `rgba(201, 169, 78, ${0.6 + Math.random() * 0.4})`;
+            ctx.lineWidth = 1.5;
+            ctx.shadowColor = 'rgba(201, 169, 78, 0.8)';
+            ctx.shadowBlur = 12;
+            ctx.globalAlpha = 0.9;
+            drawBolt(startX, 0, endX, endY, 3, ctx);
+
+            // White core
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.lineWidth = 0.5;
+            ctx.shadowBlur = 4;
+            ctx.globalAlpha = 0.6;
+            drawBolt(startX, 0, endX, endY, 2, ctx);
+        }
+
+        // Flash sequence: bright → fade
+        canvas.style.transition = 'none';
+        canvas.style.opacity = '1';
+
+        setTimeout(() => {
+            canvas.style.transition = 'opacity 0.08s';
+            canvas.style.opacity = '0';
+        }, 60);
+
+        setTimeout(() => {
+            canvas.style.transition = 'none';
+            canvas.style.opacity = '0.7';
+        }, 140);
+
+        setTimeout(() => {
+            canvas.style.transition = 'opacity 0.3s';
+            canvas.style.opacity = '0';
+        }, 200);
+    }
+
+    // Random interval: every 3-8 seconds
+    function scheduleLightning() {
+        const delay = 3000 + Math.random() * 5000;
+        setTimeout(() => {
+            lightning();
+            scheduleLightning();
+        }, delay);
+    }
+
+    // First strike after 2 seconds
+    setTimeout(() => {
+        lightning();
+        scheduleLightning();
+    }, 2000);
+})();
+
+// --- PULSING GOLD GLOW on Hero Title Lines ---
+(function() {
+    const titleLines = document.querySelectorAll('.hero__title-line');
+    titleLines.forEach((line, i) => {
+        line.classList.add('hero__title-pulse');
+        line.style.animationDelay = `${i * 0.3}s`;
+    });
+})();
