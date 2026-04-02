@@ -301,109 +301,163 @@ if (navProgress) {
     }, { passive: true });
 }
 
-// --- LIGHTNING EFFECT on Hero ---
+// --- LIGHTNING EFFECT on Hero (Full Page, Realistic) ---
 (function() {
     const hero = document.querySelector('.hero');
     if (!hero) return;
 
-    // Canvas for lightning
     const canvas = document.createElement('canvas');
+    canvas.id = 'lightningCanvas';
     canvas.style.cssText = `
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        pointer-events: none; z-index: 2; opacity: 0;
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        pointer-events: none; z-index: 1; opacity: 0;
     `;
-    hero.style.position = 'relative';
-    hero.appendChild(canvas);
+    document.body.appendChild(canvas);
 
     const ctx = canvas.getContext('2d');
 
     function resize() {
-        canvas.width = hero.offsetWidth;
-        canvas.height = hero.offsetHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    function drawBolt(x1, y1, x2, y2, branches, ctx) {
-        const mx = (x1 + x2) / 2 + (Math.random() - 0.5) * 120;
-        const my = (y1 + y2) / 2 + (Math.random() - 0.5) * 60;
+    // Realistic branching lightning using midpoint displacement
+    function boltSegment(ctx, x1, y1, x2, y2, offset, depth) {
+        if (depth <= 0 || (Math.abs(x2-x1) < 3 && Math.abs(y2-y1) < 3)) {
+            ctx.lineTo(x2, y2);
+            return;
+        }
+        const mx = (x1 + x2) / 2 + (Math.random() - 0.5) * offset;
+        const my = (y1 + y2) / 2 + (Math.random() - 0.5) * offset * 0.4;
+        boltSegment(ctx, x1, y1, mx, my, offset * 0.55, depth - 1);
+        boltSegment(ctx, mx, my, x2, y2, offset * 0.55, depth - 1);
+    }
 
+    function drawLightningBolt(startX, startY, endX, endY, alpha, lineWidth, color, glowColor) {
+        // Glow layer
+        ctx.save();
+        ctx.strokeStyle = glowColor;
+        ctx.lineWidth = lineWidth * 6;
+        ctx.shadowColor = glowColor;
+        ctx.shadowBlur = 30;
+        ctx.globalAlpha = alpha * 0.3;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
         ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(mx, my);
-        ctx.lineTo(x2, y2);
+        ctx.moveTo(startX, startY);
+        boltSegment(ctx, startX, startY, endX, endY, 120, 8);
         ctx.stroke();
+        ctx.restore();
 
-        if (branches > 0 && Math.random() > 0.4) {
-            const bx = mx + (Math.random() - 0.5) * 200;
-            const by = my + Math.random() * 150;
-            ctx.globalAlpha *= 0.6;
-            drawBolt(mx, my, bx, by, branches - 1, ctx);
-            ctx.globalAlpha /= 0.6;
+        // Mid glow
+        ctx.save();
+        ctx.strokeStyle = glowColor;
+        ctx.lineWidth = lineWidth * 3;
+        ctx.shadowColor = glowColor;
+        ctx.shadowBlur = 15;
+        ctx.globalAlpha = alpha * 0.5;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        boltSegment(ctx, startX, startY, endX, endY, 120, 8);
+        ctx.stroke();
+        ctx.restore();
+
+        // Core white bolt
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lineWidth;
+        ctx.shadowColor = glowColor;
+        ctx.shadowBlur = 8;
+        ctx.globalAlpha = alpha;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        boltSegment(ctx, startX, startY, endX, endY, 120, 8);
+        ctx.stroke();
+        ctx.restore();
+
+        // Random branches
+        const numBranches = 2 + Math.floor(Math.random() * 3);
+        for (let b = 0; b < numBranches; b++) {
+            const branchT = 0.2 + Math.random() * 0.6;
+            const bx1 = startX + (endX - startX) * branchT;
+            const by1 = startY + (endY - startY) * branchT;
+            const angle = (Math.random() - 0.5) * Math.PI * 0.8;
+            const len = 80 + Math.random() * 200;
+            const bx2 = bx1 + Math.cos(angle) * len;
+            const by2 = by1 + Math.sin(angle) * len + 50;
+
+            ctx.save();
+            ctx.strokeStyle = glowColor;
+            ctx.lineWidth = lineWidth * 2;
+            ctx.shadowColor = glowColor;
+            ctx.shadowBlur = 10;
+            ctx.globalAlpha = alpha * 0.4;
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+            ctx.moveTo(bx1, by1);
+            boltSegment(ctx, bx1, by1, bx2, by2, 60, 5);
+            ctx.stroke();
+            ctx.restore();
         }
     }
 
-    function lightning() {
-        resize();
+    function strikeSequence() {
+        const numStrikes = 2 + Math.floor(Math.random() * 3); // 2-4 bolts per sequence
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const numBolts = Math.floor(Math.random() * 2) + 1;
-
-        for (let b = 0; b < numBolts; b++) {
+        for (let i = 0; i < numStrikes; i++) {
             const startX = Math.random() * canvas.width;
-            const endX = startX + (Math.random() - 0.5) * 300;
-            const endY = Math.random() * canvas.height * 0.7 + canvas.height * 0.2;
+            const endX = startX + (Math.random() - 0.5) * 400;
+            const endY = canvas.height * (0.3 + Math.random() * 0.6);
 
-            // Gold lightning
-            ctx.strokeStyle = `rgba(201, 169, 78, ${0.6 + Math.random() * 0.4})`;
-            ctx.lineWidth = 1.5;
-            ctx.shadowColor = 'rgba(201, 169, 78, 0.8)';
-            ctx.shadowBlur = 12;
-            ctx.globalAlpha = 0.9;
-            drawBolt(startX, 0, endX, endY, 3, ctx);
-
-            // White core
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
-            ctx.lineWidth = 0.5;
-            ctx.shadowBlur = 4;
-            ctx.globalAlpha = 0.6;
-            drawBolt(startX, 0, endX, endY, 2, ctx);
+            // Gold bolts
+            drawLightningBolt(startX, 0, endX, endY, 0.9, 1.5,
+                'rgba(255, 255, 220, 0.95)',
+                'rgba(201, 169, 78, 1)'
+            );
         }
 
-        // Flash sequence: bright → fade
-        canvas.style.transition = 'none';
-        canvas.style.opacity = '1';
+        // Flash sequence: instant on → flicker → off
+        const flashEl = canvas;
+        flashEl.style.transition = 'none';
+        flashEl.style.opacity = '1';
 
+        // Flicker effect
+        setTimeout(() => { flashEl.style.opacity = '0.3'; }, 50);
+        setTimeout(() => { flashEl.style.opacity = '0.9'; }, 80);
+        setTimeout(() => { flashEl.style.opacity = '0.1'; }, 120);
+        setTimeout(() => { flashEl.style.opacity = '0.7'; }, 150);
         setTimeout(() => {
-            canvas.style.transition = 'opacity 0.08s';
-            canvas.style.opacity = '0';
-        }, 60);
-
-        setTimeout(() => {
-            canvas.style.transition = 'none';
-            canvas.style.opacity = '0.7';
-        }, 140);
-
-        setTimeout(() => {
-            canvas.style.transition = 'opacity 0.3s';
-            canvas.style.opacity = '0';
+            flashEl.style.transition = 'opacity 0.5s ease';
+            flashEl.style.opacity = '0';
         }, 200);
+
+        // Background flash
+        document.body.style.transition = 'background 0.05s';
+        document.body.style.background = 'rgba(201,169,78,0.04)';
+        setTimeout(() => {
+            document.body.style.background = '';
+        }, 100);
     }
 
-    // Random interval: every 3-8 seconds
     function scheduleLightning() {
-        const delay = 3000 + Math.random() * 5000;
+        const delay = 2000 + Math.random() * 4000; // every 2-6 seconds
         setTimeout(() => {
-            lightning();
+            strikeSequence();
             scheduleLightning();
         }, delay);
     }
 
-    // First strike after 2 seconds
     setTimeout(() => {
-        lightning();
+        strikeSequence();
         scheduleLightning();
-    }, 2000);
+    }, 1500);
 })();
 
 // --- PULSING GOLD GLOW on Hero Title Lines ---
