@@ -1374,3 +1374,100 @@ h2::after {
 .btn, .nav__link--cta {
     transition: transform 0.2s var(--ease-spring), background 0.3s, box-shadow 0.3s, color 0.3s;
 }
+
+/* ============================================
+   BOOKING CTA CARD
+   ============================================ */
+.book__cta-card {
+    background: linear-gradient(135deg, var(--dark-2) 0%, var(--dark-3) 100%);
+    border: 1px solid rgba(201, 169, 78, 0.2);
+    border-radius: 4px;
+    padding: 56px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.book__cta-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.book__cta-card::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,78,0.06), transparent 70%);
+    pointer-events: none;
+}
+
+.book__cta-icon {
+    font-size: 1.5rem;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 24px;
+    letter-spacing: 8px;
+}
+
+.book__cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+}
+
+.book__cta-sub {
+    color: var(--light-gray);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 440px;
+    margin: 0 auto 36px;
+}
+
+.book__cta-details {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.book__cta-detail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--light-gray);
+    letter-spacing: 0.05em;
+}
+
+.book__cta-detail-icon {
+    color: var(--gold);
+    font-size: 0.9rem;
+}
+
+.book__cta-btn {
+    font-size: 0.95rem;
+    padding: 16px 48px;
+    letter-spacing: 0.08em;
+}
+
+.book__cta-note {
+    margin-top: 20px;
+    font-size: 0.75rem;
+    color: var(--gray);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+    .book__cta-card { padding: 40px 24px; }
+    .book__cta-details { gap: 16px; }
+}
