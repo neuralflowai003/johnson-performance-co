@@ -4,6 +4,101 @@
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // --- ORGANIC BLACK TEXTURE CANVAS (brushed metal / matte black fabric feel) ---
+    (function() {
+        const bgEl = document.querySelector('.hero__bg-placeholder');
+        if (!bgEl) return;
+
+        const tc = document.createElement('canvas');
+        tc.id = 'heroTexture';
+        bgEl.insertBefore(tc, bgEl.firstChild);
+
+        function generateTexture() {
+            tc.width = bgEl.offsetWidth || window.innerWidth;
+            tc.height = bgEl.offsetHeight || window.innerHeight;
+            const ctx = tc.getContext('2d');
+            const w = tc.width, h = tc.height;
+
+            // Base fill
+            ctx.fillStyle = '#060604';
+            ctx.fillRect(0, 0, w, h);
+
+            // Layer 1: Large brush strokes (horizontal sweeps)
+            for (let i = 0; i < 80; i++) {
+                const y = Math.random() * h;
+                const x = Math.random() * w;
+                const len = 100 + Math.random() * w * 0.6;
+                const alpha = 0.015 + Math.random() * 0.04;
+                const width = 2 + Math.random() * 20;
+                const grad = ctx.createLinearGradient(x, y, x + len, y);
+                grad.addColorStop(0, 'transparent');
+                grad.addColorStop(0.3, `rgba(${20 + Math.random()*15}, ${15 + Math.random()*10}, ${5 + Math.random()*5}, ${alpha})`);
+                grad.addColorStop(0.7, `rgba(${20 + Math.random()*15}, ${15 + Math.random()*10}, ${5 + Math.random()*5}, ${alpha})`);
+                grad.addColorStop(1, 'transparent');
+                ctx.fillStyle = grad;
+                ctx.fillRect(x - 10, y - width/2, len + 20, width);
+            }
+
+            // Layer 2: Fine vertical streaks (like fabric weave)
+            for (let i = 0; i < 200; i++) {
+                const x = Math.random() * w;
+                const len = 30 + Math.random() * h * 0.3;
+                const y = Math.random() * h;
+                const alpha = 0.008 + Math.random() * 0.02;
+                ctx.strokeStyle = `rgba(255, 240, 200, ${alpha})`;
+                ctx.lineWidth = 0.5 + Math.random();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + (Math.random()-0.5)*8, y + len);
+                ctx.stroke();
+            }
+
+            // Layer 3: Dark patches (depth variation)
+            for (let i = 0; i < 12; i++) {
+                const x = Math.random() * w;
+                const y = Math.random() * h;
+                const rx = 80 + Math.random() * 300;
+                const ry = 60 + Math.random() * 200;
+                const grad = ctx.createRadialGradient(x, y, 0, x, y, Math.max(rx,ry));
+                grad.addColorStop(0, `rgba(0, 0, 0, ${0.1 + Math.random() * 0.25})`);
+                grad.addColorStop(1, 'transparent');
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.ellipse(x, y, rx, ry, Math.random() * Math.PI, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Layer 4: Fine grain noise
+            const imgData = ctx.getImageData(0, 0, w, h);
+            const data = imgData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                const noise = (Math.random() - 0.5) * 12;
+                data[i]   = Math.max(0, Math.min(255, data[i] + noise));
+                data[i+1] = Math.max(0, Math.min(255, data[i+1] + noise * 0.8));
+                data[i+2] = Math.max(0, Math.min(255, data[i+2] + noise * 0.3));
+            }
+            ctx.putImageData(imgData, 0, 0);
+
+            // Layer 5: Vignette
+            const vig = ctx.createRadialGradient(w/2, h/2, h*0.2, w/2, h/2, h*0.9);
+            vig.addColorStop(0, 'transparent');
+            vig.addColorStop(1, 'rgba(0,0,0,0.6)');
+            ctx.fillStyle = vig;
+            ctx.fillRect(0, 0, w, h);
+
+            // Layer 6: Subtle gold atmospheric glow center
+            const goldGlow = ctx.createRadialGradient(w*0.5, h*0.4, 0, w*0.5, h*0.4, w*0.5);
+            goldGlow.addColorStop(0, 'rgba(201, 169, 78, 0.04)');
+            goldGlow.addColorStop(0.5, 'rgba(201, 169, 78, 0.01)');
+            goldGlow.addColorStop(1, 'transparent');
+            ctx.fillStyle = goldGlow;
+            ctx.fillRect(0, 0, w, h);
+        }
+
+        generateTexture();
+        window.addEventListener('resize', generateTexture, { passive: true });
+    })();
+
 
     // --- NOISE TEXTURE CANVAS OVERLAY ---
     const noiseCanvas = document.createElement('canvas');
