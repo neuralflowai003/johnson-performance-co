@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#0A0A0A"/>
+  <rect x="25" y="25" width="150" height="150" fill="none" stroke="#C9A94E" stroke-width="2.5"/>
+  <rect x="32" y="32" width="136" height="136" fill="none" stroke="#C9A94E" stroke-width="0.5" opacity="0.3"/>
+  <line x1="25" y1="25" x2="45" y2="25" stroke="#C9A94E" stroke-width="3"/>
+  <line x1="25" y1="25" x2="25" y2="45" stroke="#C9A94E" stroke-width="3"/>
+  <line x1="175" y1="25" x2="155" y2="25" stroke="#C9A94E" stroke-width="3"/>
+  <line x1="175" y1="25" x2="175" y2="45" stroke="#C9A94E" stroke-width="3"/>
+  <line x1="25" y1="175" x2="45" y2="175" stroke="#C9A94E" stroke-width="3"/>
+  <line x1="25" y1="175" x2="25" y2="155" stroke="#C9A94E" stroke-width="3"/>
+  <line x1="175" y1="175" x2="155" y2="175" stroke="#C9A94E" stroke-width="3"/>
+  <line x1="175" y1="175" x2="175" y2="155" stroke="#C9A94E" stroke-width="3"/>
+  <text x="100" y="118" font-family="Georgia, serif" font-size="72" font-weight="700" fill="#C9A94E" text-anchor="middle" letter-spacing="4">JP</text>
+  <line x1="55" y1="138" x2="145" y2="138" stroke="#C9A94E" stroke-width="1" opacity="0.5"/>
+  <circle cx="55" cy="138" r="3" fill="#C9A94E" opacity="0.5"/>
+  <circle cx="145" cy="138" r="3" fill="#C9A94E" opacity="0.5"/>
+</svg>
