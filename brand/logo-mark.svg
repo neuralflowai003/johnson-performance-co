@@ -1,32 +1,56 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
   <defs>
     <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#D4BA6A"/>
-      <stop offset="50%" style="stop-color:#C9A94E"/>
-      <stop offset="100%" style="stop-color:#A88B3A"/>
+      <stop offset="0%" style="stop-color:#E8D48B"/>
+      <stop offset="30%" style="stop-color:#C9A94E"/>
+      <stop offset="60%" style="stop-color:#B8973F"/>
+      <stop offset="100%" style="stop-color:#8A6E2F"/>
     </linearGradient>
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#C9A94E" flood-opacity="0.3"/>
+    <linearGradient id="gold2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8D48B"/>
+      <stop offset="100%" style="stop-color:#8A6E2F"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="innerShadow">
+      <feOffset dx="0" dy="1"/>
+      <feGaussianBlur stdDeviation="1" result="offset-blur"/>
+      <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse"/>
+      <feFlood flood-color="#000" flood-opacity="0.3" result="color"/>
+      <feComposite operator="in" in="color" in2="inverse" result="shadow"/>
+      <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
     </filter>
   </defs>
-  <rect width="200" height="200" fill="#0A0A0A"/>
-  <!-- Outer frame -->
-  <rect x="25" y="25" width="150" height="150" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
-  <!-- Inner frame -->
-  <rect x="32" y="32" width="136" height="136" fill="none" stroke="url(#gold)" stroke-width="0.5" opacity="0.3"/>
-  <!-- Corner accents -->
-  <line x1="25" y1="25" x2="45" y2="25" stroke="url(#gold)" stroke-width="3"/>
-  <line x1="25" y1="25" x2="25" y2="45" stroke="url(#gold)" stroke-width="3"/>
-  <line x1="175" y1="25" x2="155" y2="25" stroke="url(#gold)" stroke-width="3"/>
-  <line x1="175" y1="25" x2="175" y2="45" stroke="url(#gold)" stroke-width="3"/>
-  <line x1="25" y1="175" x2="45" y2="175" stroke="url(#gold)" stroke-width="3"/>
-  <line x1="25" y1="175" x2="25" y2="155" stroke="url(#gold)" stroke-width="3"/>
-  <line x1="175" y1="175" x2="155" y2="175" stroke="url(#gold)" stroke-width="3"/>
-  <line x1="175" y1="175" x2="175" y2="155" stroke="url(#gold)" stroke-width="3"/>
-  <!-- JP Letters -->
-  <text x="100" y="118" font-family="Georgia, 'Cormorant Garamond', serif" font-size="72" font-weight="700" fill="url(#gold)" text-anchor="middle" letter-spacing="4" filter="url(#shadow)">JP</text>
-  <!-- Decorative barbell line under text -->
-  <line x1="55" y1="138" x2="145" y2="138" stroke="url(#gold)" stroke-width="1" opacity="0.5"/>
-  <circle cx="55" cy="138" r="3" fill="url(#gold)" opacity="0.5"/>
-  <circle cx="145" cy="138" r="3" fill="url(#gold)" opacity="0.5"/>
+  <!-- Deep black bg -->
+  <rect width="200" height="200" fill="#050505"/>
+  <!-- Subtle radial highlight -->
+  <circle cx="100" cy="95" r="80" fill="#111" opacity="0.5"/>
+  <!-- Outer diamond border -->
+  <rect x="18" y="18" width="164" height="164" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.2"/>
+  <!-- Main border -->
+  <rect x="24" y="24" width="152" height="152" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+  <!-- Inner border -->
+  <rect x="32" y="32" width="136" height="136" fill="none" stroke="url(#gold2)" stroke-width="0.5" opacity="0.25"/>
+  <!-- Corner brackets — thick gold accents -->
+  <path d="M24,24 L54,24" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M24,24 L24,54" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M176,24 L146,24" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M176,24 L176,54" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M24,176 L54,176" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M24,176 L24,146" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M176,176 L146,176" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M176,176 L176,146" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <!-- Small diamond accent top center -->
+  <polygon points="100,14 106,18 100,22 94,18" fill="url(#gold)" opacity="0.6"/>
+  <!-- JP Letters with glow -->
+  <text x="100" y="120" font-family="Georgia, 'Times New Roman', serif" font-size="76" font-weight="700" fill="url(#gold)" text-anchor="middle" letter-spacing="6" filter="url(#glow)">JP</text>
+  <!-- Thin decorative line under text -->
+  <line x1="55" y1="140" x2="85" y2="140" stroke="url(#gold)" stroke-width="0.8" opacity="0.6"/>
+  <circle cx="100" cy="140" r="2" fill="url(#gold)" opacity="0.5"/>
+  <line x1="115" y1="140" x2="145" y2="140" stroke="url(#gold)" stroke-width="0.8" opacity="0.6"/>
+  <!-- Weight plate circle accent bottom -->
+  <circle cx="100" cy="158" r="8" fill="none" stroke="url(#gold)" stroke-width="0.8" opacity="0.3"/>
+  <circle cx="100" cy="158" r="4" fill="none" stroke="url(#gold)" stroke-width="0.5" opacity="0.2"/>
 </svg>

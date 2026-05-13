@@ -1,20 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 200">
   <defs>
-    <linearGradient id="goldG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#D4BA6A"/>
-      <stop offset="50%" style="stop-color:#C9A94E"/>
-      <stop offset="100%" style="stop-color:#A88B3A"/>
+    <linearGradient id="goldW" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8973F"/>
+      <stop offset="50%" style="stop-color:#8A6E2F"/>
+      <stop offset="100%" style="stop-color:#6B5525"/>
     </linearGradient>
   </defs>
-  <rect width="600" height="200" fill="#FFFFFF"/>
-  <line x1="0" y1="100" x2="50" y2="100" stroke="#A88B3A" stroke-width="2" opacity="0.3"/>
-  <circle cx="55" cy="100" r="5" fill="none" stroke="#A88B3A" stroke-width="1.5" opacity="0.3"/>
-  <rect x="75" y="55" width="90" height="90" fill="none" stroke="#A88B3A" stroke-width="2"/>
-  <rect x="80" y="60" width="80" height="80" fill="none" stroke="#A88B3A" stroke-width="0.5" opacity="0.3"/>
-  <text x="120" y="115" font-family="Georgia, 'Cormorant Garamond', serif" font-size="48" font-weight="700" fill="#A88B3A" text-anchor="middle" letter-spacing="3">JP</text>
-  <text x="190" y="88" font-family="Georgia, 'Cormorant Garamond', serif" font-size="32" font-weight="600" fill="#0A0A0A" letter-spacing="2">JOHNSON</text>
-  <text x="190" y="120" font-family="Georgia, 'Cormorant Garamond', serif" font-size="32" font-weight="600" fill="#A88B3A" letter-spacing="2">PERFORMANCE</text>
-  <text x="190" y="148" font-family="'Helvetica Neue', 'DM Sans', sans-serif" font-size="11" fill="#666666" letter-spacing="12">PRIVATE TRAINING STUDIO</text>
-  <circle cx="545" cy="100" r="5" fill="none" stroke="#A88B3A" stroke-width="1.5" opacity="0.3"/>
-  <line x1="550" y1="100" x2="600" y2="100" stroke="#A88B3A" stroke-width="2" opacity="0.3"/>
+  <rect width="700" height="200" fill="#FFFFFF"/>
+  <!-- Left weight plate -->
+  <circle cx="22" cy="100" r="10" fill="none" stroke="url(#goldW)" stroke-width="1" opacity="0.2"/>
+  <circle cx="22" cy="100" r="6" fill="none" stroke="url(#goldW)" stroke-width="0.5" opacity="0.15"/>
+  <line x1="32" y1="100" x2="58" y2="100" stroke="url(#goldW)" stroke-width="1.5" opacity="0.2"/>
+  <!-- JP box -->
+  <rect x="64" y="48" width="104" height="104" fill="none" stroke="url(#goldW)" stroke-width="2.5"/>
+  <rect x="70" y="54" width="92" height="92" fill="none" stroke="url(#goldW)" stroke-width="0.5" opacity="0.2"/>
+  <path d="M64,48 L84,48" stroke="url(#goldW)" stroke-width="3.5" fill="none"/>
+  <path d="M64,48 L64,68" stroke="url(#goldW)" stroke-width="3.5" fill="none"/>
+  <path d="M168,48 L148,48" stroke="url(#goldW)" stroke-width="3.5" fill="none"/>
+  <path d="M168,48 L168,68" stroke="url(#goldW)" stroke-width="3.5" fill="none"/>
+  <path d="M64,152 L84,152" stroke="url(#goldW)" stroke-width="3.5" fill="none"/>
+  <path d="M64,152 L64,132" stroke="url(#goldW)" stroke-width="3.5" fill="none"/>
+  <path d="M168,152 L148,152" stroke="url(#goldW)" stroke-width="3.5" fill="none"/>
+  <path d="M168,152 L168,132" stroke="url(#goldW)" stroke-width="3.5" fill="none"/>
+  <polygon points="116,40 120,44 116,48 112,44" fill="url(#goldW)" opacity="0.4"/>
+  <text x="116" y="115" font-family="Georgia, 'Times New Roman', serif" font-size="52" font-weight="700" fill="url(#goldW)" text-anchor="middle" letter-spacing="4">JP</text>
+  <!-- Text -->
+  <text x="198" y="82" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="600" fill="#0A0A0A" letter-spacing="6">JOHNSON</text>
+  <text x="198" y="124" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="600" fill="url(#goldW)" letter-spacing="6">PERFORMANCE</text>
+  <line x1="198" y1="140" x2="350" y2="140" stroke="url(#goldW)" stroke-width="0.5" opacity="0.25"/>
+  <text x="198" y="160" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="10.5" fill="#999999" letter-spacing="10" font-weight="400">PRIVATE TRAINING STUDIO</text>
+  <!-- Right weight plate -->
+  <line x1="640" y1="100" x2="668" y2="100" stroke="url(#goldW)" stroke-width="1.5" opacity="0.2"/>
+  <circle cx="678" cy="100" r="10" fill="none" stroke="url(#goldW)" stroke-width="1" opacity="0.2"/>
+  <circle cx="678" cy="100" r="6" fill="none" stroke="url(#goldW)" stroke-width="0.5" opacity="0.15"/>
 </svg>

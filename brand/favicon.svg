@@ -1,11 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#D4BA6A"/>
-      <stop offset="100%" style="stop-color:#A88B3A"/>
+    <linearGradient id="fG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8D48B"/>
+      <stop offset="50%" style="stop-color:#C9A94E"/>
+      <stop offset="100%" style="stop-color:#8A6E2F"/>
     </linearGradient>
+    <filter id="fGlow">
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
-  <rect width="64" height="64" fill="#0A0A0A"/>
-  <rect x="6" y="6" width="52" height="52" fill="none" stroke="url(#fg)" stroke-width="2"/>
-  <text x="32" y="42" font-family="Georgia, serif" font-size="28" font-weight="700" fill="url(#fg)" text-anchor="middle" letter-spacing="1">JP</text>
+  <rect width="64" height="64" fill="#050505"/>
+  <rect x="6" y="6" width="52" height="52" fill="none" stroke="url(#fG)" stroke-width="2"/>
+  <path d="M6,6 L16,6" stroke="url(#fG)" stroke-width="3" fill="none"/>
+  <path d="M6,6 L6,16" stroke="url(#fG)" stroke-width="3" fill="none"/>
+  <path d="M58,6 L48,6" stroke="url(#fG)" stroke-width="3" fill="none"/>
+  <path d="M58,6 L58,16" stroke="url(#fG)" stroke-width="3" fill="none"/>
+  <path d="M6,58 L16,58" stroke="url(#fG)" stroke-width="3" fill="none"/>
+  <path d="M6,58 L6,48" stroke="url(#fG)" stroke-width="3" fill="none"/>
+  <path d="M58,58 L48,58" stroke="url(#fG)" stroke-width="3" fill="none"/>
+  <path d="M58,58 L58,48" stroke="url(#fG)" stroke-width="3" fill="none"/>
+  <text x="32" y="42" font-family="Georgia, serif" font-size="26" font-weight="700" fill="url(#fG)" text-anchor="middle" letter-spacing="1" filter="url(#fGlow)">JP</text>
 </svg>

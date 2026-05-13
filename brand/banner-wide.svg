@@ -1,51 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500">
   <defs>
-    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0A0A0A"/>
-      <stop offset="100%" style="stop-color:#111111"/>
+    <linearGradient id="bgW" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#050505"/>
+      <stop offset="50%" style="stop-color:#0A0A0A"/>
+      <stop offset="100%" style="stop-color:#050505"/>
     </linearGradient>
-    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#D4BA6A"/>
-      <stop offset="50%" style="stop-color:#C9A94E"/>
-      <stop offset="100%" style="stop-color:#A88B3A"/>
+    <linearGradient id="gW" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8D48B"/>
+      <stop offset="30%" style="stop-color:#C9A94E"/>
+      <stop offset="60%" style="stop-color:#B8973F"/>
+      <stop offset="100%" style="stop-color:#8A6E2F"/>
     </linearGradient>
-    <pattern id="noise2" width="200" height="200" patternUnits="userSpaceOnUse">
-      <rect width="200" height="200" fill="#111" opacity="0.3"/>
-      <circle cx="20" cy="30" r="0.5" fill="#333" opacity="0.5"/>
-      <circle cx="80" cy="10" r="0.5" fill="#333" opacity="0.4"/>
-      <circle cx="150" cy="60" r="0.5" fill="#333" opacity="0.3"/>
-      <circle cx="40" cy="90" r="0.5" fill="#333" opacity="0.5"/>
-      <circle cx="120" cy="140" r="0.5" fill="#333" opacity="0.4"/>
-      <circle cx="180" cy="170" r="0.5" fill="#333" opacity="0.3"/>
-      <circle cx="60" cy="180" r="0.5" fill="#333" opacity="0.5"/>
-    </pattern>
-    <filter id="glow2">
-      <feGaussianBlur stdDeviation="6" result="blur"/>
+    <filter id="glowW">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <rect width="1500" height="500" fill="url(#bg2)"/>
-  <rect width="1500" height="500" fill="url(#noise2)" opacity="0.5"/>
-  <!-- Top and bottom gold lines -->
-  <rect x="0" y="0" width="1500" height="3" fill="url(#g2)" opacity="0.6"/>
-  <rect x="0" y="497" width="1500" height="3" fill="url(#g2)" opacity="0.6"/>
-  <!-- Decorative dumbbell left -->
-  <rect x="80" y="235" width="20" height="30" rx="2" fill="url(#g2)" opacity="0.2"/>
-  <rect x="60" y="240" width="20" height="20" rx="2" fill="url(#g2)" opacity="0.15"/>
-  <line x1="100" y1="250" x2="250" y2="250" stroke="url(#g2)" stroke-width="3" opacity="0.15"/>
-  <!-- JP Mark centered -->
-  <rect x="670" y="80" width="160" height="160" fill="none" stroke="url(#g2)" stroke-width="2.5"/>
-  <text x="750" y="183" font-family="Georgia, serif" font-size="80" font-weight="700" fill="url(#g2)" text-anchor="middle" letter-spacing="5" filter="url(#glow2)">JP</text>
-  <!-- Name -->
-  <text x="750" y="300" font-family="Georgia, serif" font-size="52" font-weight="600" fill="#FFFFFF" text-anchor="middle" letter-spacing="12">JOHNSON</text>
-  <text x="750" y="358" font-family="Georgia, serif" font-size="52" font-weight="600" fill="url(#g2)" text-anchor="middle" letter-spacing="12">PERFORMANCE</text>
+  <rect width="1500" height="500" fill="url(#bgW)"/>
+  <!-- Gold edge lines -->
+  <rect x="0" y="0" width="1500" height="2" fill="url(#gW)" opacity="0.5"/>
+  <rect x="0" y="498" width="1500" height="2" fill="url(#gW)" opacity="0.5"/>
+  <!-- Left dumbbell -->
+  <rect x="40" y="237" width="16" height="26" rx="2" fill="url(#gW)" opacity="0.15"/>
+  <rect x="56" y="241" width="12" height="18" rx="1" fill="url(#gW)" opacity="0.1"/>
+  <line x1="68" y1="250" x2="200" y2="250" stroke="url(#gW)" stroke-width="2.5" opacity="0.12"/>
+  <!-- Corner brackets -->
+  <path d="M50,50 L80,50" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M50,50 L50,80" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M1450,50 L1420,50" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M1450,50 L1450,80" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M50,450 L80,450" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M50,450 L50,420" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M1450,450 L1420,450" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M1450,450 L1450,420" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <!-- JP Mark -->
+  <rect x="670" y="60" width="160" height="160" fill="none" stroke="url(#gW)" stroke-width="2.5"/>
+  <path d="M670,60 L698,60" stroke="url(#gW)" stroke-width="4" fill="none"/>
+  <path d="M670,60 L670,88" stroke="url(#gW)" stroke-width="4" fill="none"/>
+  <path d="M830,60 L802,60" stroke="url(#gW)" stroke-width="4" fill="none"/>
+  <path d="M830,60 L830,88" stroke="url(#gW)" stroke-width="4" fill="none"/>
+  <path d="M670,220 L698,220" stroke="url(#gW)" stroke-width="4" fill="none"/>
+  <path d="M670,220 L670,192" stroke="url(#gW)" stroke-width="4" fill="none"/>
+  <path d="M830,220 L802,220" stroke="url(#gW)" stroke-width="4" fill="none"/>
+  <path d="M830,220 L830,192" stroke="url(#gW)" stroke-width="4" fill="none"/>
+  <polygon points="750,50 756,56 750,62 744,56" fill="url(#gW)" opacity="0.5"/>
+  <text x="750" y="163" font-family="Georgia, serif" font-size="82" font-weight="700" fill="url(#gW)" text-anchor="middle" letter-spacing="6" filter="url(#glowW)">JP</text>
+  <!-- Text -->
+  <text x="750" y="285" font-family="Georgia, serif" font-size="54" font-weight="600" fill="#FFFFFF" text-anchor="middle" letter-spacing="14">JOHNSON</text>
+  <text x="750" y="345" font-family="Georgia, serif" font-size="54" font-weight="600" fill="url(#gW)" text-anchor="middle" letter-spacing="14">PERFORMANCE</text>
   <!-- Divider -->
-  <line x1="550" y1="390" x2="950" y2="390" stroke="url(#g2)" stroke-width="1" opacity="0.3"/>
-  <circle cx="750" cy="390" r="4" fill="url(#g2)" opacity="0.5"/>
+  <line x1="530" y1="380" x2="720" y2="380" stroke="url(#gW)" stroke-width="0.5" opacity="0.3"/>
+  <polygon points="750,376 754,380 750,384 746,380" fill="url(#gW)" opacity="0.4"/>
+  <line x1="780" y1="380" x2="970" y2="380" stroke="url(#gW)" stroke-width="0.5" opacity="0.3"/>
   <!-- Tagline -->
-  <text x="750" y="430" font-family="Helvetica, sans-serif" font-size="15" fill="#999999" text-anchor="middle" letter-spacing="10">PRIVATE TRAINING STUDIO</text>
-  <!-- Decorative dumbbell right -->
-  <line x1="1250" y1="250" x2="1400" y2="250" stroke="url(#g2)" stroke-width="3" opacity="0.15"/>
-  <rect x="1400" y="235" width="20" height="30" rx="2" fill="url(#g2)" opacity="0.2"/>
-  <rect x="1420" y="240" width="20" height="20" rx="2" fill="url(#g2)" opacity="0.15"/>
+  <text x="750" y="415" font-family="Helvetica, sans-serif" font-size="14" fill="#777777" text-anchor="middle" letter-spacing="10">PRIVATE TRAINING STUDIO</text>
+  <!-- Right dumbbell -->
+  <line x1="1300" y1="250" x2="1432" y2="250" stroke="url(#gW)" stroke-width="2.5" opacity="0.12"/>
+  <rect x="1432" y="241" width="12" height="18" rx="1" fill="url(#gW)" opacity="0.1"/>
+  <rect x="1444" y="237" width="16" height="26" rx="2" fill="url(#gW)" opacity="0.15"/>
 </svg>
