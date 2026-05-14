@@ -48,5 +48,5 @@
   <polygon points="750,396 754,400 750,404 746,400" fill="url(#gW)" opacity="0.3"/>
   <line x1="780" y1="400" x2="980" y2="400" stroke="url(#gW)" stroke-width="0.5" opacity="0.3"/>
   <!-- Tagline -->
-  <text x="750" y="435" font-family="'Inter', sans-serif" font-size="12" fill="#777" text-anchor="middle" letter-spacing="9" font-weight="500">PRIVATE TRAINING STUDIO  ·  BAYONNE, NJ</text>
+  <text x="750" y="435" font-family="'Inter', sans-serif" font-size="12" fill="#777" text-anchor="middle" letter-spacing="9" font-weight="500">PRIVATE TRAINING STUDIO  ·  GALLATIN, TN</text>
 </svg>

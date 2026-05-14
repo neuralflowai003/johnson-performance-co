@@ -29,6 +29,6 @@
   </text>
   <path id="botArc" d="M190,130 A70,70 0 0,1 50,130" fill="none"/>
   <text font-family="'Inter', sans-serif" font-size="6.5" fill="#555" letter-spacing="3" font-weight="400">
-    <textPath href="#botArc" startOffset="50%" text-anchor="middle">EST. 2026  ·  BAYONNE, NJ</textPath>
+    <textPath href="#botArc" startOffset="50%" text-anchor="middle">EST. 2026  ·  GALLATIN, TN</textPath>
   </text>
 </svg>
