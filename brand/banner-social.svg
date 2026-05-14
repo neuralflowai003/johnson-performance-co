@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A0A08"/>
+      <stop offset="50%" style="stop-color:#0E0E0C"/>
+      <stop offset="100%" style="stop-color:#0A0A08"/>
+    </linearGradient>
+    <linearGradient id="gB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DBCA7A"/>
+      <stop offset="50%" style="stop-color:#C8A84B"/>
+      <stop offset="100%" style="stop-color:#9A7E35"/>
+    </linearGradient>
+    <filter id="glowB">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="60" stroke="#141412" stroke-width="0.5"/>
+      <line x1="0" y1="0" x2="60" y2="0" stroke="#141412" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bgG)"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.5"/>
+  <!-- Gold edge lines -->
+  <rect x="0" y="0" width="1200" height="2" fill="url(#gB)" opacity="0.3"/>
+  <rect x="0" y="628" width="1200" height="2" fill="url(#gB)" opacity="0.3"/>
+  <!-- Corner brackets -->
+  <path d="M50,50 L90,50" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M50,50 L50,90" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M1150,50 L1110,50" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M1150,50 L1150,90" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M50,580 L90,580" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M50,580 L50,540" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M1150,580 L1110,580" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M1150,580 L1150,540" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
+  <!-- JPC Mark -->
+  <rect x="500" y="140" width="200" height="200" fill="none" stroke="url(#gB)" stroke-width="2.5"/>
+  <rect x="508" y="148" width="184" height="184" fill="none" stroke="#C8A84B" stroke-width="0.5" opacity="0.15"/>
+  <path d="M500,140 L530,140" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
+  <path d="M500,140 L500,170" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
+  <path d="M700,140 L670,140" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
+  <path d="M700,140 L700,170" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
+  <path d="M500,340 L530,340" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
+  <path d="M500,340 L500,310" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
+  <path d="M700,340 L670,340" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
+  <path d="M700,340 L700,310" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
+  <polygon points="600,130 606,136 600,142 594,136" fill="url(#gB)" opacity="0.4"/>
+  <text x="600" y="262" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="90" font-weight="800" fill="url(#gB)" text-anchor="middle" letter-spacing="10" filter="url(#glowB)">JPC</text>
+  <!-- Name -->
+  <text x="600" y="400" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="52" font-weight="800" fill="#F5F5F0" text-anchor="middle" letter-spacing="10">JOHNSON</text>
+  <text x="600" y="456" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="52" font-weight="800" fill="url(#gB)" text-anchor="middle" letter-spacing="10">PERFORMANCE</text>
+  <!-- Divider -->
+  <line x1="400" y1="488" x2="570" y2="488" stroke="url(#gB)" stroke-width="0.5" opacity="0.3"/>
+  <polygon points="600,484 604,488 600,492 596,488" fill="url(#gB)" opacity="0.3"/>
+  <line x1="630" y1="488" x2="800" y2="488" stroke="url(#gB)" stroke-width="0.5" opacity="0.3"/>
+  <!-- Tagline -->
+  <text x="600" y="520" font-family="'Inter', sans-serif" font-size="11" fill="#777" text-anchor="middle" letter-spacing="8" font-weight="500">PRIVATE TRAINING STUDIO  ·  BAYONNE, NJ</text>
+</svg>

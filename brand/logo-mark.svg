@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DBCA7A"/>
+      <stop offset="50%" style="stop-color:#C8A84B"/>
+      <stop offset="100%" style="stop-color:#9A7E35"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="240" height="240" fill="#0A0A08"/>
+  <!-- Outer frame -->
+  <rect x="20" y="20" width="200" height="200" fill="none" stroke="url(#g)" stroke-width="2.5"/>
+  <!-- Inner frame -->
+  <rect x="28" y="28" width="184" height="184" fill="none" stroke="#C8A84B" stroke-width="0.5" opacity="0.15"/>
+  <!-- Corner brackets -->
+  <path d="M20,20 L50,20" stroke="url(#g)" stroke-width="4.5" fill="none"/>
+  <path d="M20,20 L20,50" stroke="url(#g)" stroke-width="4.5" fill="none"/>
+  <path d="M220,20 L190,20" stroke="url(#g)" stroke-width="4.5" fill="none"/>
+  <path d="M220,20 L220,50" stroke="url(#g)" stroke-width="4.5" fill="none"/>
+  <path d="M20,220 L50,220" stroke="url(#g)" stroke-width="4.5" fill="none"/>
+  <path d="M20,220 L20,190" stroke="url(#g)" stroke-width="4.5" fill="none"/>
+  <path d="M220,220 L190,220" stroke="url(#g)" stroke-width="4.5" fill="none"/>
+  <path d="M220,220 L220,190" stroke="url(#g)" stroke-width="4.5" fill="none"/>
+  <!-- Diamond top -->
+  <polygon points="120,10 126,16 120,22 114,16" fill="url(#g)" opacity="0.4"/>
+  <!-- JPC -->
+  <text x="120" y="138" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="82" font-weight="800" fill="url(#g)" text-anchor="middle" letter-spacing="8" filter="url(#glow)">JPC</text>
+  <!-- Bottom line -->
+  <line x1="65" y1="165" x2="95" y2="165" stroke="url(#g)" stroke-width="0.8" opacity="0.4"/>
+  <polygon points="120,161 124,165 120,169 116,165" fill="url(#g)" opacity="0.3"/>
+  <line x1="145" y1="165" x2="175" y2="165" stroke="url(#g)" stroke-width="0.8" opacity="0.4"/>
+</svg>

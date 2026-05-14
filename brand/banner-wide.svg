@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500">
+  <defs>
+    <linearGradient id="bgW" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0A0A08"/>
+      <stop offset="50%" style="stop-color:#0E0E0C"/>
+      <stop offset="100%" style="stop-color:#0A0A08"/>
+    </linearGradient>
+    <linearGradient id="gW" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DBCA7A"/>
+      <stop offset="50%" style="stop-color:#C8A84B"/>
+      <stop offset="100%" style="stop-color:#9A7E35"/>
+    </linearGradient>
+    <filter id="glowW">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1500" height="500" fill="url(#bgW)"/>
+  <!-- Gold edges -->
+  <rect x="0" y="0" width="1500" height="2" fill="url(#gW)" opacity="0.4"/>
+  <rect x="0" y="498" width="1500" height="2" fill="url(#gW)" opacity="0.4"/>
+  <!-- Corners -->
+  <path d="M40,40 L75,40" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.35"/>
+  <path d="M40,40 L40,75" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.35"/>
+  <path d="M1460,40 L1425,40" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.35"/>
+  <path d="M1460,40 L1460,75" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.35"/>
+  <path d="M40,460 L75,460" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.35"/>
+  <path d="M40,460 L40,425" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.35"/>
+  <path d="M1460,460 L1425,460" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.35"/>
+  <path d="M1460,460 L1460,425" stroke="url(#gW)" stroke-width="1.5" fill="none" opacity="0.35"/>
+  <!-- JPC Mark -->
+  <rect x="650" y="50" width="200" height="200" fill="none" stroke="url(#gW)" stroke-width="2.5"/>
+  <path d="M650,50 L680,50" stroke="url(#gW)" stroke-width="4.5" fill="none"/>
+  <path d="M650,50 L650,80" stroke="url(#gW)" stroke-width="4.5" fill="none"/>
+  <path d="M850,50 L820,50" stroke="url(#gW)" stroke-width="4.5" fill="none"/>
+  <path d="M850,50 L850,80" stroke="url(#gW)" stroke-width="4.5" fill="none"/>
+  <path d="M650,250 L680,250" stroke="url(#gW)" stroke-width="4.5" fill="none"/>
+  <path d="M650,250 L650,220" stroke="url(#gW)" stroke-width="4.5" fill="none"/>
+  <path d="M850,250 L820,250" stroke="url(#gW)" stroke-width="4.5" fill="none"/>
+  <path d="M850,250 L850,220" stroke="url(#gW)" stroke-width="4.5" fill="none"/>
+  <polygon points="750,40 756,46 750,52 744,46" fill="url(#gW)" opacity="0.4"/>
+  <text x="750" y="172" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="90" font-weight="800" fill="url(#gW)" text-anchor="middle" letter-spacing="10" filter="url(#glowW)">JPC</text>
+  <!-- Text -->
+  <text x="750" y="310" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="58" font-weight="800" fill="#F5F5F0" text-anchor="middle" letter-spacing="14">JOHNSON</text>
+  <text x="750" y="370" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="58" font-weight="800" fill="url(#gW)" text-anchor="middle" letter-spacing="14">PERFORMANCE</text>
+  <!-- Divider -->
+  <line x1="520" y1="400" x2="720" y2="400" stroke="url(#gW)" stroke-width="0.5" opacity="0.3"/>
+  <polygon points="750,396 754,400 750,404 746,400" fill="url(#gW)" opacity="0.3"/>
+  <line x1="780" y1="400" x2="980" y2="400" stroke="url(#gW)" stroke-width="0.5" opacity="0.3"/>
+  <!-- Tagline -->
+  <text x="750" y="435" font-family="'Inter', sans-serif" font-size="12" fill="#777" text-anchor="middle" letter-spacing="9" font-weight="500">PRIVATE TRAINING STUDIO  ·  BAYONNE, NJ</text>
+</svg>

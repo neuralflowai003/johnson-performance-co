@@ -1,167 +1,39 @@
-/* ============================================
-   JOHNSON PERFORMANCE CO.
-   Main JavaScript — Enhanced Animations & Interactions
-   ============================================ */
-
 document.addEventListener('DOMContentLoaded', () => {
-    // --- ORGANIC BLACK TEXTURE CANVAS (brushed metal / matte black fabric feel) ---
-    (function() {
-        const bgEl = document.querySelector('.hero__bg-placeholder');
-        if (!bgEl) return;
 
-        const tc = document.createElement('canvas');
-        tc.id = 'heroTexture';
-        bgEl.insertBefore(tc, bgEl.firstChild);
-
-        function generateTexture() {
-            const hero = document.querySelector('.hero');
-            tc.width = (hero ? hero.offsetWidth : bgEl.offsetWidth) || window.innerWidth;
-            tc.height = (hero ? hero.offsetHeight : bgEl.offsetHeight) || window.innerHeight;
-            const ctx = tc.getContext('2d');
-            const w = tc.width, h = tc.height;
-
-            // Base fill
-            ctx.fillStyle = '#060604';
-            ctx.fillRect(0, 0, w, h);
-
-            // Layer 1: Large brush strokes (horizontal sweeps)
-            for (let i = 0; i < 80; i++) {
-                const y = Math.random() * h;
-                const x = Math.random() * w;
-                const len = 100 + Math.random() * w * 0.6;
-                const alpha = 0.015 + Math.random() * 0.04;
-                const width = 2 + Math.random() * 20;
-                const grad = ctx.createLinearGradient(x, y, x + len, y);
-                grad.addColorStop(0, 'transparent');
-                grad.addColorStop(0.3, `rgba(${20 + Math.random()*15}, ${15 + Math.random()*10}, ${5 + Math.random()*5}, ${alpha})`);
-                grad.addColorStop(0.7, `rgba(${20 + Math.random()*15}, ${15 + Math.random()*10}, ${5 + Math.random()*5}, ${alpha})`);
-                grad.addColorStop(1, 'transparent');
-                ctx.fillStyle = grad;
-                ctx.fillRect(x - 10, y - width/2, len + 20, width);
-            }
-
-            // Layer 2: Fine vertical streaks (like fabric weave)
-            for (let i = 0; i < 200; i++) {
-                const x = Math.random() * w;
-                const len = 30 + Math.random() * h * 0.3;
-                const y = Math.random() * h;
-                const alpha = 0.008 + Math.random() * 0.02;
-                ctx.strokeStyle = `rgba(255, 240, 200, ${alpha})`;
-                ctx.lineWidth = 0.5 + Math.random();
-                ctx.beginPath();
-                ctx.moveTo(x, y);
-                ctx.lineTo(x + (Math.random()-0.5)*8, y + len);
-                ctx.stroke();
-            }
-
-            // Layer 3: Dark patches (depth variation)
-            for (let i = 0; i < 12; i++) {
-                const x = Math.random() * w;
-                const y = Math.random() * h;
-                const rx = 80 + Math.random() * 300;
-                const ry = 60 + Math.random() * 200;
-                const grad = ctx.createRadialGradient(x, y, 0, x, y, Math.max(rx,ry));
-                grad.addColorStop(0, `rgba(0, 0, 0, ${0.1 + Math.random() * 0.25})`);
-                grad.addColorStop(1, 'transparent');
-                ctx.fillStyle = grad;
-                ctx.beginPath();
-                ctx.ellipse(x, y, rx, ry, Math.random() * Math.PI, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            // Layer 4: Fine grain noise
-            const imgData = ctx.getImageData(0, 0, w, h);
-            const data = imgData.data;
-            for (let i = 0; i < data.length; i += 4) {
-                const noise = (Math.random() - 0.5) * 12;
-                data[i]   = Math.max(0, Math.min(255, data[i] + noise));
-                data[i+1] = Math.max(0, Math.min(255, data[i+1] + noise * 0.8));
-                data[i+2] = Math.max(0, Math.min(255, data[i+2] + noise * 0.3));
-            }
-            ctx.putImageData(imgData, 0, 0);
-
-            // Layer 5: Vignette
-            const vig = ctx.createRadialGradient(w/2, h/2, h*0.2, w/2, h/2, h*0.9);
-            vig.addColorStop(0, 'transparent');
-            vig.addColorStop(1, 'rgba(0,0,0,0.6)');
-            ctx.fillStyle = vig;
-            ctx.fillRect(0, 0, w, h);
-
-            // Layer 6: Subtle gold atmospheric glow center
-            const goldGlow = ctx.createRadialGradient(w*0.5, h*0.4, 0, w*0.5, h*0.4, w*0.5);
-            goldGlow.addColorStop(0, 'rgba(201, 169, 78, 0.04)');
-            goldGlow.addColorStop(0.5, 'rgba(201, 169, 78, 0.01)');
-            goldGlow.addColorStop(1, 'transparent');
-            ctx.fillStyle = goldGlow;
-            ctx.fillRect(0, 0, w, h);
-        }
-
-        generateTexture();
-        window.addEventListener('resize', generateTexture, { passive: true });
-    })();
-
-
-    // --- NOISE TEXTURE CANVAS OVERLAY ---
-    const noiseCanvas = document.createElement('canvas');
-    noiseCanvas.style.cssText = `
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        pointer-events: none; z-index: 9998; opacity: 0.035; mix-blend-mode: overlay;
-    `;
-    document.body.appendChild(noiseCanvas);
-
-    function generateNoise() {
-        const ctx = noiseCanvas.getContext('2d');
-        noiseCanvas.width = window.innerWidth;
-        noiseCanvas.height = window.innerHeight;
-        const imageData = ctx.createImageData(noiseCanvas.width, noiseCanvas.height);
-        const buffer32 = new Uint32Array(imageData.data.buffer);
-        for (let i = 0; i < buffer32.length; i++) {
-            buffer32[i] = (Math.random() < 0.5) ? 0xffffffff : 0xff000000;
-        }
-        ctx.putImageData(imageData, 0, 0);
-    }
-
-    generateNoise();
-    setInterval(generateNoise, 100);
-    window.addEventListener('resize', generateNoise, { passive: true });
-
-    // --- LOADER ---
     const loader = document.getElementById('loader');
     window.addEventListener('load', () => {
-        setTimeout(() => {
-            loader.classList.add('loaded');
-        }, 800);
+        setTimeout(() => loader.classList.add('loaded'), 800);
     });
     if (document.readyState === 'complete') {
         setTimeout(() => loader.classList.add('loaded'), 800);
     }
 
-    // --- NAVIGATION: Scroll behavior ---
+    const cursorGlow = document.createElement('div');
+    cursorGlow.classList.add('cursor-glow');
+    document.body.appendChild(cursorGlow);
+    let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+    function animateGlow() {
+        glowX += (mouseX - glowX) * 0.08;
+        glowY += (mouseY - glowY) * 0.08;
+        cursorGlow.style.left = glowX + 'px';
+        cursorGlow.style.top = glowY + 'px';
+        requestAnimationFrame(animateGlow);
+    }
+    if (window.innerWidth > 768) animateGlow();
+
     const nav = document.getElementById('nav');
-    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
 
-    const handleNavScroll = () => {
-        const currentScroll = window.scrollY;
-        if (currentScroll > 60) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-        lastScroll = currentScroll;
-    };
-
-    window.addEventListener('scroll', handleNavScroll, { passive: true });
-
-    // --- NAVIGATION: Mobile toggle ---
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
-
     navToggle.addEventListener('click', () => {
         navToggle.classList.toggle('active');
         navMenu.classList.toggle('open');
         document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
     });
-
     navMenu.querySelectorAll('.nav__link').forEach(link => {
         link.addEventListener('click', () => {
             navToggle.classList.remove('active');
@@ -170,21 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- SMOOTH SCROLL ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             const target = document.querySelector(anchor.getAttribute('href'));
             if (target) {
                 e.preventDefault();
                 const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'));
-                const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
-                window.scrollTo({ top, behavior: 'smooth' });
+                window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navHeight, behavior: 'smooth' });
             }
         });
     });
 
-    // --- SCROLL REVEAL ANIMATIONS ---
-    const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -193,156 +61,82 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    revealElements.forEach(el => revealObserver.observe(el));
-
-    // --- ANIMATED COUNTERS ---
-    function animateCounter(el) {
-        const target = parseInt(el.getAttribute('data-target'));
-        const suffix = el.getAttribute('data-suffix') || '';
-        const prefix = el.getAttribute('data-prefix') || '';
-        const duration = 2000;
-        const start = performance.now();
-
-        function update(now) {
-            const elapsed = now - start;
-            const progress = Math.min(elapsed / duration, 1);
-            // Ease out cubic
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const current = Math.floor(eased * target);
-            el.textContent = prefix + current.toLocaleString() + suffix;
-            if (progress < 1) requestAnimationFrame(update);
-        }
-        requestAnimationFrame(update);
-    }
-
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                entry.target.classList.add('counted');
-                animateCounter(entry.target);
-                counterObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
-
-    // --- ACTIVE NAV LINK ---
-    const sections = document.querySelectorAll('.section, .hero');
     const navLinks = document.querySelectorAll('.nav__link:not(.nav__link--cta)');
-
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const id = entry.target.getAttribute('id');
                 navLinks.forEach(link => {
-                    link.style.color = '';
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.style.color = 'var(--white)';
-                    }
+                    link.style.color = link.getAttribute('href') === `#${id}` ? 'var(--gold)' : '';
                 });
             }
         });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.3, rootMargin: `-80px 0px 0px 0px` });
+    document.querySelectorAll('.section, .hero').forEach(sec => sectionObserver.observe(sec));
 
-    sections.forEach(sec => sectionObserver.observe(sec));
-
-    // --- PARALLAX: Hero + Section backgrounds ---
-    const heroBg = document.querySelector('.hero__bg-placeholder');
     const parallaxEls = document.querySelectorAll('[data-parallax]');
-
-    window.addEventListener('scroll', () => {
-        const scroll = window.scrollY;
-
-        if (heroBg && window.innerWidth > 768 && scroll < window.innerHeight) {
-            heroBg.style.transform = `scale(1.08) translateY(${scroll * 0.2}px)`;
-        }
-
-        if (window.innerWidth > 768) {
+    if (window.innerWidth > 768 && parallaxEls.length) {
+        window.addEventListener('scroll', () => {
             parallaxEls.forEach(el => {
+                const speed = parseFloat(el.dataset.parallax) || 0.1;
                 const rect = el.getBoundingClientRect();
-                const speed = parseFloat(el.getAttribute('data-parallax')) || 0.1;
                 const offset = (window.innerHeight / 2 - rect.top - rect.height / 2) * speed;
                 el.style.transform = `translateY(${offset}px)`;
             });
-        }
-    }, { passive: true });
+        }, { passive: true });
+    }
 
-    // --- MAGNETIC BUTTONS ---
-    document.querySelectorAll('.btn, .nav__link--cta').forEach(btn => {
+    const heroBg = document.querySelector('.hero__bg-placeholder');
+    if (heroBg && window.innerWidth > 768) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY < window.innerHeight) {
+                heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.2}px)`;
+            }
+        }, { passive: true });
+    }
+
+    const particleContainer = document.querySelector('.hero__particles');
+    if (particleContainer && window.innerWidth > 768) {
+        for (let i = 0; i < 20; i++) {
+            const p = document.createElement('div');
+            p.classList.add('hero__particle');
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 8 + 's';
+            p.style.animationDuration = (6 + Math.random() * 6) + 's';
+            const size = (1 + Math.random() * 2) + 'px';
+            p.style.width = size;
+            p.style.height = size;
+            particleContainer.appendChild(p);
+        }
+    }
+
+    document.querySelectorAll('.btn--gold, .nav__link--cta').forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
             btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
         });
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = '';
-        });
+        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
     });
 
-    // --- DUMBBELL / GYM CURSOR TRAIL ---
-    if (window.innerWidth > 768) {
-        const trail = [];
-        const TRAIL_LENGTH = 8;
-
-        for (let i = 0; i < TRAIL_LENGTH; i++) {
-            const dot = document.createElement('div');
-            dot.style.cssText = `
-                position: fixed; width: ${6 - i * 0.5}px; height: ${6 - i * 0.5}px;
-                border-radius: 50%; background: var(--gold, #C9A94E);
-                pointer-events: none; z-index: 9997;
-                opacity: ${(TRAIL_LENGTH - i) / TRAIL_LENGTH * 0.4};
-                transition: opacity 0.1s;
-                transform: translate(-50%, -50%);
-            `;
-            document.body.appendChild(dot);
-            trail.push({ el: dot, x: 0, y: 0 });
-        }
-
-        let mouseX = 0, mouseY = 0;
-        window.addEventListener('mousemove', e => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+    document.querySelectorAll('.facility__feature, .testimonial, .experience__card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            if (window.innerWidth <= 768) return;
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `perspective(600px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translateY(-4px)`;
         });
+        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
 
-        function updateTrail() {
-            trail[0].x = mouseX;
-            trail[0].y = mouseY;
-            for (let i = 1; i < trail.length; i++) {
-                trail[i].x += (trail[i-1].x - trail[i].x) * 0.4;
-                trail[i].y += (trail[i-1].y - trail[i].y) * 0.4;
-            }
-            trail.forEach(t => {
-                t.el.style.left = t.x + 'px';
-                t.el.style.top = t.y + 'px';
-            });
-            requestAnimationFrame(updateTrail);
-        }
-        updateTrail();
-    }
-
-    // --- STAGGERED GALLERY REVEAL ---
-    const galleryPhotos = document.querySelectorAll('.facility__photo');
-    galleryPhotos.forEach((photo, i) => {
+    document.querySelectorAll('.facility__photo').forEach((photo, i) => {
         photo.style.transitionDelay = `${i * 0.1}s`;
     });
 
-    // --- HORIZONTAL SCROLL TICKER (if element exists) ---
-    const ticker = document.querySelector('.ticker__inner');
-    if (ticker) {
-        let pos = 0;
-        function animateTicker() {
-            pos -= 0.5;
-            if (pos <= -ticker.scrollWidth / 2) pos = 0;
-            ticker.style.transform = `translateX(${pos}px)`;
-            requestAnimationFrame(animateTicker);
-        }
-        animateTicker();
-    }
-
-    // --- CONTACT FORM HANDLING ---
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
@@ -351,57 +145,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalText = btn.textContent;
             btn.textContent = 'Sending...';
             btn.disabled = true;
-
             try {
-                const formData = new FormData(contactForm);
-                const response = await fetch(contactForm.action, {
+                const res = await fetch(contactForm.action, {
                     method: 'POST',
-                    body: formData,
+                    body: new FormData(contactForm),
                     headers: { 'Accept': 'application/json' }
                 });
-
-                if (response.ok) {
+                if (res.ok) {
                     btn.textContent = 'Message Sent ✓';
-                    btn.style.background = '#4A8C5C';
+                    btn.style.background = 'linear-gradient(135deg, #5a8a5c, #4A8C5C)';
                     contactForm.reset();
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                        btn.style.background = '';
-                        btn.disabled = false;
-                    }, 3000);
-                } else {
-                    throw new Error('Failed');
-                }
-            } catch (err) {
+                    setTimeout(() => { btn.textContent = originalText; btn.style.background = ''; btn.disabled = false; }, 3000);
+                } else { throw new Error(); }
+            } catch {
                 btn.textContent = 'Error — Try Again';
-                btn.style.background = '#8C4A4A';
+                btn.style.background = 'linear-gradient(135deg, #8C4A4A, #6b3535)';
                 btn.disabled = false;
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.style.background = '';
-                }, 3000);
+                setTimeout(() => { btn.textContent = originalText; btn.style.background = ''; }, 3000);
             }
         });
     }
-
 });
-
-// --- SCROLL PROGRESS BAR (inside nav bottom edge) ---
-const navProgress = document.getElementById('navProgress');
-if (navProgress) {
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        navProgress.style.width = progress + '%';
-    }, { passive: true });
-}
-
-// --- PULSING GOLD GLOW on Hero Title Lines ---
-(function() {
-    const titleLines = document.querySelectorAll('.hero__title-line');
-    titleLines.forEach((line, i) => {
-        line.classList.add('hero__title-pulse');
-        line.style.animationDelay = `${i * 0.3}s`;
-    });
-})();

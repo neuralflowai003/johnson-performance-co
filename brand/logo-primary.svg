@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DBCA7A"/>
+      <stop offset="50%" style="stop-color:#C8A84B"/>
+      <stop offset="100%" style="stop-color:#9A7E35"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="200" fill="#0A0A08"/>
+  <!-- JPC Mark -->
+  <rect x="40" y="35" width="130" height="130" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+  <rect x="46" y="41" width="118" height="118" fill="none" stroke="#C8A84B" stroke-width="0.5" opacity="0.2"/>
+  <!-- Corner accents -->
+  <path d="M40,35 L65,35" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M40,35 L40,60" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M170,35 L145,35" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M170,35 L170,60" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M40,165 L65,165" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M40,165 L40,140" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M170,165 L145,165" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M170,165 L170,140" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <!-- JPC Letters -->
+  <text x="105" y="116" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="52" font-weight="800" fill="url(#gold)" text-anchor="middle" letter-spacing="5">JPC</text>
+  <!-- Company Name -->
+  <text x="210" y="72" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="48" font-weight="800" fill="#F5F5F0" letter-spacing="6">JOHNSON</text>
+  <text x="210" y="124" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="48" font-weight="800" fill="url(#gold)" letter-spacing="6">PERFORMANCE</text>
+  <!-- Separator line -->
+  <line x1="210" y1="142" x2="420" y2="142" stroke="url(#gold)" stroke-width="0.8" opacity="0.3"/>
+  <!-- Tagline -->
+  <text x="210" y="164" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="10.5" fill="#777" letter-spacing="7" font-weight="500">PRIVATE TRAINING STUDIO</text>
+  <!-- Est tag -->
+  <text x="680" y="170" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="8" fill="#555" letter-spacing="4" font-weight="400">EST. 2026  ·  BAYONNE, NJ</text>
+</svg>

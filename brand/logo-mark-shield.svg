@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280">
+  <defs>
+    <linearGradient id="gs" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DBCA7A"/>
+      <stop offset="50%" style="stop-color:#C8A84B"/>
+      <stop offset="100%" style="stop-color:#9A7E35"/>
+    </linearGradient>
+    <clipPath id="shieldClip">
+      <path d="M120,10 L220,50 L220,170 L120,270 L20,170 L20,50 Z"/>
+    </clipPath>
+    <filter id="glowS">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="240" height="280" fill="#0A0A08"/>
+  <!-- Shield shape -->
+  <path d="M120,16 L214,52 L214,168 L120,262 L26,168 L26,52 Z" fill="none" stroke="url(#gs)" stroke-width="2.5"/>
+  <!-- Inner shield -->
+  <path d="M120,28 L204,60 L204,164 L120,250 L36,164 L36,60 Z" fill="none" stroke="#C8A84B" stroke-width="0.5" opacity="0.15"/>
+  <!-- Top chevron accent -->
+  <path d="M90,42 L120,28 L150,42" fill="none" stroke="url(#gs)" stroke-width="3" opacity="0.5"/>
+  <!-- JPC -->
+  <text x="120" y="155" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="72" font-weight="800" fill="url(#gs)" text-anchor="middle" letter-spacing="7" filter="url(#glowS)">JPC</text>
+  <!-- Small divider -->
+  <line x1="80" y1="175" x2="160" y2="175" stroke="url(#gs)" stroke-width="0.8" opacity="0.3"/>
+  <!-- Bottom text -->
+  <text x="120" y="198" font-family="'Inter', sans-serif" font-size="7" fill="#777" text-anchor="middle" letter-spacing="5" font-weight="500">EST. 2026</text>
+</svg>
