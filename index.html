@@ -3,27 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Johnson Performance Co. | Private Personal Training</title>
+
+    <!-- Security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0A0A08">
+    <meta name="format-detection" content="telephone=no">
+
+    <title>Johnson Performance Co. | Private Personal Training · Bayonne, NJ</title>
     <meta name="description" content="Elite 1-on-1 private personal training in a luxury private gym. Custom programs, total privacy, real results. Book your free consultation.">
-    <meta name="keywords" content="personal training, private gym, 1 on 1 training, luxury fitness, custom training program">
-    
+    <meta name="keywords" content="personal training, private gym, 1 on 1 training, luxury fitness, custom training program, Bayonne NJ">
+    <meta name="author" content="Johnson Performance Co.">
+    <link rel="canonical" href="https://johnsonperformanceco.com">
+
     <!-- Open Graph -->
     <meta property="og:title" content="Johnson Performance Co. | Private Personal Training">
     <meta property="og:description" content="Elite 1-on-1 private personal training in a luxury private gym. Custom programs, total privacy, real results.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://johnsonperformanceco.com">
-    <meta property="og:image" content="https://johnsonperformanceco.com/images/og-image.jpg">
-    
-    <!-- Favicon placeholder -->
+    <meta property="og:image" content="https://johnsonperformanceco.com/brand/banner-social.svg">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Johnson Performance Co.">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Johnson Performance Co. | Private Personal Training">
+    <meta name="twitter:description" content="Elite 1-on-1 private personal training in a luxury private gym.">
+    <meta name="twitter:image" content="https://johnsonperformanceco.com/brand/banner-social.svg">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
-    
+    <link rel="apple-touch-icon" href="brand/favicon.svg">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="images/owner-portrait.webp" as="image" type="image/webp">
+    <link rel="preload" href="css/styles.css" as="style">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
+
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HealthClub",
+      "name": "Johnson Performance Co.",
+      "description": "Elite 1-on-1 private personal training in a luxury private gym.",
+      "url": "https://johnsonperformanceco.com",
+      "image": "https://johnsonperformanceco.com/brand/banner-social.svg",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bayonne",
+        "addressRegion": "NJ",
+        "addressCountry": "US"
+      },
+      "priceRange": "$$$",
+      "areaServed": "Bayonne, NJ and surrounding areas"
+    }
+    </script>
 </head>
 <body>
 
@@ -63,7 +107,7 @@
     <nav class="nav" id="nav">
         <div class="nav__progress" id="navProgress"></div>
         <a href="#hero" class="nav__logo">
-            <span class="nav__logo-mark">JP</span>
+            <span class="nav__logo-mark">JPC</span>
             <span class="nav__logo-text">Johnson Performance</span>
         </a>
         <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
@@ -76,7 +120,7 @@
             <li><a href="#facility" class="nav__link">The Gym</a></li>
             <li><a href="#experience" class="nav__link">Experience</a></li>
             <li><a href="#results" class="nav__link">Results</a></li>
-            <li><a href="https://calendly.com/blake-johnsonperformanceco/30min" target="_blank" class="nav__link nav__link--cta">Book a Call</a></li>
+            <li><a href="https://calendly.com/blake-johnsonperformanceco/30min" target="_blank" rel="noopener noreferrer" class="nav__link nav__link--cta">Book a Call</a></li>
         </ul>
     </nav>
 
@@ -101,7 +145,7 @@
                 No crowds. No distractions. Just results.
             </p>
             <div class="hero__actions reveal">
-                <a href="https://calendly.com/blake-johnsonperformanceco/30min" target="_blank" class="btn btn--gold">Book Your Free Consultation</a>
+                <a href="https://calendly.com/blake-johnsonperformanceco/30min" target="_blank" rel="noopener noreferrer" class="btn btn--gold">Book Your Free Consultation</a>
                 <a href="#about" class="btn btn--ghost">Learn More</a>
             </div>
         </div>
@@ -119,7 +163,10 @@
             <div class="about__grid">
                 <div class="about__image-col reveal">
                     <div class="about__image-frame">
-                        <img src="images/IMG_0367.jpg" alt="Johnson Performance Co. Owner" loading="lazy">
+                        <picture>
+                            <source srcset="images/owner-portrait.webp" type="image/webp">
+                            <img src="images/owner-portrait.jpg" alt="Johnson Performance Co. Owner" width="900" height="1200" loading="eager" decoding="async">
+                        </picture>
                     </div>
                     <div class="about__image-accent"></div>
                 </div>
@@ -189,7 +236,10 @@
             <div class="facility__gallery reveal">
                 <!-- Replace these with actual gym photos -->
                 <div class="facility__photo facility__photo--large">
-                    <img src="images/IMG_0292.jpg" alt="Johnson Performance Co. Private Gym" loading="lazy">
+                    <picture>
+                        <source srcset="images/gym-wide.webp" type="image/webp">
+                        <img src="images/gym-wide.jpg" alt="Johnson Performance Co. Private Gym" width="1200" height="1600" loading="lazy" decoding="async">
+                    </picture>
                 </div>
                 <div class="facility__photo facility__photo--tall">
                     <div class="placeholder-img"><span>Strength Area</span></div>
@@ -462,7 +512,7 @@
                                 <span>Completely Free</span>
                             </div>
                         </div>
-                        <a href="https://calendly.com/blake-johnsonperformanceco/30min" target="_blank" class="btn btn--gold book__cta-btn">Reserve Your Spot →</a>
+                        <a href="https://calendly.com/blake-johnsonperformanceco/30min" target="_blank" rel="noopener noreferrer" class="btn btn--gold book__cta-btn">Reserve Your Spot →</a>
                         <p class="book__cta-note">Limited availability — serious inquiries only.</p>
                     </div>
                 </div>
@@ -530,7 +580,7 @@
         <div class="container">
             <div class="footer__inner">
                 <div class="footer__brand">
-                    <span class="nav__logo-mark">JP</span>
+                    <span class="nav__logo-mark">JPC</span>
                     <span class="footer__name">Johnson Performance Co.</span>
                     <p class="footer__tagline">Private Personal Training</p>
                 </div>
@@ -539,7 +589,7 @@
                     <a href="#facility">The Gym</a>
                     <a href="#experience">Experience</a>
                     <a href="#results">Results</a>
-                    <a href="https://calendly.com/blake-johnsonperformanceco/30min" target="_blank">Book a Call</a>
+                    <a href="https://calendly.com/blake-johnsonperformanceco/30min" target="_blank" rel="noopener noreferrer">Book a Call</a>
                     <a href="#contact">Contact</a>
                 </div>
                 <div class="footer__bottom">

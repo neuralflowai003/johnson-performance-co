@@ -1,5 +1,26 @@
+# OS
 .DS_Store
 Thumbs.db
-*.log
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node
 node_modules/
-.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Source images (raw HEIC/large originals)
+*.HEIC
+*.heic
+
+# Build artifacts
+.cache/
+dist/

@@ -258,17 +258,18 @@ body::before {
     gap: 14px;
 }
 .nav__logo-mark {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
     color: var(--gold);
-    width: 46px;
+    min-width: 52px;
     height: 46px;
+    padding: 0 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid var(--gold);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.18em;
     position: relative;
     transition: all 0.4s var(--ease-smooth);
 }
@@ -1152,4 +1153,84 @@ body::before {
     .hero__actions .btn { width: 100%; max-width: 300px; }
     .facility__gallery { grid-template-columns: 1fr; }
     .facility__photo--large { grid-column: span 1; }
+}
+
+/* --- POLISH & ACCESSIBILITY --- */
+
+/* Smooth fade-in for all images */
+img {
+    transition: opacity 0.5s var(--ease-smooth);
+}
+img[loading="lazy"] {
+    opacity: 0;
+}
+img[loading="lazy"].loaded,
+img[loading="eager"] {
+    opacity: 1;
+}
+
+/* Better focus states for keyboard navigation */
+:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+.btn:focus-visible,
+.nav__link:focus-visible {
+    outline-offset: 4px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--black);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--dark-5);
+    border-radius: 5px;
+    border: 2px solid var(--black);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-dark);
+}
+
+/* Firefox scrollbar */
+html {
+    scrollbar-color: var(--dark-5) var(--black);
+    scrollbar-width: thin;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .hero__particle,
+    .loader__line::after,
+    .hero__scroll-line::after {
+        display: none;
+    }
+}
+
+/* Prevent flash of unstyled content */
+.no-js .reveal {
+    opacity: 1;
+    transform: none;
+}
+
+/* Print styles */
+@media print {
+    .loader, .nav, .cursor-glow, body::before,
+    .hero__particles, .section-divider, .hero__scroll {
+        display: none !important;
+    }
+    body {
+        background: white;
+        color: black;
+    }
 }
