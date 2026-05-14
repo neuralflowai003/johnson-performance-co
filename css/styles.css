@@ -624,9 +624,16 @@ body::before {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s var(--ease-smooth);
+    object-position: center 25%;
+    transform: scale(1.12);
+    transform-origin: center 30%;
+    transition: transform 1s var(--ease-smooth), filter 0.6s;
+    filter: contrast(1.05) saturate(1.05);
 }
-.about__image-frame:hover img { transform: scale(1.03); }
+.about__image-frame:hover img {
+    transform: scale(1.16);
+    filter: contrast(1.1) saturate(1.15) brightness(1.05);
+}
 .about__image-accent {
     position: absolute;
     bottom: -16px;
@@ -742,18 +749,70 @@ body::before {
 }
 .facility__feature:hover::before { opacity: 1; }
 .facility__feature:hover {
-    border-color: rgba(201,169,78,0.2);
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px var(--gold-glow);
+    border-color: rgba(201,169,78,0.35);
+    transform: translateY(-8px);
+    box-shadow:
+        0 24px 50px rgba(0,0,0,0.5),
+        0 0 50px rgba(201, 169, 78, 0.18),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+    background: linear-gradient(180deg, rgba(28,28,28,1) 0%, rgba(17,17,17,1) 100%);
 }
 .facility__feature-icon {
     color: var(--gold);
-    font-size: 1.3rem;
-    margin-bottom: 18px;
-    display: inline-block;
-    transition: transform 0.4s var(--ease-spring);
+    width: 64px;
+    height: 64px;
+    margin-bottom: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.6s var(--ease-spring);
+    filter: drop-shadow(0 0 8px rgba(201,169,78,0));
 }
-.facility__feature:hover .facility__feature-icon { transform: scale(1.2); }
+.facility__feature-icon svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+.facility__feature-icon::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    background: radial-gradient(circle, rgba(201,169,78,0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    border-radius: 50%;
+    z-index: -1;
+}
+.facility__feature:hover .facility__feature-icon {
+    transform: translateY(-4px) scale(1.08);
+    color: var(--gold-light);
+    filter: drop-shadow(0 0 12px rgba(201,169,78,0.6));
+    animation: iconBounce 0.6s var(--ease-spring);
+}
+.facility__feature:hover .facility__feature-icon::before {
+    opacity: 1;
+    animation: iconPulse 1.8s ease-in-out infinite;
+}
+@keyframes iconBounce {
+    0%, 100% { transform: translateY(-4px) scale(1.08); }
+    50% { transform: translateY(-8px) scale(1.12); }
+}
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.3); opacity: 0.3; }
+}
+/* Idle subtle float on icons */
+.facility__feature-icon svg {
+    animation: iconFloat 4s ease-in-out infinite;
+}
+.facility__feature:nth-child(2) .facility__feature-icon svg { animation-delay: 0.5s; }
+.facility__feature:nth-child(3) .facility__feature-icon svg { animation-delay: 1s; }
+.facility__feature:nth-child(4) .facility__feature-icon svg { animation-delay: 1.5s; }
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
 .facility__feature h3 {
     font-family: var(--font-display);
     font-size: 1.35rem;
@@ -892,32 +951,117 @@ body::before {
 }
 .testimonial:hover::before { opacity: 1; }
 .testimonial:hover {
-    border-color: rgba(201, 169, 78, 0.15);
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    border-color: rgba(201, 169, 78, 0.35);
+    transform: translateY(-8px);
+    box-shadow:
+        0 24px 60px rgba(0,0,0,0.5),
+        0 0 50px rgba(201, 169, 78, 0.15),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+    background: linear-gradient(180deg, rgba(28,28,28,1) 0%, rgba(17,17,17,1) 100%);
 }
-.testimonial__photo {
-    width: 80px;
-    height: 80px;
+/* Monogram circle (replaces client photo) */
+.testimonial__monogram {
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
-    overflow: hidden;
     margin: 0 auto 22px;
-    border: 2px solid var(--dark-4);
-    transition: border-color 0.4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    border: 1.5px solid var(--gold-dark);
+    position: relative;
+    transition: all 0.5s var(--ease-smooth);
+    box-shadow: inset 0 0 20px rgba(201,169,78,0.05);
 }
-.testimonial:hover .testimonial__photo { border-color: var(--gold); }
-.testimonial__photo img { width: 100%; height: 100%; object-fit: cover; }
-.testimonial__stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 4px; margin-bottom: 18px; }
+.testimonial__monogram::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    opacity: 0.2;
+    transition: all 0.5s;
+}
+.testimonial__monogram::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(201,169,78,0.15), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.testimonial__monogram span {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 20px rgba(201,169,78,0.3);
+}
+.testimonial:hover .testimonial__monogram {
+    border-color: var(--gold);
+    transform: scale(1.05);
+    box-shadow:
+        inset 0 0 20px rgba(201,169,78,0.1),
+        0 0 30px rgba(201,169,78,0.2);
+}
+.testimonial:hover .testimonial__monogram::before {
+    inset: -10px;
+    opacity: 0.4;
+}
+.testimonial:hover .testimonial__monogram::after { opacity: 1; }
+.testimonial__stars {
+    color: var(--gold);
+    font-size: 0.95rem;
+    letter-spacing: 5px;
+    margin-bottom: 18px;
+    filter: drop-shadow(0 0 6px rgba(201,169,78,0.3));
+}
 .testimonial__quote {
     font-family: var(--font-display);
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     font-style: italic;
     color: var(--off-white);
     line-height: 1.85;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
+    position: relative;
 }
-.testimonial__author { display: block; font-style: normal; font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-.testimonial__detail { font-size: 0.75rem; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; }
+.testimonial__quote::before,
+.testimonial__quote::after {
+    content: '"';
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--gold);
+    opacity: 0.3;
+    position: absolute;
+    line-height: 1;
+}
+.testimonial__quote::before { top: -8px; left: -4px; }
+.testimonial__quote::after { content: '"'; bottom: -22px; right: -4px; }
+.testimonial__author {
+    display: block;
+    font-style: normal;
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.testimonial__detail {
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+}
 
 /* --- BOOK --- */
 .book {
@@ -1250,4 +1394,244 @@ html {
         background: white;
         color: black;
     }
+}
+
+/* ============================================
+   GLOSSY POLISH LAYER
+   ============================================ */
+
+/* Gold text shimmer for hero gold line */
+.hero__title-line--gold {
+    background: linear-gradient(
+        135deg,
+        var(--gold-light) 0%,
+        var(--gold) 30%,
+        #FFE9A8 50%,
+        var(--gold) 70%,
+        var(--gold-dark) 100%
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 30px rgba(201,169,78,0.35));
+    animation: goldShimmer 6s ease-in-out infinite;
+}
+@keyframes goldShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Section title gold accent words shimmer */
+.section__title {
+    position: relative;
+}
+
+/* Section labels with glow */
+.section__label {
+    text-shadow: 0 0 20px rgba(201,169,78,0.3);
+}
+
+/* Gold rule with shimmer */
+.gold-rule {
+    background: linear-gradient(
+        90deg,
+        var(--gold-dark) 0%,
+        var(--gold) 30%,
+        var(--gold-light) 50%,
+        var(--gold) 70%,
+        var(--gold-dark) 100%
+    );
+    background-size: 200% 100%;
+    animation: ruleShimmer 4s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(201,169,78,0.4);
+}
+@keyframes ruleShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Buttons - extra gloss */
+.btn--gold {
+    background: linear-gradient(
+        135deg,
+        #F5DC8E 0%,
+        var(--gold-light) 25%,
+        var(--gold) 50%,
+        var(--gold-dark) 100%
+    );
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+    box-shadow:
+        0 4px 20px rgba(201, 169, 78, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.4),
+        inset 0 -1px 0 rgba(0,0,0,0.2);
+    transition: all 0.5s var(--ease-smooth), background-position 0.6s;
+    position: relative;
+}
+.btn--gold:hover {
+    background-position: 100% 100%;
+    transform: translateY(-3px);
+    box-shadow:
+        0 16px 50px rgba(201, 169, 78, 0.5),
+        inset 0 1px 0 rgba(255,255,255,0.5),
+        inset 0 -1px 0 rgba(0,0,0,0.2),
+        0 0 60px rgba(201,169,78,0.35);
+}
+.nav__link--cta {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    background-size: 200% 200%;
+    box-shadow:
+        0 2px 12px rgba(201, 169, 78, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    transition: all 0.4s var(--ease-smooth);
+}
+.nav__link--cta:hover {
+    background-position: 100% 100%;
+    box-shadow:
+        0 8px 30px rgba(201, 169, 78, 0.5),
+        inset 0 1px 0 rgba(255,255,255,0.4),
+        0 0 30px rgba(201,169,78,0.3);
+}
+
+/* Logo mark glossy */
+.nav__logo-mark {
+    background: linear-gradient(135deg, rgba(201,169,78,0.05), rgba(201,169,78,0));
+    box-shadow:
+        inset 0 0 10px rgba(201,169,78,0.05),
+        0 0 0 0 rgba(201,169,78,0);
+    transition: all 0.4s var(--ease-smooth);
+}
+.nav__logo:hover .nav__logo-mark {
+    background: linear-gradient(135deg, rgba(201,169,78,0.15), rgba(201,169,78,0.02));
+    box-shadow:
+        inset 0 0 20px rgba(201,169,78,0.15),
+        0 0 24px rgba(201,169,78,0.3);
+}
+
+/* Card hover glow on all premium cards */
+.experience__card {
+    background: linear-gradient(180deg, rgba(22,22,22,1) 0%, rgba(17,17,17,1) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 8px 30px rgba(0,0,0,0.3);
+}
+.experience__card-top {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    background-size: 200% 200%;
+    animation: goldShimmer 8s ease-in-out infinite;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.4),
+        inset 0 -1px 0 rgba(0,0,0,0.2);
+}
+
+/* Form inputs glow on focus */
+.form__input:focus {
+    border-color: var(--gold);
+    box-shadow:
+        0 0 0 3px rgba(201, 169, 78, 0.12),
+        0 0 30px rgba(201, 169, 78, 0.08),
+        inset 0 0 20px rgba(201,169,78,0.03);
+}
+
+/* Hero overlay - more cinematic */
+.hero__overlay {
+    background:
+        radial-gradient(ellipse at 50% 35%, rgba(201,169,78,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.6) 0%, transparent 70%),
+        linear-gradient(to bottom, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.3) 35%, rgba(5,5,5,0.85) 100%);
+}
+
+/* Hero badge - glossy */
+.hero__badge {
+    background: linear-gradient(135deg, rgba(201,169,78,0.08), rgba(201,169,78,0.02));
+    border: 1px solid rgba(201, 169, 78, 0.4);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 0 30px rgba(201,169,78,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* About image frame - gold glow on hover */
+.about__image-frame {
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    transition: box-shadow 0.6s;
+}
+.about__image-col:hover .about__image-frame {
+    box-shadow:
+        0 40px 90px rgba(0,0,0,0.6),
+        0 0 50px rgba(201,169,78,0.15);
+}
+
+/* About image accent - glow */
+.about__image-accent {
+    border-color: var(--gold);
+    box-shadow: 0 0 30px rgba(201,169,78,0.15);
+}
+
+/* Smoother section transitions on scroll */
+section {
+    will-change: transform;
+}
+
+/* Card top accent line - extends out */
+.facility__feature::before,
+.testimonial::before {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--gold-dark) 20%,
+        var(--gold-light) 50%,
+        var(--gold-dark) 80%,
+        transparent 100%);
+    height: 2px;
+    box-shadow: 0 0 20px rgba(201,169,78,0.5);
+}
+
+/* Stats - gold glow on icons */
+.about__stat-icon {
+    filter: drop-shadow(0 0 8px rgba(201,169,78,0.4));
+}
+
+/* Subtle ambient gold particles always glowing */
+.hero__particle {
+    box-shadow: 0 0 6px rgba(201,169,78,0.8), 0 0 12px rgba(201,169,78,0.4);
+}
+
+/* Footer brand glow */
+.footer__brand .nav__logo-mark {
+    box-shadow: 0 0 20px rgba(201,169,78,0.15);
+}
+
+/* Booking detail cards - glossy */
+.book__detail {
+    background: linear-gradient(180deg, rgba(20,20,20,1) 0%, rgba(15,15,15,1) 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.02),
+        0 4px 20px rgba(0,0,0,0.2);
+}
+.book__detail:hover {
+    background: linear-gradient(180deg, rgba(28,28,28,1) 0%, rgba(20,20,20,1) 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 8px 30px rgba(0,0,0,0.3),
+        0 0 30px rgba(201,169,78,0.08);
+}
+
+/* Experience list items - gold marker glow */
+.experience__list li:hover .experience__list-marker {
+    text-shadow: 0 0 20px rgba(201,169,78,0.6);
+    transform: scale(1.1);
+}
+
+/* Calendar mock - glossier */
+.book__calendar-placeholder {
+    background: linear-gradient(180deg, rgba(22,22,22,1) 0%, rgba(15,15,15,1) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* Mobile reducktion for monogram */
+@media (max-width: 768px) {
+    .testimonial__monogram { width: 64px; height: 64px; }
+    .testimonial__monogram span { font-size: 1.3rem; }
+    .facility__feature-icon { width: 56px; height: 56px; }
 }
