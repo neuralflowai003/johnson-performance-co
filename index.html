@@ -38,6 +38,7 @@
     <link rel="apple-touch-icon" href="brand/favicon.svg">
 
     <!-- Preload critical assets -->
+    <link rel="preload" href="images/hero-bg.webp" as="image" type="image/webp">
     <link rel="preload" href="images/owner-portrait.webp" as="image" type="image/webp">
     <link rel="preload" href="css/styles.css" as="style">
 
@@ -248,7 +249,10 @@
                     <div class="placeholder-img"><span>Cardio Equipment</span></div>
                 </div>
                 <div class="facility__photo">
-                    <div class="placeholder-img"><span>Sauna</span></div>
+                    <picture>
+                        <source srcset="images/sauna.webp" type="image/webp">
+                        <img src="images/sauna.jpg" alt="Private cedar sauna for post-session recovery" width="1400" height="1050" loading="lazy" decoding="async">
+                    </picture>
                 </div>
             </div>
 
