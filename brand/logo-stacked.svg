@@ -1,43 +1,116 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 560">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 580">
   <defs>
-    <linearGradient id="gSt" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#DBCA7A"/>
-      <stop offset="50%" style="stop-color:#C8A84B"/>
-      <stop offset="100%" style="stop-color:#9A7E35"/>
+    <linearGradient id="gMs" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5E0A0"/>
+      <stop offset="25%" stop-color="#E8D48B"/>
+      <stop offset="50%" stop-color="#C8A84B"/>
+      <stop offset="75%" stop-color="#9A7E35"/>
+      <stop offset="100%" stop-color="#6F5824"/>
     </linearGradient>
-    <filter id="glowSt">
-      <feGaussianBlur stdDeviation="2.5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <linearGradient id="gShineS" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF1B8" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#FFF1B8" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="bgDs" cx="50%" cy="35%" r="80%">
+      <stop offset="0%" stop-color="#1A1A18"/>
+      <stop offset="100%" stop-color="#050504"/>
+    </radialGradient>
+    <filter id="dsS">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.5"/>
     </filter>
   </defs>
-  <rect width="400" height="560" fill="#0A0A08"/>
-  <!-- JPC Square Mark -->
-  <rect x="110" y="50" width="180" height="180" fill="none" stroke="url(#gSt)" stroke-width="2.5"/>
-  <rect x="118" y="58" width="164" height="164" fill="none" stroke="#C8A84B" stroke-width="0.5" opacity="0.15"/>
-  <!-- Corner brackets -->
-  <path d="M110,50 L140,50" stroke="url(#gSt)" stroke-width="4.5" fill="none"/>
-  <path d="M110,50 L110,80" stroke="url(#gSt)" stroke-width="4.5" fill="none"/>
-  <path d="M290,50 L260,50" stroke="url(#gSt)" stroke-width="4.5" fill="none"/>
-  <path d="M290,50 L290,80" stroke="url(#gSt)" stroke-width="4.5" fill="none"/>
-  <path d="M110,230 L140,230" stroke="url(#gSt)" stroke-width="4.5" fill="none"/>
-  <path d="M110,230 L110,200" stroke="url(#gSt)" stroke-width="4.5" fill="none"/>
-  <path d="M290,230 L260,230" stroke="url(#gSt)" stroke-width="4.5" fill="none"/>
-  <path d="M290,230 L290,200" stroke="url(#gSt)" stroke-width="4.5" fill="none"/>
-  <polygon points="200,40 206,46 200,52 194,46" fill="url(#gSt)" opacity="0.4"/>
-  <!-- JPC -->
-  <text x="200" y="160" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="82" font-weight="800" fill="url(#gSt)" text-anchor="middle" letter-spacing="8" filter="url(#glowSt)">JPC</text>
-  <!-- Divider -->
-  <line x1="140" y1="280" x2="185" y2="280" stroke="url(#gSt)" stroke-width="0.8" opacity="0.3"/>
-  <polygon points="200,276 204,280 200,284 196,280" fill="url(#gSt)" opacity="0.3"/>
-  <line x1="215" y1="280" x2="260" y2="280" stroke="url(#gSt)" stroke-width="0.8" opacity="0.3"/>
-  <!-- Text -->
-  <text x="200" y="332" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="44" font-weight="800" fill="#F5F5F0" text-anchor="middle" letter-spacing="8">JOHNSON</text>
-  <text x="200" y="382" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="44" font-weight="800" fill="url(#gSt)" text-anchor="middle" letter-spacing="8">PERFORMANCE</text>
-  <text x="200" y="418" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="26" font-weight="700" fill="url(#gSt)" text-anchor="middle" letter-spacing="4" opacity="0.5">CO.</text>
-  <!-- Bottom line -->
-  <line x1="130" y1="450" x2="270" y2="450" stroke="url(#gSt)" stroke-width="0.5" opacity="0.2"/>
-  <!-- Tagline -->
-  <text x="200" y="480" font-family="'Inter', sans-serif" font-size="9.5" fill="#777" text-anchor="middle" letter-spacing="7" font-weight="500">PRIVATE TRAINING STUDIO</text>
-  <!-- Est -->
-  <text x="200" y="510" font-family="'Inter', sans-serif" font-size="7.5" fill="#555" text-anchor="middle" letter-spacing="4" font-weight="400">EST. 2026  ·  BAYONNE, NJ</text>
+
+  <rect width="420" height="580" fill="url(#bgDs)"/>
+
+  <!-- Outer ornamental frame -->
+  <rect x="20" y="20" width="380" height="540" fill="none" stroke="url(#gMs)" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- Top crown -->
+  <g transform="translate(210,40)" opacity="0.7">
+    <path d="M-30,0 L-22,-7 L-14,0 L0,-10 L14,0 L22,-7 L30,0"
+          fill="none" stroke="url(#gMs)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="0" cy="-15" r="2" fill="url(#gMs)"/>
+  </g>
+
+  <!-- JPC Mark -->
+  <g transform="translate(120,75)">
+    <rect x="0" y="0" width="180" height="180" fill="none" stroke="url(#gMs)" stroke-width="2.5"/>
+    <rect x="8" y="8" width="164" height="164" fill="none" stroke="url(#gMs)" stroke-width="0.5" opacity="0.3"/>
+    <g stroke="url(#gMs)" stroke-width="5" fill="none">
+      <path d="M0,0 L32,0"/><path d="M0,0 L0,32"/>
+      <path d="M180,0 L148,0"/><path d="M180,0 L180,32"/>
+      <path d="M0,180 L32,180"/><path d="M0,180 L0,148"/>
+      <path d="M180,180 L148,180"/><path d="M180,180 L180,148"/>
+    </g>
+    <g transform="translate(90,-12)">
+      <polygon points="0,-6 7,0 0,6 -7,0" fill="url(#gMs)"/>
+      <polygon points="0,-2 3,0 0,2 -3,0" fill="#FFE9A8"/>
+    </g>
+    <g filter="url(#dsS)">
+      <text x="90" y="120"
+            font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+            font-size="74" font-weight="800"
+            fill="url(#gMs)" text-anchor="middle" letter-spacing="5">JPC</text>
+      <text x="90" y="120"
+            font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+            font-size="74" font-weight="800"
+            fill="url(#gShineS)" text-anchor="middle" letter-spacing="5" opacity="0.4">JPC</text>
+    </g>
+  </g>
+
+  <!-- Decorative weight plate barbell divider -->
+  <g transform="translate(210,300)">
+    <g transform="translate(-70,0)">
+      <rect x="-8" y="-12" width="6" height="24" rx="1" fill="url(#gMs)"/>
+      <circle cx="-12" cy="0" r="9" fill="none" stroke="url(#gMs)" stroke-width="0.8" opacity="0.5"/>
+      <circle cx="-12" cy="0" r="5" fill="none" stroke="url(#gMs)" stroke-width="0.5" opacity="0.3"/>
+    </g>
+    <line x1="-65" y1="0" x2="-12" y2="0" stroke="url(#gMs)" stroke-width="2"/>
+    <circle cx="0" cy="0" r="3.5" fill="url(#gMs)"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFE9A8"/>
+    <line x1="12" y1="0" x2="65" y2="0" stroke="url(#gMs)" stroke-width="2"/>
+    <g transform="translate(70,0)">
+      <rect x="2" y="-12" width="6" height="24" rx="1" fill="url(#gMs)"/>
+      <circle cx="12" cy="0" r="9" fill="none" stroke="url(#gMs)" stroke-width="0.8" opacity="0.5"/>
+      <circle cx="12" cy="0" r="5" fill="none" stroke="url(#gMs)" stroke-width="0.5" opacity="0.3"/>
+    </g>
+  </g>
+
+  <!-- Company name -->
+  <g filter="url(#dsS)">
+    <text x="210" y="370"
+          font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+          font-size="44" font-weight="800"
+          fill="#F5F5F0" text-anchor="middle" letter-spacing="9">JOHNSON</text>
+    <text x="210" y="418"
+          font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+          font-size="44" font-weight="800"
+          fill="url(#gMs)" text-anchor="middle" letter-spacing="9">PERFORMANCE</text>
+    <text x="210" y="418"
+          font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+          font-size="44" font-weight="800"
+          fill="url(#gShineS)" text-anchor="middle" letter-spacing="9" opacity="0.4">PERFORMANCE</text>
+    <text x="210" y="456"
+          font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+          font-size="28" font-weight="700"
+          fill="url(#gMs)" text-anchor="middle" letter-spacing="5" opacity="0.6">CO.</text>
+  </g>
+
+  <!-- Bottom ornamental separator -->
+  <g transform="translate(210,495)">
+    <line x1="-90" y1="0" x2="-15" y2="0" stroke="url(#gMs)" stroke-width="0.5" opacity="0.4"/>
+    <polygon points="-8,0 -3,-3 0,0 -3,3" fill="url(#gMs)" opacity="0.5"/>
+    <polygon points="0,0 5,-4 10,0 5,4" fill="url(#gMs)"/>
+    <polygon points="8,0 3,-3 0,0 3,3" fill="url(#gMs)" opacity="0.5"/>
+    <line x1="15" y1="0" x2="90" y2="0" stroke="url(#gMs)" stroke-width="0.5" opacity="0.4"/>
+  </g>
+
+  <text x="210" y="520"
+        font-family="'Inter', sans-serif"
+        font-size="10" fill="#888"
+        text-anchor="middle" letter-spacing="9" font-weight="500">PRIVATE TRAINING STUDIO</text>
+  <text x="210" y="544"
+        font-family="'Inter', sans-serif"
+        font-size="8" fill="#666"
+        text-anchor="middle" letter-spacing="5" font-weight="400">EST. 2026  ·  BAYONNE, NJ</text>
 </svg>

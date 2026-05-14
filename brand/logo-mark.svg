@@ -1,35 +1,132 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#DBCA7A"/>
-      <stop offset="50%" style="stop-color:#C8A84B"/>
-      <stop offset="100%" style="stop-color:#9A7E35"/>
+    <!-- Premium metallic gold gradient -->
+    <linearGradient id="goldMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5E0A0"/>
+      <stop offset="20%" stop-color="#E8D48B"/>
+      <stop offset="45%" stop-color="#C8A84B"/>
+      <stop offset="55%" stop-color="#B8973F"/>
+      <stop offset="80%" stop-color="#9A7E35"/>
+      <stop offset="100%" stop-color="#6F5824"/>
     </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <!-- Reflection highlight -->
+    <linearGradient id="goldShine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF1B8" stop-opacity="0.6"/>
+      <stop offset="40%" stop-color="#FFF1B8" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.2"/>
+    </linearGradient>
+    <!-- Subtle background depth -->
+    <radialGradient id="bgDepth" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#1A1A18"/>
+      <stop offset="60%" stop-color="#0A0A08"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <!-- Glow filter -->
+    <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Bevel filter for embossed text -->
+    <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+      <feSpecularLighting result="specOut" specularConstant="1.5" specularExponent="20" lighting-color="#FFE9A8">
+        <feDistantLight azimuth="45" elevation="60"/>
+      </feSpecularLighting>
+      <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut2"/>
+      <feComposite in="SourceGraphic" in2="specOut2" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+    <!-- Drop shadow -->
+    <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.5"/>
     </filter>
   </defs>
-  <rect width="240" height="240" fill="#0A0A08"/>
-  <!-- Outer frame -->
-  <rect x="20" y="20" width="200" height="200" fill="none" stroke="url(#g)" stroke-width="2.5"/>
-  <!-- Inner frame -->
-  <rect x="28" y="28" width="184" height="184" fill="none" stroke="#C8A84B" stroke-width="0.5" opacity="0.15"/>
-  <!-- Corner brackets -->
-  <path d="M20,20 L50,20" stroke="url(#g)" stroke-width="4.5" fill="none"/>
-  <path d="M20,20 L20,50" stroke="url(#g)" stroke-width="4.5" fill="none"/>
-  <path d="M220,20 L190,20" stroke="url(#g)" stroke-width="4.5" fill="none"/>
-  <path d="M220,20 L220,50" stroke="url(#g)" stroke-width="4.5" fill="none"/>
-  <path d="M20,220 L50,220" stroke="url(#g)" stroke-width="4.5" fill="none"/>
-  <path d="M20,220 L20,190" stroke="url(#g)" stroke-width="4.5" fill="none"/>
-  <path d="M220,220 L190,220" stroke="url(#g)" stroke-width="4.5" fill="none"/>
-  <path d="M220,220 L220,190" stroke="url(#g)" stroke-width="4.5" fill="none"/>
-  <!-- Diamond top -->
-  <polygon points="120,10 126,16 120,22 114,16" fill="url(#g)" opacity="0.4"/>
-  <!-- JPC -->
-  <text x="120" y="138" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="82" font-weight="800" fill="url(#g)" text-anchor="middle" letter-spacing="8" filter="url(#glow)">JPC</text>
-  <!-- Bottom line -->
-  <line x1="65" y1="165" x2="95" y2="165" stroke="url(#g)" stroke-width="0.8" opacity="0.4"/>
-  <polygon points="120,161 124,165 120,169 116,165" fill="url(#g)" opacity="0.3"/>
-  <line x1="145" y1="165" x2="175" y2="165" stroke="url(#g)" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- Background with depth -->
+  <rect width="240" height="240" fill="url(#bgDepth)"/>
+
+  <!-- Outer ornamental frame -->
+  <rect x="14" y="14" width="212" height="212" fill="none" stroke="url(#goldMetal)" stroke-width="0.5" opacity="0.25"/>
+
+  <!-- Main border with double line -->
+  <rect x="22" y="22" width="196" height="196" fill="none" stroke="url(#goldMetal)" stroke-width="2.5"/>
+  <rect x="29" y="29" width="182" height="182" fill="none" stroke="url(#goldMetal)" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Corner brackets - bold -->
+  <g stroke="url(#goldMetal)" stroke-width="5" fill="none" stroke-linecap="square">
+    <path d="M22,22 L48,22"/><path d="M22,22 L22,48"/>
+    <path d="M218,22 L192,22"/><path d="M218,22 L218,48"/>
+    <path d="M22,218 L48,218"/><path d="M22,218 L22,192"/>
+    <path d="M218,218 L192,218"/><path d="M218,218 L218,192"/>
+  </g>
+  <!-- Inner corner accents -->
+  <g stroke="url(#goldMetal)" stroke-width="1" fill="none" opacity="0.5">
+    <path d="M40,29 L40,40 L29,40"/>
+    <path d="M200,29 L200,40 L211,40"/>
+    <path d="M40,211 L40,200 L29,200"/>
+    <path d="M200,211 L200,200 L211,200"/>
+  </g>
+
+  <!-- Top diamond ornament -->
+  <g transform="translate(120,16)">
+    <polygon points="0,-7 8,0 0,7 -8,0" fill="url(#goldMetal)" filter="url(#dropShadow)"/>
+    <polygon points="0,-3 4,0 0,3 -4,0" fill="#FFE9A8"/>
+  </g>
+  <!-- Bottom diamond ornament -->
+  <g transform="translate(120,224)">
+    <polygon points="0,-7 8,0 0,7 -8,0" fill="url(#goldMetal)" filter="url(#dropShadow)"/>
+    <polygon points="0,-3 4,0 0,3 -4,0" fill="#FFE9A8"/>
+  </g>
+  <!-- Side diamond ornaments -->
+  <g transform="translate(16,120)">
+    <polygon points="-7,0 0,-8 7,0 0,8" fill="url(#goldMetal)" opacity="0.7"/>
+  </g>
+  <g transform="translate(224,120)">
+    <polygon points="-7,0 0,-8 7,0 0,8" fill="url(#goldMetal)" opacity="0.7"/>
+  </g>
+
+  <!-- Decorative chevrons above text -->
+  <g transform="translate(120,68)" opacity="0.6">
+    <path d="M-30,0 L-22,-6 L-14,0" fill="none" stroke="url(#goldMetal)" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M-14,0 L0,-8 L14,0" fill="none" stroke="url(#goldMetal)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M14,0 L22,-6 L30,0" fill="none" stroke="url(#goldMetal)" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Main JPC monogram with metallic effect -->
+  <g filter="url(#dropShadow)">
+    <text x="120" y="148"
+          font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+          font-size="84"
+          font-weight="800"
+          fill="url(#goldMetal)"
+          text-anchor="middle"
+          letter-spacing="6">JPC</text>
+    <!-- Highlight overlay on text -->
+    <text x="120" y="148"
+          font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+          font-size="84"
+          font-weight="800"
+          fill="url(#goldShine)"
+          text-anchor="middle"
+          letter-spacing="6"
+          opacity="0.5">JPC</text>
+  </g>
+
+  <!-- Underline ornament -->
+  <g transform="translate(120,168)">
+    <line x1="-50" y1="0" x2="-12" y2="0" stroke="url(#goldMetal)" stroke-width="1" opacity="0.5"/>
+    <circle cx="0" cy="0" r="2.5" fill="url(#goldMetal)"/>
+    <circle cx="0" cy="0" r="1" fill="#FFE9A8"/>
+    <line x1="12" y1="0" x2="50" y2="0" stroke="url(#goldMetal)" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- Decorative weight plate accent -->
+  <g transform="translate(120,190)" opacity="0.4">
+    <circle cx="0" cy="0" r="10" fill="none" stroke="url(#goldMetal)" stroke-width="0.8"/>
+    <circle cx="0" cy="0" r="6" fill="none" stroke="url(#goldMetal)" stroke-width="0.5"/>
+    <line x1="-12" y1="0" x2="-10" y2="0" stroke="url(#goldMetal)" stroke-width="0.8"/>
+    <line x1="10" y1="0" x2="12" y2="0" stroke="url(#goldMetal)" stroke-width="0.8"/>
+  </g>
 </svg>

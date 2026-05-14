@@ -1,58 +1,120 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
-    <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0A0A08"/>
-      <stop offset="50%" style="stop-color:#0E0E0C"/>
-      <stop offset="100%" style="stop-color:#0A0A08"/>
+    <radialGradient id="bgB" cx="50%" cy="50%" r="80%">
+      <stop offset="0%" stop-color="#1A1A18"/>
+      <stop offset="60%" stop-color="#0A0A08"/>
+      <stop offset="100%" stop-color="#050504"/>
+    </radialGradient>
+    <linearGradient id="gMb" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5E0A0"/>
+      <stop offset="30%" stop-color="#E8D48B"/>
+      <stop offset="60%" stop-color="#C8A84B"/>
+      <stop offset="100%" stop-color="#6F5824"/>
     </linearGradient>
-    <linearGradient id="gB" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#DBCA7A"/>
-      <stop offset="50%" style="stop-color:#C8A84B"/>
-      <stop offset="100%" style="stop-color:#9A7E35"/>
+    <linearGradient id="gShineB" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF1B8" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#FFF1B8" stop-opacity="0"/>
     </linearGradient>
-    <filter id="glowB">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="0" y2="60" stroke="#141412" stroke-width="0.5"/>
-      <line x1="0" y1="0" x2="60" y2="0" stroke="#141412" stroke-width="0.5"/>
+    <pattern id="grid2" width="60" height="60" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="60" stroke="#181816" stroke-width="0.5"/>
+      <line x1="0" y1="0" x2="60" y2="0" stroke="#181816" stroke-width="0.5"/>
     </pattern>
+    <filter id="dsB">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="goldGlowB">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="1200" height="630" fill="url(#bgG)"/>
-  <rect width="1200" height="630" fill="url(#grid)" opacity="0.5"/>
-  <!-- Gold edge lines -->
-  <rect x="0" y="0" width="1200" height="2" fill="url(#gB)" opacity="0.3"/>
-  <rect x="0" y="628" width="1200" height="2" fill="url(#gB)" opacity="0.3"/>
-  <!-- Corner brackets -->
-  <path d="M50,50 L90,50" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
-  <path d="M50,50 L50,90" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
-  <path d="M1150,50 L1110,50" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
-  <path d="M1150,50 L1150,90" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
-  <path d="M50,580 L90,580" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
-  <path d="M50,580 L50,540" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
-  <path d="M1150,580 L1110,580" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
-  <path d="M1150,580 L1150,540" stroke="url(#gB)" stroke-width="2" fill="none" opacity="0.4"/>
+
+  <rect width="1200" height="630" fill="url(#bgB)"/>
+  <rect width="1200" height="630" fill="url(#grid2)" opacity="0.4"/>
+
+  <!-- Atmospheric gold glow -->
+  <ellipse cx="600" cy="280" rx="500" ry="200" fill="url(#gMb)" opacity="0.04"/>
+
+  <!-- Top + bottom gold trim lines -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#gMb)" opacity="0.5"/>
+  <rect x="0" y="627" width="1200" height="3" fill="url(#gMb)" opacity="0.5"/>
+
+  <!-- Outer corner brackets -->
+  <g stroke="url(#gMb)" stroke-width="2" fill="none" opacity="0.6">
+    <path d="M50,50 L100,50"/><path d="M50,50 L50,100"/>
+    <path d="M1150,50 L1100,50"/><path d="M1150,50 L1150,100"/>
+    <path d="M50,580 L100,580"/><path d="M50,580 L50,530"/>
+    <path d="M1150,580 L1100,580"/><path d="M1150,580 L1150,530"/>
+  </g>
+
+  <!-- Decorative chevrons above mark -->
+  <g transform="translate(600,150)" opacity="0.5">
+    <path d="M-50,0 L-32,-12 L-14,0" fill="none" stroke="url(#gMb)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M-14,0 L0,-16 L14,0" fill="none" stroke="url(#gMb)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M14,0 L32,-12 L50,0" fill="none" stroke="url(#gMb)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
   <!-- JPC Mark -->
-  <rect x="500" y="140" width="200" height="200" fill="none" stroke="url(#gB)" stroke-width="2.5"/>
-  <rect x="508" y="148" width="184" height="184" fill="none" stroke="#C8A84B" stroke-width="0.5" opacity="0.15"/>
-  <path d="M500,140 L530,140" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
-  <path d="M500,140 L500,170" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
-  <path d="M700,140 L670,140" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
-  <path d="M700,140 L700,170" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
-  <path d="M500,340 L530,340" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
-  <path d="M500,340 L500,310" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
-  <path d="M700,340 L670,340" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
-  <path d="M700,340 L700,310" stroke="url(#gB)" stroke-width="4.5" fill="none"/>
-  <polygon points="600,130 606,136 600,142 594,136" fill="url(#gB)" opacity="0.4"/>
-  <text x="600" y="262" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="90" font-weight="800" fill="url(#gB)" text-anchor="middle" letter-spacing="10" filter="url(#glowB)">JPC</text>
-  <!-- Name -->
-  <text x="600" y="400" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="52" font-weight="800" fill="#F5F5F0" text-anchor="middle" letter-spacing="10">JOHNSON</text>
-  <text x="600" y="456" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="52" font-weight="800" fill="url(#gB)" text-anchor="middle" letter-spacing="10">PERFORMANCE</text>
-  <!-- Divider -->
-  <line x1="400" y1="488" x2="570" y2="488" stroke="url(#gB)" stroke-width="0.5" opacity="0.3"/>
-  <polygon points="600,484 604,488 600,492 596,488" fill="url(#gB)" opacity="0.3"/>
-  <line x1="630" y1="488" x2="800" y2="488" stroke="url(#gB)" stroke-width="0.5" opacity="0.3"/>
-  <!-- Tagline -->
-  <text x="600" y="520" font-family="'Inter', sans-serif" font-size="11" fill="#777" text-anchor="middle" letter-spacing="8" font-weight="500">PRIVATE TRAINING STUDIO  ·  BAYONNE, NJ</text>
+  <g transform="translate(500,170)">
+    <rect x="0" y="0" width="200" height="200" fill="none" stroke="url(#gMb)" stroke-width="2.5"/>
+    <rect x="8" y="8" width="184" height="184" fill="none" stroke="url(#gMb)" stroke-width="0.5" opacity="0.3"/>
+    <g stroke="url(#gMb)" stroke-width="5" fill="none">
+      <path d="M0,0 L32,0"/><path d="M0,0 L0,32"/>
+      <path d="M200,0 L168,0"/><path d="M200,0 L200,32"/>
+      <path d="M0,200 L32,200"/><path d="M0,200 L0,168"/>
+      <path d="M200,200 L168,200"/><path d="M200,200 L200,168"/>
+    </g>
+    <g transform="translate(100,-12)">
+      <polygon points="0,-6 7,0 0,6 -7,0" fill="url(#gMb)"/>
+      <polygon points="0,-2 3,0 0,2 -3,0" fill="#FFE9A8"/>
+    </g>
+    <g filter="url(#dsB)">
+      <text x="100" y="135"
+            font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+            font-size="92" font-weight="800"
+            fill="url(#gMb)" text-anchor="middle" letter-spacing="8"
+            filter="url(#goldGlowB)">JPC</text>
+      <text x="100" y="135"
+            font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+            font-size="92" font-weight="800"
+            fill="url(#gShineB)" text-anchor="middle" letter-spacing="8" opacity="0.5">JPC</text>
+    </g>
+  </g>
+
+  <!-- Decorative chevrons below mark -->
+  <g transform="translate(600,395)" opacity="0.5">
+    <path d="M-50,0 L-32,12 L-14,0" fill="none" stroke="url(#gMb)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M-14,0 L0,16 L14,0" fill="none" stroke="url(#gMb)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M14,0 L32,12 L50,0" fill="none" stroke="url(#gMb)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Company name -->
+  <g filter="url(#dsB)">
+    <text x="600" y="465"
+          font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+          font-size="52" font-weight="800"
+          fill="#F5F5F0" text-anchor="middle" letter-spacing="11">JOHNSON</text>
+    <text x="600" y="520"
+          font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+          font-size="52" font-weight="800"
+          fill="url(#gMb)" text-anchor="middle" letter-spacing="11">PERFORMANCE</text>
+    <text x="600" y="520"
+          font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+          font-size="52" font-weight="800"
+          fill="url(#gShineB)" text-anchor="middle" letter-spacing="11" opacity="0.4">PERFORMANCE</text>
+  </g>
+
+  <!-- Bottom separator with diamond -->
+  <g transform="translate(600,560)">
+    <line x1="-200" y1="0" x2="-15" y2="0" stroke="url(#gMb)" stroke-width="0.5" opacity="0.4"/>
+    <polygon points="0,-5 6,0 0,5 -6,0" fill="url(#gMb)" opacity="0.6"/>
+    <line x1="15" y1="0" x2="200" y2="0" stroke="url(#gMb)" stroke-width="0.5" opacity="0.4"/>
+  </g>
+
+  <text x="600" y="588"
+        font-family="'Inter', sans-serif"
+        font-size="13" fill="#888"
+        text-anchor="middle" letter-spacing="9" font-weight="500">PRIVATE TRAINING STUDIO  ·  BAYONNE, NJ</text>
 </svg>

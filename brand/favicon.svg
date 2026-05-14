@@ -1,20 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="fG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#DBCA7A"/>
-      <stop offset="50%" style="stop-color:#C8A84B"/>
-      <stop offset="100%" style="stop-color:#9A7E35"/>
+    <linearGradient id="fM" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5E0A0"/>
+      <stop offset="50%" stop-color="#C8A84B"/>
+      <stop offset="100%" stop-color="#6F5824"/>
     </linearGradient>
   </defs>
-  <rect width="64" height="64" fill="#0A0A08"/>
-  <rect x="5" y="5" width="54" height="54" fill="none" stroke="url(#fG)" stroke-width="2"/>
-  <path d="M5,5 L14,5" stroke="url(#fG)" stroke-width="3" fill="none"/>
-  <path d="M5,5 L5,14" stroke="url(#fG)" stroke-width="3" fill="none"/>
-  <path d="M59,5 L50,5" stroke="url(#fG)" stroke-width="3" fill="none"/>
-  <path d="M59,5 L59,14" stroke="url(#fG)" stroke-width="3" fill="none"/>
-  <path d="M5,59 L14,59" stroke="url(#fG)" stroke-width="3" fill="none"/>
-  <path d="M5,59 L5,50" stroke="url(#fG)" stroke-width="3" fill="none"/>
-  <path d="M59,59 L50,59" stroke="url(#fG)" stroke-width="3" fill="none"/>
-  <path d="M59,59 L59,50" stroke="url(#fG)" stroke-width="3" fill="none"/>
-  <text x="32" y="40" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="22" font-weight="800" fill="url(#fG)" text-anchor="middle" letter-spacing="2">JPC</text>
+  <rect width="64" height="64" fill="#050504"/>
+  <rect x="4" y="4" width="56" height="56" fill="none" stroke="url(#fM)" stroke-width="2"/>
+  <g stroke="url(#fM)" stroke-width="3.5" fill="none">
+    <path d="M4,4 L14,4"/><path d="M4,4 L4,14"/>
+    <path d="M60,4 L50,4"/><path d="M60,4 L60,14"/>
+    <path d="M4,60 L14,60"/><path d="M4,60 L4,50"/>
+    <path d="M60,60 L50,60"/><path d="M60,60 L60,50"/>
+  </g>
+  <text x="32" y="42"
+        font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+        font-size="22" font-weight="800"
+        fill="url(#fM)" text-anchor="middle" letter-spacing="2">JPC</text>
 </svg>
