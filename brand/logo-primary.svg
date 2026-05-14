@@ -1,51 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200">
   <defs>
-    <linearGradient id="goldH" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#E8D48B"/>
-      <stop offset="30%" style="stop-color:#C9A94E"/>
-      <stop offset="60%" style="stop-color:#B8973F"/>
-      <stop offset="100%" style="stop-color:#8A6E2F"/>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DBCA7A"/>
+      <stop offset="50%" style="stop-color:#C8A84B"/>
+      <stop offset="100%" style="stop-color:#9A7E35"/>
     </linearGradient>
-    <linearGradient id="goldH2" x1="100%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#E8D48B"/>
-      <stop offset="100%" style="stop-color:#8A6E2F"/>
-    </linearGradient>
-    <filter id="glowH">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
-  <rect width="700" height="200" fill="#050505"/>
-  <!-- Left decorative weight plate -->
-  <circle cx="22" cy="100" r="10" fill="none" stroke="url(#goldH)" stroke-width="1" opacity="0.2"/>
-  <circle cx="22" cy="100" r="6" fill="none" stroke="url(#goldH)" stroke-width="0.5" opacity="0.15"/>
-  <line x1="32" y1="100" x2="58" y2="100" stroke="url(#goldH)" stroke-width="1.5" opacity="0.25"/>
-  <!-- JP Monogram box -->
-  <rect x="64" y="48" width="104" height="104" fill="none" stroke="url(#goldH)" stroke-width="2.5"/>
-  <rect x="70" y="54" width="92" height="92" fill="none" stroke="url(#goldH2)" stroke-width="0.5" opacity="0.2"/>
-  <!-- Corner accents on box -->
-  <path d="M64,48 L84,48" stroke="url(#goldH)" stroke-width="3.5" fill="none"/>
-  <path d="M64,48 L64,68" stroke="url(#goldH)" stroke-width="3.5" fill="none"/>
-  <path d="M168,48 L148,48" stroke="url(#goldH)" stroke-width="3.5" fill="none"/>
-  <path d="M168,48 L168,68" stroke="url(#goldH)" stroke-width="3.5" fill="none"/>
-  <path d="M64,152 L84,152" stroke="url(#goldH)" stroke-width="3.5" fill="none"/>
-  <path d="M64,152 L64,132" stroke="url(#goldH)" stroke-width="3.5" fill="none"/>
-  <path d="M168,152 L148,152" stroke="url(#goldH)" stroke-width="3.5" fill="none"/>
-  <path d="M168,152 L168,132" stroke="url(#goldH)" stroke-width="3.5" fill="none"/>
-  <!-- Diamond top -->
-  <polygon points="116,40 120,44 116,48 112,44" fill="url(#goldH)" opacity="0.5"/>
-  <!-- JP text -->
-  <text x="116" y="115" font-family="Georgia, 'Times New Roman', serif" font-size="52" font-weight="700" fill="url(#goldH)" text-anchor="middle" letter-spacing="4" filter="url(#glowH)">JP</text>
-  <!-- Company name -->
-  <text x="198" y="82" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="600" fill="#FFFFFF" letter-spacing="6">JOHNSON</text>
-  <text x="198" y="124" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="600" fill="url(#goldH)" letter-spacing="6">PERFORMANCE</text>
-  <!-- Thin separator -->
-  <line x1="198" y1="140" x2="350" y2="140" stroke="url(#goldH)" stroke-width="0.5" opacity="0.3"/>
-  <polygon points="358,140 362,138 362,142" fill="url(#goldH)" opacity="0.3"/>
+  <rect width="800" height="200" fill="#0A0A08"/>
+  <!-- JPC Mark -->
+  <rect x="40" y="35" width="130" height="130" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+  <rect x="46" y="41" width="118" height="118" fill="none" stroke="#C8A84B" stroke-width="0.5" opacity="0.2"/>
+  <!-- Corner accents -->
+  <path d="M40,35 L65,35" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M40,35 L40,60" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M170,35 L145,35" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M170,35 L170,60" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M40,165 L65,165" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M40,165 L40,140" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M170,165 L145,165" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <path d="M170,165 L170,140" stroke="url(#gold)" stroke-width="4" fill="none"/>
+  <!-- JPC Letters -->
+  <text x="105" y="116" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="52" font-weight="800" fill="url(#gold)" text-anchor="middle" letter-spacing="5">JPC</text>
+  <!-- Company Name -->
+  <text x="210" y="72" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="48" font-weight="800" fill="#F5F5F0" letter-spacing="6">JOHNSON</text>
+  <text x="210" y="124" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="48" font-weight="800" fill="url(#gold)" letter-spacing="6">PERFORMANCE</text>
+  <!-- Separator line -->
+  <line x1="210" y1="142" x2="420" y2="142" stroke="url(#gold)" stroke-width="0.8" opacity="0.3"/>
   <!-- Tagline -->
-  <text x="198" y="160" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="10.5" fill="#777777" letter-spacing="10" font-weight="400">PRIVATE TRAINING STUDIO</text>
-  <!-- Right decorative weight plate -->
-  <line x1="640" y1="100" x2="668" y2="100" stroke="url(#goldH)" stroke-width="1.5" opacity="0.25"/>
-  <circle cx="678" cy="100" r="10" fill="none" stroke="url(#goldH)" stroke-width="1" opacity="0.2"/>
-  <circle cx="678" cy="100" r="6" fill="none" stroke="url(#goldH)" stroke-width="0.5" opacity="0.15"/>
+  <text x="210" y="164" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="10.5" fill="#777" letter-spacing="7" font-weight="500">PRIVATE TRAINING STUDIO</text>
+  <!-- Est tag -->
+  <text x="680" y="170" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="8" fill="#555" letter-spacing="4" font-weight="400">EST. 2026  ·  BAYONNE, NJ</text>
 </svg>
