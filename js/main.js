@@ -29,17 +29,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
+    const closeMenu = () => {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        document.body.style.overflow = '';
+    };
     navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('open');
-        document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
+        const isOpen = navMenu.classList.toggle('open');
+        navToggle.classList.toggle('active', isOpen);
+        document.body.classList.toggle('menu-open', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
     });
     navMenu.querySelectorAll('.nav__link').forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('open');
-            document.body.style.overflow = '';
-        });
+        link.addEventListener('click', closeMenu);
+    });
+    // Close menu when tapping backdrop
+    document.addEventListener('click', (e) => {
+        if (navMenu.classList.contains('open') &&
+            !navMenu.contains(e.target) &&
+            !navToggle.contains(e.target)) {
+            closeMenu();
+        }
+    });
+    // Close menu on Esc
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('open')) closeMenu();
     });
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
