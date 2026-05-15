@@ -48,7 +48,7 @@
     <!-- Preload critical assets -->
     <link rel="preload" href="images/hero-bg.webp" as="image" type="image/webp">
     <link rel="preload" href="images/owner-portrait.webp" as="image" type="image/webp">
-    <link rel="preload" href="css/styles.css?v=6" as="style">
+    <link rel="preload" href="css/styles.css?v=7" as="style">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,7 +56,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=6">
+    <link rel="stylesheet" href="css/styles.css?v=7">
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -144,7 +144,12 @@
         </div>
         <div class="hero__particles"></div>
         <div class="hero__content">
-            <div class="hero__badge reveal">Private Training Studio</div>
+            <div class="hero__badge reveal">
+                <span class="hero__badge-dot" aria-hidden="true"></span>
+                Private Training Studio
+                <span class="hero__badge-divider" aria-hidden="true">·</span>
+                Gallatin, TN
+            </div>
             <h1 class="hero__title reveal">
                 <span class="hero__title-line">Your Body.</span>
                 <span class="hero__title-line">Your Goals.</span>
@@ -577,6 +582,12 @@
                         Drop a message and I'll get back to you within 24 hours.
                     </p>
                     <div class="contact__links reveal">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Gallatin%2C+TN" class="contact__link" target="_blank" rel="noopener">
+                            <span class="contact__link-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </span>
+                            Gallatin, Tennessee
+                        </a>
                         <a href="mailto:blake@johnsonperformanceco.com" class="contact__link">
                             <span class="contact__link-icon">✉</span>
                             info@johnsonperformanceco.com
@@ -623,7 +634,7 @@
             <div class="footer__inner">
                 <div class="footer__brand">
                     <span class="footer__name">Johnson Performance Co.</span>
-                    <p class="footer__tagline">Private Training Studio</p>
+                    <p class="footer__tagline">Private Training Studio · Gallatin, TN</p>
                 </div>
                 <div class="footer__links">
                     <a href="#about">About</a>
