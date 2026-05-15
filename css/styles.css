@@ -837,34 +837,34 @@ body::before {
 
 /* CARDIO — running stride: body bounce, legs swap */
 .facility__feature-icon--cardio .anim-runner {
-    transform-box: fill-box;
-    transform-origin: 50% 100%;
-    animation: runnerBounce 0.7s ease-in-out infinite;
+    transform-box: view-box;
+    transform-origin: 36px 50px;
+    animation: runnerBounce 0.9s ease-in-out infinite;
 }
 @keyframes runnerBounce {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50%      { transform: translateY(-3px) rotate(-1deg); }
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-2px); }
 }
 .facility__feature-icon--cardio .anim-leg {
-    transform-box: fill-box;
+    transform-box: view-box;
     transform-origin: 36px 38px;
 }
 .facility__feature-icon--cardio .anim-leg--front {
-    animation: legSwingFront 0.7s ease-in-out infinite;
+    animation: legSwingFront 0.9s ease-in-out infinite;
 }
 .facility__feature-icon--cardio .anim-leg--back {
-    animation: legSwingBack 0.7s ease-in-out infinite;
+    animation: legSwingBack 0.9s ease-in-out infinite;
 }
 @keyframes legSwingFront {
     0%, 100% { transform: rotate(0deg); }
-    50%      { transform: rotate(-25deg); }
+    50%      { transform: rotate(-15deg); }
 }
 @keyframes legSwingBack {
     0%, 100% { transform: rotate(0deg); }
-    50%      { transform: rotate(20deg); }
+    50%      { transform: rotate(12deg); }
 }
 .facility__feature-icon--cardio .anim-ground {
-    animation: groundShift 0.7s linear infinite;
+    animation: groundShift 0.9s linear infinite;
     transform-box: fill-box;
     transform-origin: center;
 }
