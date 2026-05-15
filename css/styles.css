@@ -2464,15 +2464,12 @@ section {
    FACILITY FEATURE — EXPANDABLE DETAIL
    ============================================ */
 .facility__feature-detail {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.45s var(--ease-smooth);
-    margin-top: 0;
-}
-.facility__feature-detail-inner {
+    max-height: 0;
     overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s var(--ease-smooth), opacity 0.4s ease;
 }
-.facility__feature-detail p {
+.facility__feature-detail-inner p {
     padding-top: 18px;
     margin-top: 18px;
     border-top: 1px solid rgba(201,169,78,0.18);
@@ -2481,7 +2478,8 @@ section {
     line-height: 1.7;
 }
 .facility__feature.expanded .facility__feature-detail {
-    grid-template-rows: 1fr;
+    max-height: 600px;
+    opacity: 1;
 }
 .facility__feature-chevron {
     position: absolute;
