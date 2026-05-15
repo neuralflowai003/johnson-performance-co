@@ -48,7 +48,7 @@
     <!-- Preload critical assets -->
     <link rel="preload" href="images/hero-bg.webp" as="image" type="image/webp">
     <link rel="preload" href="images/owner-portrait.webp" as="image" type="image/webp">
-    <link rel="preload" href="css/styles.css?v=5" as="style">
+    <link rel="preload" href="css/styles.css?v=6" as="style">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,7 +56,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=5">
+    <link rel="stylesheet" href="css/styles.css?v=6">
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -272,46 +272,50 @@
             </div>
 
             <div class="facility__features reveal">
-                <div class="facility__feature">
-                    <div class="facility__feature-icon">
+                <div class="facility__feature facility__feature--strength">
+                    <div class="facility__feature-icon facility__feature-icon--strength">
                         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <rect x="6" y="22" width="6" height="20" rx="1" stroke="currentColor" stroke-width="2"/>
-                            <rect x="12" y="26" width="4" height="12" rx="1" stroke="currentColor" stroke-width="2"/>
-                            <rect x="16" y="30" width="32" height="4" rx="1" fill="currentColor"/>
-                            <rect x="48" y="26" width="4" height="12" rx="1" stroke="currentColor" stroke-width="2"/>
-                            <rect x="52" y="22" width="6" height="20" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect class="anim-plate anim-plate--outer-l" x="6" y="22" width="6" height="20" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect class="anim-plate anim-plate--inner-l" x="12" y="26" width="4" height="12" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect class="anim-bar" x="16" y="30" width="32" height="4" rx="1" fill="currentColor"/>
+                            <rect class="anim-plate anim-plate--inner-r" x="48" y="26" width="4" height="12" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect class="anim-plate anim-plate--outer-r" x="52" y="22" width="6" height="20" rx="1" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
                     <h3>Strength Training</h3>
                     <p>Full rack, free weights, cables, and machines for complete strength programming.</p>
                 </div>
-                <div class="facility__feature">
-                    <div class="facility__feature-icon">
+                <div class="facility__feature facility__feature--cardio">
+                    <div class="facility__feature-icon facility__feature-icon--cardio">
                         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M44 14 L44 24 M44 24 L52 28 M44 24 L36 30 L36 38 M36 38 L30 50 M36 38 L42 50 M36 30 L26 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="44" cy="10" r="4" stroke="currentColor" stroke-width="2.5"/>
-                            <path d="M14 50 Q22 44 30 50" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                            <g class="anim-runner">
+                                <path d="M44 14 L44 24 M44 24 L52 28 M44 24 L36 30 L36 38 M36 30 L26 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path class="anim-leg anim-leg--front" d="M36 38 L42 50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path class="anim-leg anim-leg--back" d="M36 38 L30 50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="44" cy="10" r="4" stroke="currentColor" stroke-width="2.5"/>
+                            </g>
+                            <path class="anim-ground" d="M14 50 Q22 44 30 50" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
                         </svg>
                     </div>
                     <h3>Cardio Equipment</h3>
                     <p>Premium cardio machines for warm-ups, conditioning, and endurance work.</p>
                 </div>
-                <div class="facility__feature">
-                    <div class="facility__feature-icon">
+                <div class="facility__feature facility__feature--sauna">
+                    <div class="facility__feature-icon facility__feature-icon--sauna">
                         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M20 50 Q20 30 32 14 Q44 30 44 50" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-                            <path d="M28 46 Q28 36 32 28 Q36 36 36 46" stroke="currentColor" stroke-width="2" stroke-linejoin="round" opacity="0.6"/>
-                            <path d="M14 56 L50 56" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <path class="anim-flame anim-flame--outer" d="M20 50 Q20 30 32 14 Q44 30 44 50" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                            <path class="anim-flame anim-flame--inner" d="M28 46 Q28 36 32 28 Q36 36 36 46" stroke="currentColor" stroke-width="2" stroke-linejoin="round" opacity="0.6"/>
+                            <path class="anim-flame-base" d="M14 56 L50 56" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
                         </svg>
                     </div>
                     <h3>Private Sauna</h3>
                     <p>Recovery is part of the process. Wind down post-session in a dedicated sauna.</p>
                 </div>
-                <div class="facility__feature">
-                    <div class="facility__feature-icon">
+                <div class="facility__feature facility__feature--private">
+                    <div class="facility__feature-icon facility__feature-icon--private">
                         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M32 8 L52 18 L52 32 Q52 46 32 56 Q12 46 12 32 L12 18 Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-                            <path d="M22 32 L29 39 L42 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path class="anim-shield" d="M32 8 L52 18 L52 32 Q52 46 32 56 Q12 46 12 32 L12 18 Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                            <path class="anim-check" d="M22 32 L29 39 L42 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                     <h3>100% Private</h3>
