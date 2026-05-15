@@ -252,4 +252,91 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
+
+    // --- STICKY MOBILE CTA ---
+    const mobileCta = document.getElementById('mobileCta');
+    if (mobileCta) {
+        window.addEventListener('scroll', () => {
+            mobileCta.classList.toggle('visible', window.scrollY > window.innerHeight * 0.8);
+        }, { passive: true });
+    }
+
+    // --- HERO TYPEWRITER EFFECT ---
+    const heroRotate = document.getElementById('heroRotate');
+    if (heroRotate) {
+        const phrases = ['Your Private Gym.', 'Your Transformation.', 'Your Results.', 'Your Journey.'];
+        let phraseIdx = 0;
+        const cursor = document.createElement('span');
+        cursor.classList.add('typewriter-cursor');
+        heroRotate.appendChild(cursor);
+
+        async function typePhrase() {
+            const current = phrases[phraseIdx];
+            const next = phrases[(phraseIdx + 1) % phrases.length];
+            // Delete current text
+            for (let i = current.length; i >= 0; i--) {
+                heroRotate.childNodes[0].textContent = current.slice(0, i);
+                await new Promise(r => setTimeout(r, 35));
+            }
+            await new Promise(r => setTimeout(r, 300));
+            phraseIdx = (phraseIdx + 1) % phrases.length;
+            // Type new text
+            for (let i = 0; i <= next.length; i++) {
+                heroRotate.childNodes[0].textContent = next.slice(0, i);
+                await new Promise(r => setTimeout(r, 55));
+            }
+            await new Promise(r => setTimeout(r, 3000));
+            typePhrase();
+        }
+        // Wrap existing text in a text node we can manipulate
+        const textNode = document.createTextNode(phrases[0]);
+        heroRotate.insertBefore(textNode, cursor);
+        heroRotate.childNodes[0].textContent = phrases[0];
+        setTimeout(typePhrase, 4000);
+    }
+
+    // --- TESTIMONIAL CAROUSEL ---
+    const carousel = document.getElementById('testimonialCarousel');
+    if (carousel) {
+        const slides = carousel.querySelectorAll('.testimonial');
+        const dots = carousel.querySelectorAll('.testimonial-carousel__dot');
+        let current = 0;
+        let autoTimer;
+
+        function goTo(idx) {
+            slides[current].classList.remove('testimonial--active');
+            dots[current].classList.remove('testimonial-carousel__dot--active');
+            current = idx;
+            slides[current].classList.add('testimonial--active');
+            dots[current].classList.add('testimonial-carousel__dot--active');
+        }
+
+        function startAuto() {
+            autoTimer = setInterval(() => goTo((current + 1) % slides.length), 6000);
+        }
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                clearInterval(autoTimer);
+                goTo(i);
+                startAuto();
+            });
+        });
+
+        startAuto();
+    }
+
+    // --- COMPARE LIST STAGGER ---
+    const compareLists = document.querySelectorAll('.compare__list');
+    if (compareLists.length) {
+        const compareObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('stagger-in');
+                    compareObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        compareLists.forEach(list => compareObserver.observe(list));
+    }
 });
