@@ -1529,12 +1529,17 @@ html {
         inset 0 0 20px rgba(201,169,78,0.03);
 }
 
-/* Hero overlay - more cinematic */
+/* Hero overlay - cinematic editorial grade */
 .hero__overlay {
     background:
-        radial-gradient(ellipse at 50% 35%, rgba(201,169,78,0.06) 0%, transparent 55%),
-        radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.6) 0%, transparent 70%),
-        linear-gradient(to bottom, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.3) 35%, rgba(5,5,5,0.85) 100%);
+        /* gold light leak spilling down from center-top */
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,169,78,0.14) 0%, rgba(201,169,78,0.04) 35%, transparent 65%),
+        /* soft golden bloom around hero title */
+        radial-gradient(ellipse 50% 35% at 50% 45%, rgba(232,212,139,0.05) 0%, transparent 70%),
+        /* deeper vignette pulling corners in */
+        radial-gradient(ellipse 110% 90% at 50% 50%, transparent 40%, rgba(0,0,0,0.55) 100%),
+        /* bottom shadow for footer copy + dark to ground the image */
+        linear-gradient(to bottom, rgba(5,5,5,0.25) 0%, rgba(5,5,5,0.15) 40%, rgba(5,5,5,0.85) 100%);
 }
 
 /* Hero badge - glossy */
