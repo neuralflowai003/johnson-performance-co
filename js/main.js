@@ -202,4 +202,15 @@ document.addEventListener('DOMContentLoaded', () => {
             img.addEventListener('error', () => img.classList.add('loaded'), { once: true });
         }
     });
+
+    // --- BACK TO TOP BUTTON ---
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > window.innerHeight);
+        }, { passive: true });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 });
