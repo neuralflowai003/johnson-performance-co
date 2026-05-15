@@ -202,4 +202,52 @@ document.addEventListener('DOMContentLoaded', () => {
             img.addEventListener('error', () => img.classList.add('loaded'), { once: true });
         }
     });
+
+    // --- SCROLL PROGRESS BAR ---
+    const progressBar = document.querySelector('.scroll-progress__bar');
+    if (progressBar) {
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            progressBar.style.width = pct + '%';
+        }, { passive: true });
+    }
+
+    // --- ANIMATED STAT COUNTERS ---
+    const counters = document.querySelectorAll('.stats-strip__number[data-count]');
+    if (counters.length) {
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.count, 10);
+                    const duration = 1800;
+                    const start = performance.now();
+                    const from = 0;
+                    function tick(now) {
+                        const elapsed = now - start;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const ease = 1 - Math.pow(1 - progress, 3);
+                        el.textContent = Math.round(from + (target - from) * ease);
+                        if (progress < 1) requestAnimationFrame(tick);
+                    }
+                    requestAnimationFrame(tick);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.4 });
+        counters.forEach(c => counterObserver.observe(c));
+    }
+
+    // --- BACK TO TOP BUTTON ---
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > window.innerHeight);
+        }, { passive: true });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 });

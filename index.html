@@ -48,7 +48,7 @@
     <!-- Preload critical assets -->
     <link rel="preload" href="images/hero-bg.webp" as="image" type="image/webp">
     <link rel="preload" href="images/owner-portrait.webp" as="image" type="image/webp">
-    <link rel="preload" href="css/styles.css?v=8" as="style">
+    <link rel="preload" href="css/styles.css?v=9" as="style">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,7 +56,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=8">
+    <link rel="stylesheet" href="css/styles.css?v=9">
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -129,6 +129,11 @@
     </script>
 </head>
 <body>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress" aria-hidden="true">
+        <div class="scroll-progress__bar"></div>
+    </div>
 
     <!-- ============================================ -->
     <!-- LOADER -->
@@ -283,6 +288,40 @@
     </div>
 
     <!-- ============================================ -->
+    <!-- STATS STRIP -->
+    <!-- ============================================ -->
+    <div class="stats-strip">
+        <div class="container">
+            <div class="stats-strip__grid">
+                <div class="stats-strip__item reveal">
+                    <div class="stats-strip__value">
+                        <span class="stats-strip__number" data-count="100">0</span><span class="stats-strip__suffix">%</span>
+                    </div>
+                    <span class="stats-strip__label">Private</span>
+                </div>
+                <div class="stats-strip__item reveal">
+                    <div class="stats-strip__value">
+                        <span class="stats-strip__number stats-strip__number--static">1:1</span>
+                    </div>
+                    <span class="stats-strip__label">Training</span>
+                </div>
+                <div class="stats-strip__item reveal">
+                    <div class="stats-strip__value">
+                        <span class="stats-strip__number" data-count="6">0</span>
+                    </div>
+                    <span class="stats-strip__label">Days a Week</span>
+                </div>
+                <div class="stats-strip__item reveal">
+                    <div class="stats-strip__value">
+                        <span class="stats-strip__number" data-count="0">0</span>
+                    </div>
+                    <span class="stats-strip__label">Crowds. Ever.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
     <!-- FACILITY -->
     <!-- ============================================ -->
     <section class="section facility" id="facility">
@@ -375,6 +414,57 @@
                     </div>
                     <h3>100% Private</h3>
                     <p>When you're training here, this entire facility is yours. No exceptions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BARBELL DIVIDER -->
+    <div class="section-divider">
+        <div class="section-divider__plate"></div>
+        <div class="section-divider__plate--sm"></div>
+        <div class="section-divider__bar"></div>
+        <div class="section-divider__grip"></div>
+        <div class="section-divider__bar"></div>
+        <div class="section-divider__plate--sm"></div>
+        <div class="section-divider__plate"></div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- WHY PRIVATE? — COMPARISON -->
+    <!-- ============================================ -->
+    <section class="section compare">
+        <div class="container">
+            <span class="section__label reveal">The Difference</span>
+            <h2 class="section__title reveal">Why Private Training?</h2>
+            <div class="gold-rule reveal"></div>
+            <div class="compare__grid">
+                <div class="compare__col compare__col--them reveal">
+                    <div class="compare__header">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+                        <h3>Commercial Gym</h3>
+                    </div>
+                    <ul class="compare__list">
+                        <li><span class="compare__x" aria-hidden="true">✕</span> Crowded floors, waiting for equipment</li>
+                        <li><span class="compare__x" aria-hidden="true">✕</span> Generic group classes</li>
+                        <li><span class="compare__x" aria-hidden="true">✕</span> Cookie-cutter programs</li>
+                        <li><span class="compare__x" aria-hidden="true">✕</span> Distracting environment</li>
+                        <li><span class="compare__x" aria-hidden="true">✕</span> No real accountability</li>
+                    </ul>
+                </div>
+                <div class="compare__vs reveal" aria-hidden="true">VS</div>
+                <div class="compare__col compare__col--us reveal">
+                    <div class="compare__header">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <h3>Johnson Performance</h3>
+                    </div>
+                    <ul class="compare__list">
+                        <li><span class="compare__check" aria-hidden="true">✓</span> Entire gym is yours alone</li>
+                        <li><span class="compare__check" aria-hidden="true">✓</span> 100% personalized coaching</li>
+                        <li><span class="compare__check" aria-hidden="true">✓</span> Programs built from scratch</li>
+                        <li><span class="compare__check" aria-hidden="true">✓</span> Total focus, zero distractions</li>
+                        <li><span class="compare__check" aria-hidden="true">✓</span> Tracked progress & evolving plan</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -673,6 +763,14 @@
                     </form>
                 </div>
             </div>
+            <div class="contact__map reveal">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51456.12!2d-86.47!3d36.38!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8864710e9b3b60e1%3A0xf6f2a4b0b2e2d2a0!2sGallatin%2C%20TN!5e0!3m2!1sen!2sus!4v1"
+                    width="100%" height="280" style="border:0; border-radius: 4px; filter: grayscale(0.85) invert(0.92) contrast(0.9);"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    title="Johnson Performance Co. location — Gallatin, Tennessee">
+                </iframe>
+            </div>
         </div>
     </section>
 
@@ -716,7 +814,12 @@
         </div>
     </footer>
 
-    <script src="js/main.js?v=4"></script>
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <script src="js/main.js?v=5"></script>
 </body>
 </html>
 

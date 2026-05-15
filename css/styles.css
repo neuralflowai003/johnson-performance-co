@@ -2349,3 +2349,259 @@ section {
 .footer__social:hover { color: var(--gold); }
 .footer__social[href="#"] { cursor: not-allowed; opacity: 0.45; }
 .footer__social[href="#"]:hover { color: var(--gray); }
+
+/* ============================================
+   1. SCROLL PROGRESS BAR
+   ============================================ */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 10000;
+    background: transparent;
+    pointer-events: none;
+}
+.scroll-progress__bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light));
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px rgba(201,169,78,0.5);
+}
+
+/* ============================================
+   2. STAT COUNTERS STRIP
+   ============================================ */
+.stats-strip {
+    padding: 60px 0;
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+}
+.stats-strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,169,78,0.04), transparent);
+}
+.stats-strip__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+    position: relative;
+}
+.stats-strip__item {
+    position: relative;
+    padding: 20px 10px;
+}
+.stats-strip__item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--dark-5), transparent);
+}
+.stats-strip__value {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 2px;
+}
+.stats-strip__number {
+    font-family: var(--font-display);
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+.stats-strip__suffix {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+}
+.stats-strip__label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--light-gray);
+    margin-top: 10px;
+}
+
+/* ============================================
+   3. WHY PRIVATE? COMPARISON
+   ============================================ */
+.compare { background: var(--dark); position: relative; }
+.compare__grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 50px;
+}
+.compare__col {
+    padding: 36px 32px;
+    border: 1px solid var(--dark-4);
+    position: relative;
+    overflow: hidden;
+}
+.compare__col::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+}
+.compare__col--them {
+    background: linear-gradient(180deg, rgba(20,20,20,1), var(--dark-2));
+}
+.compare__col--them::before {
+    background: linear-gradient(90deg, transparent, #6b3535, transparent);
+}
+.compare__col--us {
+    background: linear-gradient(180deg, rgba(22,22,18,1), var(--dark-2));
+    border-color: rgba(201,169,78,0.2);
+    box-shadow: 0 0 40px rgba(201,169,78,0.06);
+}
+.compare__col--us::before {
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.compare__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--dark-4);
+}
+.compare__header h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.compare__col--them .compare__header { color: #8C4A4A; }
+.compare__col--us .compare__header { color: var(--gold); }
+.compare__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.compare__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.92rem;
+    color: var(--light-gray);
+    line-height: 1.6;
+}
+.compare__x {
+    color: #8C4A4A;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+.compare__check {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+.compare__vs {
+    align-self: center;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--dark-5);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   4. GOOGLE MAPS EMBED (contact section)
+   ============================================ */
+.contact__map {
+    margin-top: 50px;
+    border: 1px solid var(--dark-4);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.contact__map iframe {
+    display: block;
+    width: 100%;
+    min-height: 280px;
+}
+
+/* ============================================
+   5. BACK TO TOP BUTTON
+   ============================================ */
+.back-to-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,169,78,0.35);
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.4s, visibility 0.4s, transform 0.4s var(--ease-spring), background 0.3s, border-color 0.3s;
+    z-index: 900;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.back-to-top:hover {
+    background: rgba(201,169,78,0.15);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(201,169,78,0.2);
+}
+.back-to-top svg { display: block; }
+
+/* --- RESPONSIVE: stats + compare + map --- */
+@media (max-width: 768px) {
+    .stats-strip { padding: 40px 0; }
+    .stats-strip__grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .stats-strip__number { font-size: 2.4rem; }
+    .stats-strip__suffix { font-size: 1.3rem; }
+    .stats-strip__item:nth-child(2)::after { display: none; }
+
+    .compare__grid { grid-template-columns: 1fr; gap: 16px; }
+    .compare__vs { order: -1; text-align: center; padding: 0; display: none; }
+    .compare__col { padding: 28px 22px; }
+
+    .contact__map iframe { min-height: 220px; }
+
+    .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+}
+@media (max-width: 480px) {
+    .stats-strip__number { font-size: 2rem; }
+    .stats-strip__label { font-size: 0.68rem; }
+}
