@@ -203,6 +203,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- LIGHTBOX ---
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    if (lightbox) {
+        document.querySelectorAll('.facility__photo img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        const closeLightbox = () => {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        };
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+        });
+    }
+
     // --- BACK TO TOP BUTTON ---
     const backToTop = document.getElementById('backToTop');
     if (backToTop) {

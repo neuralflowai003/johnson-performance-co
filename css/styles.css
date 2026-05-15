@@ -2391,3 +2391,61 @@ section {
 @media (max-width: 768px) {
     .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
 }
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+.facility__photo { cursor: zoom-in; }
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s, visibility 0.35s;
+}
+.lightbox.open {
+    opacity: 1;
+    visibility: visible;
+}
+.lightbox__img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+    transform: scale(0.92);
+    transition: transform 0.35s var(--ease-spring);
+}
+.lightbox.open .lightbox__img {
+    transform: scale(1);
+}
+.lightbox__close {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    background: rgba(10,10,10,0.6);
+    color: var(--off-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s, background 0.3s;
+    line-height: 1;
+}
+.lightbox__close:hover {
+    border-color: var(--gold);
+    background: rgba(201,169,78,0.12);
+    color: var(--gold);
+}
