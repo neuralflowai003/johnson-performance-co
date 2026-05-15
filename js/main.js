@@ -215,29 +215,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- ANIMATED STAT COUNTERS ---
-    const counters = document.querySelectorAll('.stats-strip__number[data-count]');
-    if (counters.length) {
+    const statsGrid = document.getElementById('statsGrid');
+    if (statsGrid) {
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
+                if (!entry.isIntersecting) return;
+                statsGrid.classList.add('counting');
+                statsGrid.querySelectorAll('.stats-strip__number[data-count]').forEach((el, i) => {
                     const target = parseInt(el.dataset.count, 10);
                     const duration = 1800;
-                    const start = performance.now();
-                    const from = 0;
-                    function tick(now) {
-                        const elapsed = now - start;
-                        const progress = Math.min(elapsed / duration, 1);
-                        const ease = 1 - Math.pow(1 - progress, 3);
-                        el.textContent = Math.round(from + (target - from) * ease);
-                        if (progress < 1) requestAnimationFrame(tick);
-                    }
-                    requestAnimationFrame(tick);
-                    counterObserver.unobserve(el);
-                }
+                    setTimeout(() => {
+                        const start = performance.now();
+                        function tick(now) {
+                            const elapsed = now - start;
+                            const progress = Math.min(elapsed / duration, 1);
+                            const ease = 1 - Math.pow(1 - progress, 3);
+                            el.textContent = Math.round(target * ease);
+                            if (progress < 1) requestAnimationFrame(tick);
+                        }
+                        requestAnimationFrame(tick);
+                    }, i * 120);
+                });
+                counterObserver.unobserve(statsGrid);
             });
-        }, { threshold: 0.4 });
-        counters.forEach(c => counterObserver.observe(c));
+        }, { threshold: 0.3 });
+        counterObserver.observe(statsGrid);
     }
 
     // --- BACK TO TOP BUTTON ---

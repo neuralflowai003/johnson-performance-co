@@ -2397,7 +2397,14 @@ section {
 .stats-strip__item {
     position: relative;
     padding: 20px 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth);
 }
+.stats-strip__grid.counting .stats-strip__item { opacity: 1; transform: translateY(0); }
+.stats-strip__grid.counting .stats-strip__item:nth-child(2) { transition-delay: 0.12s; }
+.stats-strip__grid.counting .stats-strip__item:nth-child(3) { transition-delay: 0.24s; }
+.stats-strip__grid.counting .stats-strip__item:nth-child(4) { transition-delay: 0.36s; }
 .stats-strip__item:not(:last-child)::after {
     content: '';
     position: absolute;
