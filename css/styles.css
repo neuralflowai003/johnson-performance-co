@@ -2123,3 +2123,87 @@ section {
         padding-bottom: max(30px, env(safe-area-inset-bottom));
     }
 }
+
+/* ============================================
+   FOOTER SOCIALS
+   ============================================ */
+.footer__socials {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+}
+.footer__social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--dark-5);
+    background: linear-gradient(180deg, rgba(22,22,22,1) 0%, rgba(15,15,15,1) 100%);
+    color: var(--light-gray);
+    border-radius: 50%;
+    transition: all 0.4s var(--ease-smooth);
+    position: relative;
+    overflow: hidden;
+}
+.footer__social svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.4s var(--ease-spring);
+    position: relative;
+    z-index: 1;
+}
+.footer__social span {
+    /* Hide label visually but keep for accessibility */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+.footer__social::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, var(--gold-glow) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+.footer__social:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow:
+        0 8px 24px rgba(0,0,0,0.4),
+        0 0 24px rgba(201,169,78,0.25);
+}
+.footer__social:hover::before { opacity: 1; }
+.footer__social:hover svg { transform: scale(1.15); }
+
+/* Disabled state for "coming soon" socials (href="#") */
+.footer__social[href="#"] {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+.footer__social[href="#"]:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: rgba(201,169,78,0.3);
+    color: var(--gold-dark);
+}
+.footer__social[href="#"]:hover svg {
+    transform: none;
+}
+
+@media (max-width: 768px) {
+    .footer__socials { gap: 14px; margin-bottom: 28px; }
+    .footer__social { width: 44px; height: 44px; }
+    .footer__social svg { width: 17px; height: 17px; }
+}

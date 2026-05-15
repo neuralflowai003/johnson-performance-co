@@ -59,7 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
-            const target = document.querySelector(anchor.getAttribute('href'));
+            const href = anchor.getAttribute('href');
+            // Bare "#" links (placeholder socials, etc.) — block them silently
+            if (href === '#') {
+                e.preventDefault();
+                return;
+            }
+            const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
                 const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'));
