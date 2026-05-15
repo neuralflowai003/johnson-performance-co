@@ -13,7 +13,7 @@
     --dark-4: #1C1C1C;
     --dark-5: #2A2A2A;
     --gray: #555555;
-    --light-gray: #999999;
+    --light-gray: #B0B0B0;
     --off-white: #E8E8E3;
     --white: #FFFFFF;
     --gold: #C9A94E;
@@ -309,8 +309,10 @@ body::before {
     transition: all 0.3s var(--ease-smooth);
     transform: translateX(-50%);
 }
-.nav__link:hover { color: var(--gold); }
-.nav__link:hover::after { width: 100%; }
+.nav__link:hover,
+.nav__link--active { color: var(--gold); }
+.nav__link:hover::after,
+.nav__link--active::after { width: 100%; }
 .nav__link--cta {
     color: var(--black);
     background: linear-gradient(135deg, var(--gold-light), var(--gold));
@@ -1488,10 +1490,19 @@ img {
 }
 img[loading="lazy"] {
     opacity: 0;
+    background: linear-gradient(90deg, var(--dark-3) 25%, var(--dark-4) 50%, var(--dark-3) 75%);
+    background-size: 200% 100%;
+    animation: imgShimmer 1.6s ease-in-out infinite;
+}
+@keyframes imgShimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 img[loading="lazy"].loaded,
 img[loading="eager"] {
     opacity: 1;
+    animation: none;
+    background: none;
 }
 
 /* Better focus states for keyboard navigation */
@@ -2321,9 +2332,14 @@ section {
 .footer__social {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     color: var(--gray);
     transition: color 0.25s;
     line-height: 1;
+    padding: 6px;
+    margin: -6px;
+    min-width: 44px;
+    min-height: 44px;
 }
 .footer__social svg {
     width: 11px;

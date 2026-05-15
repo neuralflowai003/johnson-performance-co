@@ -11,16 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursorGlow = document.createElement('div');
     cursorGlow.classList.add('cursor-glow');
     document.body.appendChild(cursorGlow);
-    let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
-    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+    let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0, glowRunning = false, glowTimer;
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX; mouseY = e.clientY;
+        clearTimeout(glowTimer);
+        if (!glowRunning) { glowRunning = true; animateGlow(); }
+        glowTimer = setTimeout(() => { glowRunning = false; }, 2000);
+    });
     function animateGlow() {
+        if (!glowRunning) return;
         glowX += (mouseX - glowX) * 0.08;
         glowY += (mouseY - glowY) * 0.08;
         cursorGlow.style.left = glowX + 'px';
         cursorGlow.style.top = glowY + 'px';
         requestAnimationFrame(animateGlow);
     }
-    if (window.innerWidth > 768) animateGlow();
 
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
@@ -90,7 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 const id = entry.target.getAttribute('id');
                 navLinks.forEach(link => {
-                    link.style.color = link.getAttribute('href') === `#${id}` ? 'var(--gold)' : '';
+                    const isActive = link.getAttribute('href') === `#${id}`;
+                    link.classList.toggle('nav__link--active', isActive);
                 });
             }
         });

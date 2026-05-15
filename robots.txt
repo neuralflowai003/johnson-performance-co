@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /brand/pdf/
 
 Sitemap: https://johnsonperformanceco.com/sitemap.xml
