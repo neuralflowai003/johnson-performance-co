@@ -2139,12 +2139,18 @@ section {
     justify-content: center;
     width: 26px;
     height: 26px;
+    max-width: 26px;
+    max-height: 26px;
     color: var(--gray);
     transition: color 0.3s var(--ease-smooth), transform 0.3s var(--ease-smooth);
+    flex-shrink: 0;
 }
 .footer__social svg {
     width: 14px;
     height: 14px;
+    max-width: 14px;
+    max-height: 14px;
+    display: block;
     transition: transform 0.3s var(--ease-spring);
 }
 .footer__social:hover {
