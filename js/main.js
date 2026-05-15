@@ -203,6 +203,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- FACILITY FEATURE EXPAND/COLLAPSE ---
+    document.querySelectorAll('.facility__feature').forEach(card => {
+        const toggle = () => {
+            const isExpanded = card.classList.toggle('expanded');
+            card.setAttribute('aria-expanded', isExpanded);
+        };
+        card.addEventListener('click', toggle);
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggle();
+            }
+        });
+    });
+
     // --- LIGHTBOX ---
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');

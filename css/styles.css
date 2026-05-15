@@ -745,12 +745,13 @@ body::before {
     gap: 20px;
 }
 .facility__feature {
-    padding: 40px 28px;
+    padding: 40px 28px 56px;
     background: var(--dark-2);
     border: 1px solid var(--dark-4);
     transition: all 0.5s var(--ease-smooth);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 .facility__feature::before {
     content: '';
@@ -2448,4 +2449,54 @@ section {
     border-color: var(--gold);
     background: rgba(201,169,78,0.12);
     color: var(--gold);
+}
+
+/* ============================================
+   FACILITY FEATURE — EXPANDABLE DETAIL
+   ============================================ */
+.facility__feature-detail {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s var(--ease-smooth);
+    margin-top: 0;
+}
+.facility__feature-detail-inner {
+    overflow: hidden;
+}
+.facility__feature-detail p {
+    padding-top: 18px;
+    margin-top: 18px;
+    border-top: 1px solid rgba(201,169,78,0.18);
+    font-size: 0.86rem;
+    color: var(--light-gray);
+    line-height: 1.7;
+}
+.facility__feature.expanded .facility__feature-detail {
+    grid-template-rows: 1fr;
+}
+.facility__feature-chevron {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    border: 1px solid rgba(201,169,78,0.25);
+    border-radius: 50%;
+    transition: transform 0.4s var(--ease-spring), border-color 0.3s, background 0.3s;
+    pointer-events: none;
+    background: rgba(10,10,10,0.4);
+}
+.facility__feature:hover .facility__feature-chevron {
+    border-color: var(--gold);
+    background: rgba(201,169,78,0.08);
+}
+.facility__feature.expanded .facility__feature-chevron {
+    transform: translateX(-50%) rotate(180deg);
+    border-color: var(--gold);
+    background: rgba(201,169,78,0.12);
 }
