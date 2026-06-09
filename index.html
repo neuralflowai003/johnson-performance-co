@@ -10,6 +10,9 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.google.com https://calendly.com; connect-src 'self' https://formspree.io; form-action https://formspree.io;">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0A0A08">
     <meta name="format-detection" content="telephone=no">
@@ -67,7 +70,11 @@
       "description": "Elite 1-on-1 private personal training in a luxury private gym. Gallatin, TN.",
       "url": "https://johnsonperformanceco.com",
       "image": "https://johnsonperformanceco.com/images/og-image.jpg",
-      "email": "blake@johnsonperformanceco.com",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "url": "https://johnsonperformanceco.com/#contact"
+      },
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Gallatin",

@@ -166,10 +166,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
+        let lastSubmit = 0;
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = contactForm.querySelector('button[type="submit"]');
             const originalText = btn.textContent;
+
+            // Rate limit: 10s between submissions
+            if (Date.now() - lastSubmit < 10000) {
+                btn.textContent = 'Please wait...';
+                setTimeout(() => { btn.textContent = originalText; }, 2000);
+                return;
+            }
+
+            // Validate email format
+            const emailInput = contactForm.querySelector('#email');
+            if (emailInput && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+                emailInput.focus();
+                return;
+            }
+
+            // Validate message length
+            const msgInput = contactForm.querySelector('#message');
+            if (msgInput && msgInput.value.trim().length < 10) {
+                msgInput.focus();
+                return;
+            }
+
+            lastSubmit = Date.now();
             btn.textContent = 'Sending...';
             btn.disabled = true;
             try {
