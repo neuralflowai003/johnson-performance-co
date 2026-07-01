@@ -278,4 +278,45 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
+
+    // --- SECTION TITLE WORD-STAGGER REVEAL ---
+    // Splits each title into word spans that rise in sequence when the
+    // title scrolls into view (pairs with .w / .w-inner CSS).
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.section__title').forEach(title => {
+            let wordIndex = 0;
+            const wrapWords = (text, target) => {
+                text.split(/\s+/).filter(Boolean).forEach(word => {
+                    const w = document.createElement('span');
+                    w.className = 'w';
+                    const inner = document.createElement('span');
+                    inner.className = 'w-inner';
+                    inner.textContent = word;
+                    inner.style.transitionDelay = (wordIndex * 0.055) + 's';
+                    wordIndex++;
+                    w.appendChild(inner);
+                    target.appendChild(w);
+                    target.appendChild(document.createTextNode(' '));
+                });
+            };
+            const rebuilt = document.createDocumentFragment();
+            Array.from(title.childNodes).forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    wrapWords(node.textContent, rebuilt);
+                } else if (node.nodeName === 'BR') {
+                    rebuilt.appendChild(node.cloneNode());
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    const el = node.cloneNode(false);
+                    Array.from(node.childNodes).forEach(child => {
+                        if (child.nodeType === Node.TEXT_NODE) wrapWords(child.textContent, el);
+                        else el.appendChild(child.cloneNode(true));
+                    });
+                    rebuilt.appendChild(el);
+                }
+            });
+            title.textContent = '';
+            title.appendChild(rebuilt);
+            title.classList.add('split');
+        });
+    }
 });
