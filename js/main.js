@@ -28,8 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const nav = document.getElementById('nav');
+    let lastScrollY = 0;
     window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 60);
+        const y = window.scrollY;
+        nav.classList.toggle('scrolled', y > 60);
+        // Retreat on scroll down, return on scroll up (never while menu is open)
+        const menuOpen = document.body.classList.contains('menu-open');
+        nav.classList.toggle('nav--hidden', !menuOpen && y > 500 && y > lastScrollY);
+        lastScrollY = y;
     }, { passive: true });
 
     const navToggle = document.getElementById('navToggle');
@@ -120,6 +126,18 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', () => {
             if (window.scrollY < window.innerHeight) {
                 heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.2}px)`;
+            }
+        }, { passive: true });
+    }
+
+    // Hero content drifts up and dims as you scroll away
+    const heroContent = document.querySelector('.hero__content');
+    if (heroContent && window.innerWidth > 768) {
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            if (y < window.innerHeight) {
+                heroContent.style.opacity = Math.max(0, 1 - y / 620);
+                heroContent.style.transform = `translateY(${y * 0.18}px)`;
             }
         }, { passive: true });
     }
@@ -247,10 +265,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxClose = document.getElementById('lightboxClose');
     if (lightbox) {
+        const lightboxCaption = document.getElementById('lightboxCaption');
         document.querySelectorAll('.facility__photo img').forEach(img => {
             img.addEventListener('click', () => {
                 lightboxImg.src = img.src;
                 lightboxImg.alt = img.alt;
+                const photo = img.closest('.facility__photo');
+                if (lightboxCaption) {
+                    lightboxCaption.textContent = (photo && photo.dataset.caption) || '';
+                }
                 lightbox.classList.add('open');
                 document.body.style.overflow = 'hidden';
             });

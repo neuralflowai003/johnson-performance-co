@@ -51,7 +51,7 @@
     <!-- Preload critical assets -->
     <link rel="preload" href="images/hero-bg.webp" as="image" type="image/webp">
     <link rel="preload" href="images/owner-portrait.webp" as="image" type="image/webp">
-    <link rel="preload" href="css/styles.css?v=11" as="style">
+    <link rel="preload" href="css/styles.css?v=12" as="style">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +59,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=11">
+    <link rel="stylesheet" href="css/styles.css?v=12">
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -225,6 +225,8 @@
             <span>Scroll</span>
             <div class="hero__scroll-line"></div>
         </div>
+        <div class="hero__rail hero__rail--left" aria-hidden="true">Est. 2026 · Gallatin, Tennessee</div>
+        <div class="hero__rail hero__rail--right" aria-hidden="true">Private Training Studio</div>
     </section>
 
     <!-- ETHOS MARQUEE -->
@@ -266,6 +268,8 @@
             <div class="about__grid">
                 <div class="about__image-col reveal">
                     <div class="about__image-frame">
+                        <i class="bracket bracket--tl" aria-hidden="true"></i>
+                        <i class="bracket bracket--br" aria-hidden="true"></i>
                         <picture>
                             <source srcset="images/owner-portrait.webp" type="image/webp">
                             <img src="images/owner-portrait.jpg" alt="Johnson Performance Co. Owner" width="900" height="1200" loading="eager" decoding="async">
@@ -503,6 +507,8 @@
                 </div>
                 <div class="experience__visual reveal">
                     <div class="experience__card">
+                        <i class="bracket bracket--tl" aria-hidden="true"></i>
+                        <i class="bracket bracket--br" aria-hidden="true"></i>
                         <div class="experience__card-top">
                             <span class="experience__card-label">Your Session Includes</span>
                         </div>
@@ -658,6 +664,8 @@
                 </div>
                 <div class="book__calendar reveal">
                     <div class="book__cta-card">
+                        <i class="bracket bracket--tl" aria-hidden="true"></i>
+                        <i class="bracket bracket--br" aria-hidden="true"></i>
                         <div class="book__cta-icon">◆</div>
                         <h3 class="book__cta-title">Ready to Start?</h3>
                         <p class="book__cta-sub">Choose a time that works for you. Your free 30-minute consultation is the first step toward a completely transformed physique — no pressure, no commitment.</p>
@@ -748,6 +756,10 @@
     <!-- ============================================ -->
     <footer class="footer">
         <div class="container">
+            <div class="footer__cta reveal">
+                <p class="footer__cta-line">Ready when <em>you</em> are.</p>
+                <a href="https://calendly.com/blake-johnsonperformanceco/30min" target="_blank" rel="noopener noreferrer" class="btn btn--gold">Book Your Free Consultation</a>
+            </div>
             <div class="footer__inner">
                 <div class="footer__brand">
                     <span class="footer__name">Johnson Performance Co.</span>
@@ -786,14 +798,17 @@
     <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
         <button class="lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
-        <img class="lightbox__img" id="lightboxImg" src="" alt="">
+        <figure class="lightbox__figure">
+            <img class="lightbox__img" id="lightboxImg" src="" alt="">
+            <figcaption class="lightbox__caption" id="lightboxCaption"></figcaption>
+        </figure>
     </div>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
 
-    <script src="js/main.js?v=7"></script>
+    <script src="js/main.js?v=8"></script>
 </body>
 </html>
 
