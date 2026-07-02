@@ -291,6 +291,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- MOBILE STICKY CTA (shows once past hero, hides at lead form) ---
+    const mobileCta = document.getElementById('mobileCta');
+    const contactSection = document.getElementById('contact');
+    if (mobileCta) {
+        window.addEventListener('scroll', () => {
+            const pastHero = window.scrollY > window.innerHeight * 0.7;
+            let beforeForm = true;
+            if (contactSection) {
+                beforeForm = contactSection.getBoundingClientRect().top > window.innerHeight * 0.5;
+            }
+            mobileCta.classList.toggle('visible', pastHero && beforeForm);
+        }, { passive: true });
+    }
+
     // --- SECTION TITLE WORD-STAGGER REVEAL ---
     // Splits each title into word spans that rise in sequence when the
     // title scrolls into view (pairs with .w / .w-inner CSS).

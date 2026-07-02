@@ -3188,3 +3188,224 @@ html { scrollbar-color: #8A6E2F #0A0A0A; scrollbar-width: thin; }
     animation-name: heroTextInGold;
     filter: none;
 }
+
+/* ══════════════════════════════════════════════════════════
+   CONVERSION LAYER — programs menu, lead-capture pills,
+   mobile sticky CTA for social traffic
+   ══════════════════════════════════════════════════════════ */
+
+/* --- PROGRAMS / WAYS TO TRAIN --- */
+.programs { background: var(--dark); }
+.programs__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 70px;
+}
+.programs__header .section__intro { margin: 0 auto; }
+.programs__header .gold-rule { margin: 0 auto 30px; }
+.programs__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: stretch;
+}
+.program-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 46px 34px 38px;
+    background: var(--dark-2);
+    border: 1px solid var(--dark-4);
+    transition: border-color 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
+    overflow: hidden;
+}
+.program-card:hover {
+    border-color: rgba(201,169,78,0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 0 40px rgba(201,169,78,0.08);
+}
+.program-card--signature {
+    border-color: rgba(201,169,78,0.35);
+    background: linear-gradient(180deg, rgba(24,22,16,1) 0%, var(--dark-2) 60%);
+}
+.program-card__tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 12px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.62rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+}
+.program-card--signature { padding-top: 66px; }
+.program-card__num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(201,169,78,0.35);
+    margin-bottom: 18px;
+}
+.program-card__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.9rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 14px;
+}
+.program-card__title em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    text-transform: none;
+    background: linear-gradient(105deg, #F0DFAC 0%, #DFC178 45%, #B89340 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.program-card__body {
+    font-size: 0.92rem;
+    color: var(--light-gray);
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+.program-card__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+.program-card__list li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 0.86rem;
+    color: var(--light-gray);
+    line-height: 1.5;
+}
+.program-card__list li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    top: 1px;
+    font-size: 0.5rem;
+    color: var(--gold);
+}
+.program-card__cta {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    transition: gap 0.3s var(--ease-smooth), color 0.3s;
+}
+.program-card__cta:hover { color: var(--gold-light); gap: 16px; }
+
+/* --- LEAD FORM: interest pills --- */
+.form__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+.form__pill { cursor: pointer; }
+.form__pill input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.form__pill span {
+    display: inline-flex;
+    align-items: center;
+    padding: 11px 20px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--light-gray);
+    border: 1px solid var(--dark-5);
+    background: var(--dark-2);
+    transition: all 0.3s var(--ease-smooth);
+}
+.form__pill:hover span {
+    border-color: rgba(201,169,78,0.45);
+    color: var(--off-white);
+}
+.form__pill input:checked + span {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    border-color: var(--gold);
+    color: var(--black);
+    box-shadow: 0 4px 18px rgba(201,169,78,0.3);
+}
+.form__pill input:focus-visible + span {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+/* --- MOBILE STICKY CTA --- */
+.mobile-cta {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 950;
+    padding: 12px 16px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    background: rgba(8,8,8,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(201,169,78,0.25);
+    transform: translateY(102%);
+    transition: transform 0.45s var(--ease-smooth);
+}
+.mobile-cta.visible { transform: translateY(0); }
+.mobile-cta__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px 20px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    box-shadow: 0 4px 20px rgba(201,169,78,0.35);
+}
+
+/* --- CONVERSION LAYER RESPONSIVE --- */
+@media (max-width: 1024px) {
+    .programs__grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+}
+@media (max-width: 768px) {
+    .mobile-cta { display: block; }
+    .back-to-top.visible { bottom: 86px; }
+    .programs__header { margin-bottom: 50px; }
+    .program-card { padding: 40px 26px 34px; }
+    .program-card--signature { padding-top: 62px; }
+    .form__pill span { padding: 12px 16px; font-size: 0.78rem; }
+}
+
+/* Sticky CTA: keep to a single line on small phones */
+@media (max-width: 480px) {
+    .mobile-cta__btn { font-size: 0.84rem; letter-spacing: 0.12em; padding: 15px 14px; }
+}
