@@ -167,17 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
     });
 
-    document.querySelectorAll('.facility__feature, .testimonial, .experience__card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            if (window.innerWidth <= 768) return;
-            const rect = card.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-            card.style.transform = `perspective(600px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translateY(-4px)`;
-        });
-        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-    });
-
     document.querySelectorAll('.facility__photo').forEach((photo, i) => {
         photo.style.transitionDelay = `${i * 0.1}s`;
     });
