@@ -1,11 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // --- CINEMATIC PRELOADER: counter 00→100, then curtain split ---
     const loader = document.getElementById('loader');
-    window.addEventListener('load', () => {
-        setTimeout(() => loader.classList.add('loaded'), 800);
-    });
-    if (document.readyState === 'complete') {
-        setTimeout(() => loader.classList.add('loaded'), 800);
+    const loaderCount = document.getElementById('loaderCount');
+    const finishLoader = () => loader.classList.add('loaded');
+    if (loaderCount && !prefersReduced) {
+        const t0 = performance.now();
+        const DURATION = 1400;
+        const tick = (now) => {
+            const p = Math.min((now - t0) / DURATION, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            loaderCount.textContent = String(Math.round(eased * 100)).padStart(2, '0');
+            if (p < 1) requestAnimationFrame(tick);
+            else setTimeout(finishLoader, 250);
+        };
+        requestAnimationFrame(tick);
+    } else {
+        window.addEventListener('load', () => setTimeout(finishLoader, 600));
+        if (document.readyState === 'complete') setTimeout(finishLoader, 600);
     }
 
     const cursorGlow = document.createElement('div');
@@ -121,13 +135,74 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
+    // Hero background: scroll parallax + pointer depth in one composed loop
     const heroBg = document.querySelector('.hero__bg-placeholder');
-    if (heroBg && window.innerWidth > 768) {
-        window.addEventListener('scroll', () => {
+    const heroSection = document.querySelector('.hero');
+    if (heroBg && heroSection && window.innerWidth > 768 && !prefersReduced) {
+        let tx = 0, ty = 0, hx = 0, hy = 0;
+        heroSection.addEventListener('mousemove', (e) => {
+            tx = (e.clientX / window.innerWidth - 0.5) * 14;
+            ty = (e.clientY / window.innerHeight - 0.5) * 10;
+        });
+        const heroLoop = () => {
+            hx += (tx - hx) * 0.05;
+            hy += (ty - hy) * 0.05;
             if (window.scrollY < window.innerHeight) {
-                heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.2}px)`;
+                heroBg.style.transform =
+                    `scale(1.1) translate(${(-hx).toFixed(2)}px, ${(window.scrollY * 0.2 - hy).toFixed(2)}px)`;
             }
-        }, { passive: true });
+            requestAnimationFrame(heroLoop);
+        };
+        heroLoop();
+    }
+
+    // --- SCROLL-VELOCITY MARQUEE SKEW + INNER IMAGE PARALLAX ---
+    const marqueeHalves = document.querySelectorAll('.marquee__half');
+    const parallaxPics = (window.innerWidth > 768 && !prefersReduced)
+        ? Array.from(document.querySelectorAll('.facility__photo picture, .about__image-frame picture'))
+        : [];
+    parallaxPics.forEach(p => {
+        p.style.display = 'block';
+        p.style.height = '100%';
+        p.style.willChange = 'transform';
+    });
+    if ((marqueeHalves.length || parallaxPics.length) && !prefersReduced) {
+        let lastY = window.scrollY, vel = 0;
+        const motionLoop = () => {
+            const y = window.scrollY;
+            vel += ((y - lastY) - vel) * 0.12;
+            lastY = y;
+            if (marqueeHalves.length && window.innerWidth > 768) {
+                const skew = Math.max(-9, Math.min(9, vel * 0.32));
+                marqueeHalves.forEach(h => { h.style.transform = `skewX(${skew.toFixed(2)}deg)`; });
+            }
+            parallaxPics.forEach(p => {
+                const r = p.getBoundingClientRect();
+                if (r.bottom < 0 || r.top > window.innerHeight) return;
+                const prog = ((r.top + r.height / 2) - window.innerHeight / 2) / window.innerHeight;
+                p.style.transform = `scale(1.08) translateY(${(prog * -22).toFixed(2)}px)`;
+            });
+            requestAnimationFrame(motionLoop);
+        };
+        motionLoop();
+    }
+
+    // --- LIVE LOCAL TIME (footer) ---
+    const localTime = document.getElementById('localTime');
+    if (localTime) {
+        const updateTime = () => {
+            try {
+                const t = new Date().toLocaleTimeString('en-US', {
+                    timeZone: 'America/Chicago',
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    timeZoneName: 'short'
+                });
+                localTime.textContent = 'Gallatin, Tennessee · ' + t;
+            } catch { /* keep fallback text */ }
+        };
+        updateTime();
+        setInterval(updateTime, 30000);
     }
 
     // Hero content drifts up and dims as you scroll away

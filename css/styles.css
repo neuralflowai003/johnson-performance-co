@@ -3409,3 +3409,126 @@ html { scrollbar-color: #8A6E2F #0A0A0A; scrollbar-width: thin; }
 @media (max-width: 480px) {
     .mobile-cta__btn { font-size: 0.84rem; letter-spacing: 0.12em; padding: 15px 14px; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   SIGNATURE LAYER — award-site details:
+   curtain preloader w/ counter, indexed nav, live time,
+   velocity marquee, ghost-button gold fill
+   ══════════════════════════════════════════════════════════ */
+
+/* --- CINEMATIC PRELOADER --- */
+.loader {
+    background: transparent;
+    transition: none;
+}
+.loader__panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 50.5%;
+    background: #050505;
+    z-index: 0;
+    transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1) 0.15s;
+}
+.loader__panel--top { top: 0; }
+.loader__panel--bottom { bottom: 0; }
+.loader__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    transition: opacity 0.4s ease;
+}
+.loader__mark { width: 62px; height: 62px; }
+.loader__count {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 3.4rem;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    background: linear-gradient(105deg, #F0DFAC 0%, #DFC178 45%, #B89340 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-variant-numeric: tabular-nums;
+}
+.loader__line { display: none; }
+.loader__text {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.45em;
+    color: var(--gray);
+    animation: none;
+}
+.loader.loaded {
+    opacity: 1;
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s 1.2s;
+}
+.loader.loaded .loader__inner { opacity: 0; }
+.loader.loaded .loader__panel--top { transform: translateY(-102%); }
+.loader.loaded .loader__panel--bottom { transform: translateY(102%); }
+
+/* --- INDEXED NAVIGATION (01–05 superscripts) --- */
+.nav__menu { counter-reset: navidx; }
+.nav__menu li { counter-increment: navidx; }
+.nav__link:not(.nav__link--cta)::before {
+    content: counter(navidx, decimal-leading-zero);
+    font-size: 0.52rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    vertical-align: super;
+    color: var(--gold);
+    opacity: 0.65;
+    margin-right: 5px;
+}
+
+/* --- GHOST BUTTON: gold fill rises on hover --- */
+.btn--ghost {
+    position: relative;
+    z-index: 0;
+}
+.btn--ghost::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.45s var(--ease-expo);
+    z-index: -1;
+}
+.btn--ghost:hover::after { transform: scaleY(1); }
+.btn--ghost:hover {
+    color: var(--black);
+    border-color: var(--gold);
+    box-shadow: 0 8px 30px rgba(201,169,78,0.25);
+}
+
+/* --- MARQUEE: GPU hint for velocity skew --- */
+.marquee__half { will-change: transform; }
+
+/* --- FOOTER: live local time --- */
+.footer__meta {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.66rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 14px;
+}
+
+/* --- SIGNATURE LAYER RESPONSIVE --- */
+@media (max-width: 768px) {
+    .loader__count { font-size: 2.6rem; }
+    .loader__mark { width: 50px; height: 50px; }
+    .nav__link:not(.nav__link--cta)::before { font-size: 0.6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .loader__panel { transition: none; }
+    .btn--ghost::after { transition: none; }
+}
