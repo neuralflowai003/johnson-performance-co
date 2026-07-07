@@ -3667,3 +3667,148 @@ html { scrollbar-color: #8A6E2F #0A0A0A; scrollbar-width: thin; }
     }
     .contact__step-arrow { display: none; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   THE SHOP — Drop 001 merch showcase
+   ══════════════════════════════════════════════════════════ */
+.merch { background: var(--dark); }
+.merch__header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 70px;
+}
+.merch__header .section__intro { margin: 0 auto 28px; }
+.merch__header .gold-rule { margin: 0 auto 30px; }
+.merch__drop-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 22px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,169,78,0.35);
+}
+.merch__drop-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 8px rgba(201,169,78,0.8);
+    animation: badgePulse 2.2s ease-in-out infinite;
+}
+.merch__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 70px;
+}
+.merch-card {
+    background: var(--dark-2);
+    border: 1px solid var(--dark-4);
+    overflow: hidden;
+    transition: border-color 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
+}
+.merch-card:hover {
+    border-color: rgba(201,169,78,0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 26px 60px rgba(0,0,0,0.5), 0 0 44px rgba(201,169,78,0.08);
+}
+.merch-card__stage {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse 62% 55% at 50% 44%, rgba(201,169,78,0.07), transparent 70%),
+        linear-gradient(180deg, #121210 0%, #0d0d0c 100%);
+    border-bottom: 1px solid var(--dark-4);
+}
+.merch-card__stage::after {
+    content: '';
+    position: absolute;
+    bottom: 14%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 46%;
+    height: 10px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.55), transparent 70%);
+}
+.merch-card__stage svg {
+    width: 78%;
+    height: 78%;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 16px 22px rgba(0,0,0,0.45));
+    transition: transform 0.6s var(--ease-spring);
+}
+.merch-card:hover .merch-card__stage svg {
+    transform: translateY(-6px) scale(1.04);
+}
+.merch-card__info {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "cat   price"
+        "name  price";
+    align-items: center;
+    gap: 2px 16px;
+    padding: 20px 24px 22px;
+}
+.merch-card__cat {
+    grid-area: cat;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.62rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gray);
+}
+.merch-card__name {
+    grid-area: name;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--off-white);
+}
+.merch-card__price {
+    grid-area: price;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.25rem;
+    background: linear-gradient(105deg, #F0DFAC 0%, #DFC178 45%, #B89340 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.merch__cta {
+    text-align: center;
+}
+.merch__cta-note {
+    margin-top: 18px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.98rem;
+    color: var(--light-gray);
+}
+
+/* --- SHOP RESPONSIVE --- */
+@media (max-width: 1024px) {
+    .merch__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+    .merch__header { margin-bottom: 50px; }
+    .merch__grid { gap: 14px; margin-bottom: 54px; }
+    .merch-card__info { padding: 16px 18px 18px; }
+    .merch-card__name { font-size: 1.08rem; }
+    .merch-card__price { font-size: 1.05rem; }
+}
+@media (max-width: 560px) {
+    .merch__grid { grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto; }
+}
