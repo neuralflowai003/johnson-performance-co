@@ -366,6 +366,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- FAQ ACCORDION (one open at a time) ---
+    const faqItems = document.querySelectorAll('.faq__item');
+    faqItems.forEach(item => {
+        const btn = item.querySelector('.faq__question');
+        btn.addEventListener('click', () => {
+            const isOpen = item.classList.contains('open');
+            faqItems.forEach(other => {
+                other.classList.remove('open');
+                other.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+            });
+            if (!isOpen) {
+                item.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
     // --- MOBILE STICKY CTA (shows once past hero, hides at lead form) ---
     const mobileCta = document.getElementById('mobileCta');
     const contactSection = document.getElementById('contact');

@@ -3532,3 +3532,138 @@ html { scrollbar-color: #8A6E2F #0A0A0A; scrollbar-width: thin; }
     .loader__panel { transition: none; }
     .btn--ghost::after { transition: none; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   FUNNEL FINISH — FAQ accordion + process steps strip
+   ══════════════════════════════════════════════════════════ */
+
+/* --- FAQ --- */
+.faq { background: var(--dark); }
+.faq__grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 70px;
+    align-items: start;
+}
+.faq__intro { position: sticky; top: 120px; }
+.faq__list {
+    border-top: 1px solid var(--dark-4);
+}
+.faq__item {
+    border-bottom: 1px solid var(--dark-4);
+    transition: border-color 0.4s;
+}
+.faq__item.open { border-bottom-color: rgba(201,169,78,0.35); }
+.faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    padding: 26px 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.28rem;
+    letter-spacing: 0.02em;
+    color: var(--off-white);
+    transition: color 0.3s;
+}
+.faq__question:hover { color: var(--gold-light); }
+.faq__item.open .faq__question { color: var(--gold); }
+.faq__icon {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 1.25rem;
+    color: var(--gold);
+    border: 1px solid rgba(201,169,78,0.3);
+    border-radius: 50%;
+    transition: transform 0.45s var(--ease-spring), background 0.3s, color 0.3s;
+}
+.faq__item.open .faq__icon {
+    transform: rotate(45deg);
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: var(--black);
+    border-color: var(--gold);
+}
+.faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.55s var(--ease-smooth), opacity 0.4s ease;
+}
+.faq__item.open .faq__answer {
+    max-height: 320px;
+    opacity: 1;
+}
+.faq__answer-inner { padding: 0 40px 26px 4px; }
+.faq__answer-inner p {
+    font-size: 0.94rem;
+    color: var(--light-gray);
+    line-height: 1.8;
+}
+
+/* --- PROCESS STEPS STRIP (top of Start section) --- */
+.contact__steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(18px, 4vw, 48px);
+    margin-bottom: 80px;
+    padding: 26px 20px;
+    border: 1px solid var(--dark-4);
+    background: linear-gradient(180deg, rgba(22,22,18,0.6), rgba(17,17,17,0.6));
+}
+.contact__step {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+.contact__step-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(201,169,78,0.5);
+}
+.contact__step-label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--off-white);
+}
+.contact__step-arrow {
+    color: var(--gold);
+    opacity: 0.55;
+    font-size: 1.05rem;
+}
+
+/* --- FUNNEL FINISH RESPONSIVE --- */
+@media (max-width: 900px) {
+    .faq__grid { grid-template-columns: 1fr; gap: 44px; }
+    .faq__intro { position: static; }
+}
+@media (max-width: 768px) {
+    .faq__question { font-size: 1.08rem; padding: 22px 2px; }
+    .faq__answer-inner { padding-right: 12px; }
+    .contact__steps {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 56px;
+        padding: 24px 22px;
+    }
+    .contact__step-arrow { display: none; }
+}

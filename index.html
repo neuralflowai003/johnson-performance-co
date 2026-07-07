@@ -46,12 +46,12 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
-    <link rel="apple-touch-icon" href="brand/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 
     <!-- Preload critical assets -->
     <link rel="preload" href="images/hero-bg.webp" as="image" type="image/webp">
     <link rel="preload" href="images/owner-portrait.webp" as="image" type="image/webp">
-    <link rel="preload" href="css/styles.css?v=15" as="style">
+    <link rel="preload" href="css/styles.css?v=16" as="style">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +59,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=15">
+    <link rel="stylesheet" href="css/styles.css?v=16">
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -109,26 +109,50 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Is Johnson Performance Co. a private gym?",
+          "name": "Is it really 100% private?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. When you're training here, the entire facility is yours. No other clients, no distractions — just you and your trainer."
+            "text": "Yes. When you train here, the entire facility is yours. No other clients, no strangers on the next machine, no waiting. Just you and your coach, door closed."
           }
         },
         {
           "@type": "Question",
-          "name": "Is private training good for beginners?",
+          "name": "I'm a complete beginner. Is this for me?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Absolutely. Every program is built from scratch around your current level, goals, and body. Beginners often see the fastest results because everything is customized from day one."
+            "text": "Especially for you. Every program is built from scratch around your current level, and there's no gym floor full of people watching you learn. Beginners often see the fastest results because everything is customized from day one."
           }
         },
         {
           "@type": "Question",
-          "name": "Where is Johnson Performance Co. located?",
+          "name": "What does it cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We're located in Gallatin, Tennessee, serving clients from Gallatin, Hendersonville, Nashville, and surrounding areas."
+            "text": "Every program is custom, so pricing depends on what we build together. After your free consultation you'll get a clear recommendation with exact pricing — no surprises, no pressure, no lock-in gimmicks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer online coaching?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — custom programming, weekly check-ins, and video form review, wherever you are in the country. Custom nutrition plans are available both on their own and alongside any training option."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where are you located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gallatin, Tennessee — serving clients from Gallatin, Hendersonville, Nashville, and the surrounding area. Online coaching is available anywhere."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens after I reach out?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You'll hear back from Blake personally within 24 hours to set up a free consultation — a real conversation about your goals, your schedule, and whether this is the right fit. If it is, you'll get a custom plan and a start date."
           }
         }
       ]
@@ -800,14 +824,106 @@
     </section>
 
     <!-- ============================================ -->
+    <!-- FAQ -->
+    <!-- ============================================ -->
+    <section class="section faq" id="faq">
+        <span class="ghost-num" aria-hidden="true">07</span>
+        <div class="container">
+            <div class="faq__grid">
+                <div class="faq__intro">
+                    <span class="section__label reveal" data-num="07">Questions</span>
+                    <h2 class="section__title reveal">Before You <em class="accent">Ask.</em></h2>
+                    <div class="gold-rule reveal"></div>
+                    <p class="section__intro reveal">
+                        The things people usually want to know before reaching out.
+                        Anything else — the form is right below.
+                    </p>
+                </div>
+                <div class="faq__list reveal">
+                    <div class="faq__item">
+                        <button class="faq__question" aria-expanded="false">
+                            <span>Is it really 100% private?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq__answer"><div class="faq__answer-inner">
+                            <p>Yes. When you train here, the entire facility is yours. No other clients, no strangers on the next machine, no waiting. Just you and your coach, door closed.</p>
+                        </div></div>
+                    </div>
+                    <div class="faq__item">
+                        <button class="faq__question" aria-expanded="false">
+                            <span>I'm a complete beginner. Is this for me?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq__answer"><div class="faq__answer-inner">
+                            <p>Especially for you. Every program is built from scratch around your current level, and there's no gym floor full of people watching you learn. Beginners often see the fastest results here because everything is customized from day one.</p>
+                        </div></div>
+                    </div>
+                    <div class="faq__item">
+                        <button class="faq__question" aria-expanded="false">
+                            <span>What does it cost?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq__answer"><div class="faq__answer-inner">
+                            <p>Every program is custom, so pricing depends on what we build together. After your free consultation you'll get a clear recommendation with exact pricing — no surprises, no pressure, no lock-in gimmicks.</p>
+                        </div></div>
+                    </div>
+                    <div class="faq__item">
+                        <button class="faq__question" aria-expanded="false">
+                            <span>Do you offer online coaching?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq__answer"><div class="faq__answer-inner">
+                            <p>Yes — custom programming, weekly check-ins, and video form review, wherever you are in the country. Custom nutrition plans are available both on their own and alongside any training option.</p>
+                        </div></div>
+                    </div>
+                    <div class="faq__item">
+                        <button class="faq__question" aria-expanded="false">
+                            <span>Where are you located?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq__answer"><div class="faq__answer-inner">
+                            <p>Gallatin, Tennessee — serving clients from Gallatin, Hendersonville, Nashville, and the surrounding area. Online coaching is available anywhere.</p>
+                        </div></div>
+                    </div>
+                    <div class="faq__item">
+                        <button class="faq__question" aria-expanded="false">
+                            <span>What happens after I reach out?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq__answer"><div class="faq__answer-inner">
+                            <p>You'll hear back from Blake personally within 24 hours to set up a free consultation — a real conversation about your goals, your schedule, and whether this is the right fit. If it is, you'll get a custom plan and a start date.</p>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
     <!-- CONTACT -->
     <!-- ============================================ -->
     <section class="section contact" id="contact">
-        <span class="ghost-num" aria-hidden="true">07</span>
+        <span class="ghost-num" aria-hidden="true">08</span>
         <div class="container">
+            <div class="contact__steps reveal" aria-label="How it works">
+                <div class="contact__step">
+                    <span class="contact__step-num">01</span>
+                    <span class="contact__step-label">Reach Out</span>
+                </div>
+                <span class="contact__step-arrow" aria-hidden="true">&rarr;</span>
+                <div class="contact__step">
+                    <span class="contact__step-num">02</span>
+                    <span class="contact__step-label">Free Consult</span>
+                </div>
+                <span class="contact__step-arrow" aria-hidden="true">&rarr;</span>
+                <div class="contact__step">
+                    <span class="contact__step-num">03</span>
+                    <span class="contact__step-label">Start Training</span>
+                </div>
+            </div>
             <div class="contact__grid">
                 <div class="contact__info">
-                    <span class="section__label reveal" data-num="07">Start Today</span>
+                    <span class="section__label reveal" data-num="08">Start Today</span>
                     <h2 class="section__title reveal">Start Your <em class="accent">Transformation.</em></h2>
                     <div class="gold-rule reveal"></div>
                     <p class="contact__body reveal">
@@ -949,7 +1065,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
 
-    <script src="js/main.js?v=11"></script>
+    <script src="js/main.js?v=12"></script>
 </body>
 </html>
 
