@@ -366,6 +366,170 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- MERCH PRE-ORDER CART ---
+    // Sizes/prices derive from each card's rendered info; orders submit
+    // through the existing Formspree endpoint as an itemized pre-order.
+    (function initCart() {
+        const drawer = document.getElementById('cartDrawer');
+        const overlay = document.getElementById('cartOverlay');
+        if (!drawer || !overlay) return;
+
+        const openBtn = document.getElementById('cartOpen');
+        const closeBtn = document.getElementById('cartClose');
+        const countEl = document.getElementById('cartCount');
+        const itemsEl = document.getElementById('cartItems');
+        const emptyEl = document.getElementById('cartEmpty');
+        const footEl = document.getElementById('cartFoot');
+        const subtotalEl = document.getElementById('cartSubtotal');
+        const cartForm = document.getElementById('cartForm');
+        const successEl = document.getElementById('cartSuccess');
+
+        let cart = [];
+        try { cart = JSON.parse(localStorage.getItem('jpcCart') || '[]'); } catch { cart = []; }
+
+        const save = () => { try { localStorage.setItem('jpcCart', JSON.stringify(cart)); } catch { /* private mode */ } };
+        const money = (n) => '$' + n.toFixed(n % 1 ? 2 : 0);
+
+        function render() {
+            const totalQty = cart.reduce((s, it) => s + it.qty, 0);
+            countEl.textContent = totalQty;
+            countEl.hidden = totalQty === 0;
+            emptyEl.style.display = cart.length ? 'none' : '';
+            footEl.hidden = cart.length === 0;
+            successEl.hidden = true;
+            itemsEl.innerHTML = cart.map((it, i) => `
+                <div class="cart__item">
+                    <div class="cart__item-info">
+                        <span class="cart__item-name">${it.name}</span>
+                        <span class="cart__item-meta">${it.size === 'OS' ? 'One size' : 'Size ' + it.size} · ${money(it.price)}</span>
+                    </div>
+                    <div class="cart__item-qty">
+                        <button type="button" data-act="dec" data-i="${i}" aria-label="Decrease quantity">&minus;</button>
+                        <span>${it.qty}</span>
+                        <button type="button" data-act="inc" data-i="${i}" aria-label="Increase quantity">+</button>
+                    </div>
+                    <button type="button" class="cart__item-remove" data-act="rm" data-i="${i}" aria-label="Remove ${it.name}">&times;</button>
+                </div>`).join('');
+            subtotalEl.textContent = money(cart.reduce((s, it) => s + it.price * it.qty, 0));
+        }
+
+        itemsEl.addEventListener('click', (e) => {
+            const btn = e.target.closest('button[data-act]');
+            if (!btn) return;
+            const i = parseInt(btn.dataset.i, 10);
+            if (btn.dataset.act === 'inc') cart[i].qty++;
+            if (btn.dataset.act === 'dec') { cart[i].qty--; if (cart[i].qty < 1) cart.splice(i, 1); }
+            if (btn.dataset.act === 'rm') cart.splice(i, 1);
+            save(); render();
+        });
+
+        const openCart = () => {
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        };
+        const closeCart = () => {
+            drawer.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        };
+        if (openBtn) openBtn.addEventListener('click', openCart);
+        if (closeBtn) closeBtn.addEventListener('click', closeCart);
+        overlay.addEventListener('click', closeCart);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) closeCart();
+        });
+
+        // Inject size pickers + add buttons onto every product card
+        document.querySelectorAll('.merch-card').forEach(card => {
+            const name = card.querySelector('.merch-card__name').textContent.trim();
+            const price = parseFloat(card.querySelector('.merch-card__price').textContent.replace(/[^0-9.]/g, ''));
+            const cat = card.querySelector('.merch-card__cat').textContent;
+            const sizes = /apparel/i.test(cat) ? ['S', 'M', 'L', 'XL', '2XL'] : ['OS'];
+
+            const row = document.createElement('div');
+            row.className = 'merch-card__order';
+            row.innerHTML =
+                '<div class="merch-card__sizes" role="group" aria-label="Size">' +
+                sizes.map((s, i) =>
+                    `<button type="button" class="merch-card__size${(sizes.length === 1 || i === 1) ? ' selected' : ''}" data-size="${s}">${s === 'OS' ? 'One Size' : s}</button>`
+                ).join('') +
+                '</div><button type="button" class="merch-card__add">Add to Order</button>';
+            card.appendChild(row);
+
+            row.querySelectorAll('.merch-card__size').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    row.querySelectorAll('.merch-card__size').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                });
+            });
+
+            const addBtn = row.querySelector('.merch-card__add');
+            addBtn.addEventListener('click', () => {
+                const size = row.querySelector('.merch-card__size.selected').dataset.size;
+                const existing = cart.find(it => it.name === name && it.size === size);
+                if (existing) existing.qty++;
+                else cart.push({ name, price, size, qty: 1 });
+                save(); render();
+                addBtn.textContent = 'Added ✓';
+                addBtn.classList.add('added');
+                setTimeout(() => {
+                    addBtn.textContent = 'Add to Order';
+                    addBtn.classList.remove('added');
+                }, 1400);
+            });
+        });
+
+        // Submit pre-order through Formspree
+        if (cartForm) {
+            cartForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!cart.length) return;
+                const btn = cartForm.querySelector('button[type="submit"]');
+                const original = btn.textContent;
+                btn.textContent = 'Placing order...';
+                btn.disabled = true;
+
+                const lines = cart.map(it =>
+                    `${it.qty} × ${it.name} (${it.size}) — ${money(it.price * it.qty)}`
+                ).join('\n');
+                const subtotal = money(cart.reduce((s, it) => s + it.price * it.qty, 0));
+
+                const data = new FormData();
+                data.append('_subject', 'NEW MERCH PRE-ORDER — Drop 001');
+                data.append('type', 'Merch pre-order');
+                data.append('order', lines);
+                data.append('subtotal', subtotal);
+                data.append('name', document.getElementById('cartName').value);
+                data.append('email', document.getElementById('cartEmail').value);
+                data.append('phone', document.getElementById('cartPhone').value);
+
+                try {
+                    const res = await fetch('https://formspree.io/f/xdapdqdl', {
+                        method: 'POST',
+                        body: data,
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (!res.ok) throw new Error();
+                    cart = [];
+                    save(); render();
+                    itemsEl.innerHTML = '';
+                    emptyEl.style.display = 'none';
+                    footEl.hidden = true;
+                    successEl.hidden = false;
+                    btn.textContent = original;
+                    btn.disabled = false;
+                } catch {
+                    btn.textContent = 'Error — Try Again';
+                    btn.disabled = false;
+                    setTimeout(() => { btn.textContent = original; }, 3000);
+                }
+            });
+        }
+
+        render();
+    })();
+
     // --- FAQ ACCORDION (one open at a time) ---
     const faqItems = document.querySelectorAll('.faq__item');
     faqItems.forEach(item => {
