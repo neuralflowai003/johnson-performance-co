@@ -471,6 +471,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (existing) existing.qty++;
                 else cart.push({ name, price, size, qty: 1 });
                 save(); render();
+                // Bring the nav (and its cart badge) back into view
+                nav.classList.remove('nav--hidden');
                 addBtn.textContent = 'Added ✓';
                 addBtn.classList.add('added');
                 setTimeout(() => {
