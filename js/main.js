@@ -482,6 +482,142 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // Empty-cart CTA: close the drawer, then the global anchor
+        // handler smooth-scrolls to the shop
+        const cartShopLink = document.getElementById('cartShopLink');
+        if (cartShopLink) cartShopLink.addEventListener('click', closeCart);
+
+        // --- PRODUCT QUICK VIEW ---
+        const PRODUCT_INFO = {
+            'The Standard Tee': {
+                desc: 'The everyday flag. A heavyweight black tee with the JPC mark embroidered in gold over the left chest — quiet until you catch it in the light.',
+                details: ['240gsm heavyweight cotton', 'Gold chest embroidery with bracket motif', 'Unisex, true to size']
+            },
+            'The Statement Tee': {
+                desc: 'The studio ethos across your back: ONE CLIENT. One coach. ONE STANDARD. For people who understood the assignment.',
+                details: ['240gsm heavyweight cotton', 'Screen-printed back statement, gold back-neck hit', 'Relaxed fit — size down for a closer cut']
+            },
+            'Discipline Hoodie': {
+                desc: 'The heaviest piece in the drop. Brushed fleece, gold-tipped drawcords, and the JPC mark on the chest. Built for cold mornings and hard sessions.',
+                details: ['420gsm brushed-back fleece', 'Gold-tipped drawcords, kangaroo pocket', 'Embroidered chest mark']
+            },
+            'Hex Crest Hoodie': {
+                desc: 'The back print is pulled straight from the studio ceiling — the hex lights every client trains under. If you know, you know.',
+                details: ['420gsm brushed-back fleece', 'Screen-printed hex crest back panel', 'Dropped shoulder, roomy fit']
+            },
+            'Discipline L/S': {
+                desc: 'DISCIPLINE — over everything. A mid-weight long-sleeve with ribbed cuffs that holds its shape set after set.',
+                details: ['Mid-weight combed cotton', 'Printed chest graphic', 'Ribbed cuffs and hem']
+            },
+            'Performance Cap': {
+                desc: 'Structured six-panel with a curved brim and gold JPC embroidery front and center. The finishing touch.',
+                details: ['Structured 6-panel crown', 'Curved brim, adjustable strap', 'Gold front embroidery']
+            },
+            'Ethos Beanie': {
+                desc: 'Chunky rib knit with a fold-over cuff and a woven gold label. Cold-weather standard issue.',
+                details: ['Chunky rib knit acrylic', 'Fold-over cuff, woven gold JPC label', 'One size fits most']
+            },
+            'JPC Shaker': {
+                desc: 'The 24oz studio shaker — leak-proof flip cap, mixer ball included, vertical gold lettering. Every session ends with one.',
+                details: ['24oz / 700ml capacity', 'Leak-proof flip cap, mixer ball included', 'Hand wash recommended']
+            },
+            'Studio Towel': {
+                desc: 'Heavyweight terry in studio black with the gold stripe and full lockup embroidery. Gym-sized, built to be used.',
+                details: ['Heavyweight cotton terry', 'Embroidered lockup + gold stripe', '16" × 40" gym size']
+            },
+            'Varsity Crewneck': {
+                desc: 'The collegiate piece — arched JOHNSON lettering across the chest on brushed fleece with ribbed everything.',
+                details: ['400gsm brushed fleece', 'Arched chest lettering, diamond rule', 'Ribbed collar, cuffs, and hem']
+            },
+            'Training Shorts': {
+                desc: 'Four-way stretch with gold side taping and a JPC leg hit. Cut for squats, not the beach.',
+                details: ['4-way stretch woven fabric', '7" inseam, elastic waist, gold drawcord', 'Gold side taping, zip back pocket']
+            },
+            'Gym Duffel': {
+                desc: 'A 40L duffel in blacked-out canvas with gold hardware and the framed JPC patch. Studio to street.',
+                details: ['40L capacity, reinforced base', 'Gold-ring zip pull, compression straps', 'Interior shoe compartment']
+            }
+        };
+
+        const pmodal = document.getElementById('pmodal');
+        const pmodalOverlay = document.getElementById('pmodalOverlay');
+        if (pmodal && pmodalOverlay) {
+            const pStage = document.getElementById('pmodalStage');
+            const pCat = document.getElementById('pmodalCat');
+            const pName = document.getElementById('pmodalName');
+            const pPrice = document.getElementById('pmodalPrice');
+            const pDesc = document.getElementById('pmodalDesc');
+            const pDetails = document.getElementById('pmodalDetails');
+            const pSizes = document.getElementById('pmodalSizes');
+            const pAdd = document.getElementById('pmodalAdd');
+            let pCurrent = null;
+
+            const closeModal = () => {
+                pmodal.classList.remove('open');
+                pmodalOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+            };
+            document.getElementById('pmodalClose').addEventListener('click', closeModal);
+            pmodalOverlay.addEventListener('click', closeModal);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && pmodal.classList.contains('open')) closeModal();
+            });
+
+            document.querySelectorAll('.merch-card').forEach(card => {
+                const stage = card.querySelector('.merch-card__stage');
+                stage.style.cursor = 'pointer';
+                stage.addEventListener('click', () => {
+                    const name = card.querySelector('.merch-card__name').textContent.trim();
+                    const price = parseFloat(card.querySelector('.merch-card__price').textContent.replace(/[^0-9.]/g, ''));
+                    const cat = card.querySelector('.merch-card__cat').textContent;
+                    const sizes = /apparel/i.test(cat) ? ['S', 'M', 'L', 'XL', '2XL'] : ['OS'];
+                    const info = PRODUCT_INFO[name] || { desc: '', details: [] };
+                    pCurrent = { name, price, sizes };
+
+                    pStage.innerHTML = '';
+                    const svg = card.querySelector('svg');
+                    if (svg) pStage.appendChild(svg.cloneNode(true));
+                    pCat.textContent = cat;
+                    pName.textContent = name;
+                    pPrice.textContent = '$' + (price % 1 ? price.toFixed(2) : price);
+                    pDesc.textContent = info.desc;
+                    pDetails.innerHTML = info.details.map(d => `<li>${d}</li>`).join('');
+                    pSizes.innerHTML = sizes.map((s, i) =>
+                        `<button type="button" class="merch-card__size${(sizes.length === 1 || i === 1) ? ' selected' : ''}" data-size="${s}">${s === 'OS' ? 'One Size' : s}</button>`
+                    ).join('');
+                    pSizes.querySelectorAll('.merch-card__size').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            pSizes.querySelectorAll('.merch-card__size').forEach(b => b.classList.remove('selected'));
+                            btn.classList.add('selected');
+                        });
+                    });
+                    pAdd.textContent = 'Add to Order';
+                    pAdd.classList.remove('added');
+
+                    pmodal.classList.add('open');
+                    pmodalOverlay.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            pAdd.addEventListener('click', () => {
+                if (!pCurrent) return;
+                const sizeBtn = pSizes.querySelector('.merch-card__size.selected');
+                const size = sizeBtn ? sizeBtn.dataset.size : pCurrent.sizes[0];
+                const existing = cart.find(it => it.name === pCurrent.name && it.size === size);
+                if (existing) existing.qty++;
+                else cart.push({ name: pCurrent.name, price: pCurrent.price, size, qty: 1 });
+                save(); render();
+                nav.classList.remove('nav--hidden');
+                pAdd.textContent = 'Added ✓';
+                pAdd.classList.add('added');
+                setTimeout(() => {
+                    pAdd.textContent = 'Add to Order';
+                    pAdd.classList.remove('added');
+                }, 1400);
+            });
+        }
+
         // Submit pre-order through Formspree
         if (cartForm) {
             cartForm.addEventListener('submit', async (e) => {
