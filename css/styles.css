@@ -4444,3 +4444,137 @@ html { scrollbar-color: #8A6E2F #0A0A0A; scrollbar-width: thin; }
     .pmodal__info { padding: 28px 24px 26px; }
     .pmodal__name { font-size: 1.6rem; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   SHOP 10× — fabric-engine era: filters, thumbnails, motion
+   ══════════════════════════════════════════════════════════ */
+
+/* Category filter tabs */
+.merch__filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: -30px 0 44px;
+}
+.merch__filter {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 11px 20px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--light-gray);
+    background: transparent;
+    border: 1px solid var(--dark-5);
+    cursor: pointer;
+    transition: all 0.3s var(--ease-smooth);
+}
+.merch__filter span {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    transition: color 0.3s;
+}
+.merch__filter:hover { border-color: rgba(201,169,78,0.45); color: var(--off-white); }
+.merch__filter.active {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    border-color: var(--gold);
+    color: var(--black);
+    box-shadow: 0 4px 18px rgba(201,169,78,0.28);
+}
+.merch__filter.active span { color: rgba(0,0,0,0.6); }
+.merch-card.is-hidden { display: none; }
+
+/* Fixed collector numbering (survives filtering) */
+.merch-card::before { content: attr(data-idx) "/12"; }
+
+/* Limited tag */
+.merch-card__tag {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    z-index: 3;
+    padding: 5px 9px 4px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.56rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,169,78,0.5);
+    background: rgba(10,10,10,0.55);
+    backdrop-filter: blur(6px);
+}
+
+/* Stage: gold light sweep across the product on hover; filters are
+   heavy, so the product lifts (no scale) and the old reflection goes */
+.merch-card__stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(112deg, transparent 38%, rgba(255,236,190,0.11) 50%, transparent 62%);
+    transform: translateX(-110%);
+    transition: transform 0.95s var(--ease-smooth);
+    pointer-events: none;
+}
+.merch-card:hover .merch-card__stage::before { transform: translateX(110%); }
+.merch-card__stage svg {
+    -webkit-box-reflect: none;
+    transition: transform 0.6s var(--ease-spring);
+}
+.merch-card:hover .merch-card__stage svg { transform: translateY(-7px); }
+
+/* Entrance: cards rise in a cascade (animation, so hover stays snappy) */
+@keyframes cardRise {
+    from { opacity: 0; transform: translateY(46px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.merch-card.visible,
+.program-card.visible,
+.testimonial.visible {
+    animation: cardRise 1.2s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.merch__grid .merch-card:nth-child(3n+2).visible,
+.programs__grid .program-card:nth-child(2).visible,
+.results__grid .testimonial:nth-child(2).visible { animation-delay: 0.12s; }
+.merch__grid .merch-card:nth-child(3n).visible,
+.programs__grid .program-card:nth-child(3).visible,
+.results__grid .testimonial:nth-child(3).visible { animation-delay: 0.24s; }
+
+/* Cart icon bump when something is added */
+@keyframes cartBump {
+    0%   { transform: scale(1); }
+    35%  { transform: scale(1.22) rotate(-6deg); }
+    70%  { transform: scale(0.96) rotate(3deg); }
+    100% { transform: scale(1); }
+}
+.nav__cart.bump { animation: cartBump 0.55s var(--ease-spring); }
+
+/* Cart thumbnails */
+.cart__item-thumb {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at 50% 45%, #171715, #0d0d0c);
+    border: 1px solid var(--dark-4);
+}
+.cart__item-thumb svg { width: 86%; height: 86%; }
+
+@media (max-width: 768px) {
+    .merch__filters { margin: -14px 0 32px; gap: 6px; }
+    .merch__filter { padding: 10px 14px; font-size: 0.72rem; letter-spacing: 0.14em; }
+    .merch-card__tag { top: 10px; right: 11px; }
+    .cart__item-thumb { width: 50px; height: 50px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .merch-card.visible, .program-card.visible, .testimonial.visible { animation: none; }
+    .merch-card__stage::before { display: none; }
+}

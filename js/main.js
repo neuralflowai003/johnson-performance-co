@@ -411,6 +411,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button type="button" class="cart__item-remove" data-act="rm" data-i="${i}" aria-label="Remove ${it.name}">&times;</button>
                 </div>`).join('');
             subtotalEl.textContent = money(cart.reduce((s, it) => s + it.price * it.qty, 0));
+            // Product thumbnails, cloned from the matching card render
+            itemsEl.querySelectorAll('.cart__item').forEach((row, i) => {
+                const card = Array.from(document.querySelectorAll('.merch-card'))
+                    .find(c => c.querySelector('.merch-card__name').textContent.trim() === cart[i].name);
+                const svg = card && card.querySelector('svg');
+                if (!svg) return;
+                const thumb = document.createElement('div');
+                thumb.className = 'cart__item-thumb';
+                thumb.appendChild(svg.cloneNode(true));
+                row.insertBefore(thumb, row.firstChild);
+            });
         }
 
         itemsEl.addEventListener('click', (e) => {
@@ -433,6 +444,44 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.classList.remove('open');
             document.body.style.overflow = '';
         };
+        const bumpCart = () => {
+            if (!openBtn) return;
+            openBtn.classList.remove('bump');
+            void openBtn.offsetWidth;
+            openBtn.classList.add('bump');
+        };
+
+        // Category filter tabs
+        const filterBtns = document.querySelectorAll('.merch__filter');
+        if (filterBtns.length) {
+            const allCards = Array.from(document.querySelectorAll('.merch-card'));
+            const catOf = (c) => {
+                const t = c.querySelector('.merch-card__cat').textContent;
+                return /apparel/i.test(t) ? 'apparel' : /headwear/i.test(t) ? 'headwear' : 'gear';
+            };
+            const countFor = (f) => f === 'all' ? allCards.length : allCards.filter(c => catOf(c) === f).length;
+            filterBtns.forEach(btn => {
+                const span = btn.querySelector('span');
+                if (span) span.textContent = countFor(btn.dataset.filter);
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-selected', 'true');
+                    const f = btn.dataset.filter;
+                    allCards.forEach(card => {
+                        const show = f === 'all' || catOf(card) === f;
+                        card.classList.toggle('is-hidden', !show);
+                        if (show) {
+                            card.classList.add('visible');
+                            card.style.animation = 'none';
+                            void card.offsetWidth;
+                            card.style.animation = '';
+                        }
+                    });
+                });
+            });
+        }
+
         if (openBtn) openBtn.addEventListener('click', openCart);
         if (closeBtn) closeBtn.addEventListener('click', closeCart);
         overlay.addEventListener('click', closeCart);
@@ -441,11 +490,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Inject size pickers + add buttons onto every product card
-        document.querySelectorAll('.merch-card').forEach(card => {
+        document.querySelectorAll('.merch-card').forEach((card, idx) => {
             const name = card.querySelector('.merch-card__name').textContent.trim();
             const price = parseFloat(card.querySelector('.merch-card__price').textContent.replace(/[^0-9.]/g, ''));
             const cat = card.querySelector('.merch-card__cat').textContent;
             const sizes = /apparel/i.test(cat) ? ['S', 'M', 'L', 'XL', '2XL'] : ['OS'];
+            card.dataset.idx = String(idx + 1).padStart(2, '0');
+            card.dataset.cat = /apparel/i.test(cat) ? 'apparel' : /headwear/i.test(cat) ? 'headwear' : 'gear';
 
             const row = document.createElement('div');
             row.className = 'merch-card__order';
@@ -473,6 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 save(); render();
                 // Bring the nav (and its cart badge) back into view
                 nav.classList.remove('nav--hidden');
+                bumpCart();
                 addBtn.textContent = 'Added ✓';
                 addBtn.classList.add('added');
                 setTimeout(() => {
@@ -609,6 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 else cart.push({ name: pCurrent.name, price: pCurrent.price, size, qty: 1 });
                 save(); render();
                 nav.classList.remove('nav--hidden');
+                bumpCart();
                 pAdd.textContent = 'Added ✓';
                 pAdd.classList.add('added');
                 setTimeout(() => {
